@@ -1,0 +1,7 @@
+出处
+三江源自然保护区:http://kb.cs.tsinghua.edu.cn/apibztask/label/17951#xpointer(start-point(string-range(//BODY/P[13]/SPAN[1]/text()[1],'',2))/range-to(string-range(//BODY/P[13]/SPAN[1]/text()[1],'',10)))
+
+新疆维吾尔自治区:http://kb.cs.tsinghua.edu.cn/apibztask/label/17828#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[9]/TD[3]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[9]/TD[3]/text()[1],'',8)))
+
+新疆维吾尔自治区:http://kb.cs.tsinghua.edu.cn/apibztask/label/2259#xpointer#新疆维吾尔自治区
+

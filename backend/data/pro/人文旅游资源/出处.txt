@@ -1,0 +1,17 @@
+出处
+建筑景观:http://kb.cs.tsinghua.edu.cn/apibztask/label/2279#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[5]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[5]/text()[1],'',4)))
+
+文化艺术景观:http://kb.cs.tsinghua.edu.cn/apibztask/label/2279#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[6]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[6]/text()[1],'',6)))
+
+风土民情:http://kb.cs.tsinghua.edu.cn/apibztask/label/2280#xpointer(start-point(string-range(//BODY/P[12]/text()[1],'',1))/range-to(string-range(//BODY/P[12]/text()[1],'',5)))
+
+风土民情:http://kb.cs.tsinghua.edu.cn/apibztask/label/2279#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[7]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[7]/text()[1],'',4)))
+
+古代文化艺术宝藏:http://kb.cs.tsinghua.edu.cn/apibztask/label/2280#xpointer(start-point(string-range(//BODY/P[11]/text()[1],'',1))/range-to(string-range(//BODY/P[11]/text()[1],'',9)))
+
+其他人文旅游资源:http://kb.cs.tsinghua.edu.cn/apibztask/label/2280#xpointer(start-point(string-range(//BODY/P[13]/text()[1],'',1))/range-to(string-range(//BODY/P[13]/text()[1],'',9)))
+
+人文旅游资源:http://kb.cs.tsinghua.edu.cn/apibztask/label/2279#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[3]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[3]/text()[1],'',6)))
+
+人文旅游资源:http://kb.cs.tsinghua.edu.cn/apibztask/label/2280#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',6))/range-to(string-range(//BODY/P[10]/text()[1],'',12)))
+

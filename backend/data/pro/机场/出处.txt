@@ -1,0 +1,5 @@
+出处
+航空港:http://kb.cs.tsinghua.edu.cn/apibztask/label/2168#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',3))/range-to(string-range(//BODY/P[10]/text()[1],'',6)))
+
+机场:http://kb.cs.tsinghua.edu.cn/apibztask/label/2168#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',3))/range-to(string-range(//BODY/P[10]/text()[1],'',6)))
+

@@ -1,0 +1,7 @@
+图片
+同心圆模式:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T01140010101
+
+扇形模式:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T01140010102
+
+多核心模式:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T01140010103
+

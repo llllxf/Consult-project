@@ -1,0 +1,13 @@
+出处
+北部湾:http://kb.cs.tsinghua.edu.cn/apibztask/label/2240#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[2]/TD[5]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[2]/TD[5]/text()[1],'',3)))
+
+孟加拉湾:http://kb.cs.tsinghua.edu.cn/apibztask/label/17771#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[4]/TD[2]/text()[1],'',22))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[4]/TD[2]/text()[1],'',26)))
+
+几内亚湾:http://kb.cs.tsinghua.edu.cn/apibztask/label/17797#xpointer(start-point(string-range(//BODY/TABLE[7]/TBODY[1]/TR[2]/TD[3]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[7]/TBODY[1]/TR[2]/TD[3]/text()[1],'',4)))
+
+比斯开湾:http://kb.cs.tsinghua.edu.cn/apibztask/label/17791#xpointer(start-point(string-range(//BODY/TABLE[6]/TBODY[1]/TR[6]/TD[2]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[6]/TBODY[1]/TR[6]/TD[2]/text()[1],'',4)))
+
+波斯湾:http://kb.cs.tsinghua.edu.cn/apibztask/label/2232#xpointer(start-point(string-range(//BODY/TABLE[5]/TBODY[1]/TR[5]/TD[2]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[5]/TBODY[1]/TR[5]/TD[2]/text()[1],'',3)))
+
+波斯湾:http://kb.cs.tsinghua.edu.cn/apibztask/label/2241#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',36))/range-to(string-range(//BODY/P[10]/text()[1],'',39)))
+

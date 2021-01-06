@@ -1,0 +1,5 @@
+出处
+经纬网:http://kb.cs.tsinghua.edu.cn/apibztask/label/2012#xpointer(start-point(string-range(//BODY/H5[1]/text()[1],'',4))/range-to(string-range(//BODY/H5[1]/text()[1],'',7)))
+
+经纬网:http://kb.cs.tsinghua.edu.cn/apibztask/label/17672#xpointer(start-point(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',2))/range-to(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',5)))
+

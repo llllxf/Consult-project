@@ -1,0 +1,7 @@
+出处
+高新技术产业:http://kb.cs.tsinghua.edu.cn/apibztask/label/17809#xpointer(start-point(string-range(//BODY/P[8]/SPAN[1]/text()[1],'',2))/range-to(string-range(//BODY/P[8]/SPAN[1]/text()[1],'',8)))
+
+服务外包产业:http://kb.cs.tsinghua.edu.cn/apibztask/label/17773#xpointer(start-point(string-range(//BODY/H5[1]/text()[1],'',9))/range-to(string-range(//BODY/H5[1]/text()[1],'',15)))
+
+电子信息产业:http://kb.cs.tsinghua.edu.cn/apibztask/label/17894#xpointer#电子信息产业
+

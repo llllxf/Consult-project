@@ -1,0 +1,7 @@
+图片
+锋面雨:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/495/CS090002T00380010803
+
+地形雨:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/495/CS090002T00380010802
+
+对流雨:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/495/CS090002T00380010801
+

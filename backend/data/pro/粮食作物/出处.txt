@@ -1,0 +1,5 @@
+出处
+粮食作物:http://kb.cs.tsinghua.edu.cn/apibztask/label/17887#xpointer(start-point(string-range(//BODY/P[12]/text()[1],'',3))/range-to(string-range(//BODY/P[12]/text()[1],'',7)))
+
+粮食作物:http://kb.cs.tsinghua.edu.cn/apibztask/label/17902#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[2]/TD[1]/text()[1],'',4)))
+

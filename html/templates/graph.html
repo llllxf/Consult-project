@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="../static/js/echarts.min.js" ></script>
+        <script type="text/javascript" src="../static/js/jquery.min.js" ></script>
+		<title></title>
+
+	</head>
+	<body>
+<div id="main" style="width:1500px;height:800px"></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*alert(window.location.search.substring(1))*/
+
+        var entity = window.location.search.substring(1).split("=")[1]
+
+        $.ajax({
+        type:'POST',
+        data:JSON.stringify({'entity':entity}),
+        contentType :'application/json',
+        dataType:'json',
+        url :'showGraph',
+        success :function(reply) {
+            var link = new Array();
+            var inf = new Array();
+            var ent = reply['entity']
+             inf.push({name: reply['entity'],
+             des: reply['entity'],
+             symbolSize: 50,
+             category: 0})
+            for(var key in reply) {
+                if(key == 'entity'){
+                    continue
+                }
+
+                var item = reply[key]
+
+            inf.push({
+                name: key.toString(),
+                des: item.toString(),
+                symbolSize: 100,
+                category: 1
+            })
+                link.push({
+                    source: reply['entity'].toString(),
+                    target: key.toString(),
+                    name: '',
+                    des: ''
+                })
+
+            var myChart = echarts.init(document.getElementById('main'));
+        var categories = [{name:'实体'},{name:'属性'}];
+
+        option = {
+            // 图的标题
+            title: {
+                text: ent+'的知识图'
+            },
+            // 提示框的配置
+            tooltip: {
+                formatter: function (x) {
+                    return x.data.des;
+                }
+            },
+            // 工具箱
+            toolbox: {
+                // 显示工具箱
+                show: true,
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    // 还原
+                    restore: {
+                        show: true
+                    },
+                    // 保存为图片
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            legend: [{
+                // selectedMode: 'single',
+                data: categories.map(function (a) {
+                    return a.name;
+                })
+            }],
+            series: [{
+                type: 'graph', // 类型:关系图
+                layout: 'force', //图的布局，类型为力导图
+                symbolSize: 40, // 调整节点的大小
+                roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [2, 10],
+                edgeLabel: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    }
+                },
+                force: {
+                    repulsion: 2500,
+                    edgeLength: [10, 50]
+                },
+                draggable: true,
+                lineStyle: {
+                    normal: {
+                        width: 2,
+                        color: '#4b565b',
+                    }
+                },
+                edgeLabel: {
+                    normal: {
+                        show: true,
+                        formatter: function (x) {
+                            return x.data.name;
+                        }
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {}
+                    }
+                },
+                data:inf,
+                links: link,
+
+                // 数据
+                /*
+                data: [{
+                    name: entity,
+                    des: 'nodedes01',
+                    symbolSize: 70,
+                    category: 0,
+                }, {
+                    name: 'node02',
+                    des: 'nodedes02',
+                    symbolSize: 50,
+                    category: 1,
+                }, {
+                    name: 'node03',
+                    des: 'nodedes3',
+                    symbolSize: 50,
+                    category: 1,
+                }, {
+                    name: 'node04',
+                    des: 'nodedes04',
+                    symbolSize: 50,
+                    category: 1,
+                }, {
+                    name: 'node05',
+                    des: 'nodedes05',
+                    symbolSize: 50,
+                    category: 1,
+                }],
+                links: [{
+                    source: 'node01',
+                    target: 'node02',
+                    name: 'link01',
+                    des: 'link01des'
+                }, {
+                    source: 'node01',
+                    target: 'node03',
+                    name: 'link02',
+                    des: 'link02des'
+                }, {
+                    source: 'node01',
+                    target: 'node04',
+                    name: 'link03',
+                    des: 'link03des'
+                }, {
+                    source: 'node01',
+                    target: 'node05',
+                    name: 'link04',
+                    des: 'link05des'
+                }],*/
+                categories: categories,
+            }]
+        }
+
+    myChart.setOption(option);
+
+        }
+
+
+        }, error :function(e) {
+            alert("查询异常!")
+
+        }});
+
+
+
+        });
+
+</script>
+</body>
+</html>

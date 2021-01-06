@@ -1,0 +1,715 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#高#</pattern>
+        <template>
+            task_mountain_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#高#</pattern>
+        <template>
+            task_mountain_height_more
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#低#</pattern>
+        <template>
+            task_mountain_height_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#低#</pattern>
+        <template>
+            task_mountain_height_less
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#矮#</pattern>
+        <template>
+            task_mountain_height_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#矮#</pattern>
+        <template>
+            task_mountain_height_less
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#长#</pattern>
+        <template>
+            task_mountain_long_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#长#</pattern>
+        <template>
+            task_mountain_long_more
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#短#</pattern>
+        <template>
+            task_mountain_long_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#短#</pattern>
+        <template>
+            task_mountain_long_less
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#南#</pattern>
+        <template>
+            task_mountain_south
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#南#</pattern>
+        <template>
+            task_mountain_south
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#北#</pattern>
+        <template>
+            task_mountain_north
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#北#</pattern>
+        <template>
+            task_mountain_north
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#东#</pattern>
+        <template>
+            task_mountain_east
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#东#</pattern>
+        <template>
+            task_mountain_east
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#西#</pattern>
+        <template>
+            task_mountain_west
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#西#</pattern>
+        <template>
+            task_mountain_west
+        </template>
+    </category>
+
+
+
+     <category>
+        <pattern>#MOUNTAIN#HILL#谁#南#</pattern>
+        <template>
+            task_mountain_hill_south
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#MOUNTAIN#谁#南#</pattern>
+        <template>
+            task_mountain_hill_south
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#哪个#南#</pattern>
+        <template>
+            task_mountain_hill_south
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#HILL#哪个#南#</pattern>
+        <template>
+            task_mountain_hill_south
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#谁#北#</pattern>
+        <template>
+            task_mountain_hill_north
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#MOUNTAIN#谁#北#</pattern>
+        <template>
+            task_mountain_hill_north
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#哪个#北#</pattern>
+        <template>
+            task_mountain_hill_north
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#HILL#哪个#北#</pattern>
+        <template>
+            task_mountain_hill_north
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#谁#东#</pattern>
+        <template>
+            task_mountain_hill_east
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#MOUNTAIN#谁#东#</pattern>
+        <template>
+            task_mountain_hill_east
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#哪个#东#</pattern>
+        <template>
+            task_mountain_hill_east
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#HILL#哪个#东#</pattern>
+        <template>
+            task_mountain_hill_east
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#谁#西#</pattern>
+        <template>
+            task_mountain_hill_west
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#MOUNTAIN#谁#东#</pattern>
+        <template>
+            task_mountain_hill_west
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#哪个#东#</pattern>
+        <template>
+            task_mountain_hill_west
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#HILL#哪个#东#</pattern>
+        <template>
+            task_mountain_hill_west
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#谁#长#</pattern>
+        <template>
+            task_mountain_long_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#哪个#长#</pattern>
+        <template>
+            task_mountain_long_more
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#HILL#HILL#谁#南#</pattern>
+        <template>
+            task_hill_south_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#哪个#南#</pattern>
+        <template>
+            task_hill_south_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#谁#北#</pattern>
+        <template>
+            task_hill_north_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#哪个#北#</pattern>
+        <template>
+            task_hill_north_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#谁#东#</pattern>
+        <template>
+            task_hill_east_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#哪个#东#</pattern>
+        <template>
+            task_hill_east_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#谁#西#</pattern>
+        <template>
+            task_hill_west_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#哪个#西#</pattern>
+        <template>
+            task_hill_west_more
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#HILL#HILL#哪个#高#</pattern>
+        <template>
+            task_hill_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#谁#高#</pattern>
+        <template>
+            task_hill_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#哪个#低#</pattern>
+        <template>
+            task_hill_height_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#谁#低#</pattern>
+        <template>
+            task_hill_height_less
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#谁#高#</pattern>
+        <template>
+            task_mountain_hill_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#谁#高#</pattern>
+        <template>
+            task_mountain_hill_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#哪个#高#</pattern>
+        <template>
+            task_mountain_hill_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#哪个#高#</pattern>
+        <template>
+            task_mountain_hill_height_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#谁#低#</pattern>
+        <template>
+            task_mountain_hill_height_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#谁#低#</pattern>
+        <template>
+            task_mountain_hill_height_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#哪个#低#</pattern>
+        <template>
+            task_mountain_hill_height_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#HILL#哪个#低#</pattern>
+        <template>
+            task_mountain_hill_height_less
+        </template>
+    </category>
+
+
+
+
+
+
+
+
+    <category>
+        <pattern>#LAKE#LAKE#谁#大#</pattern>
+        <template>
+            task_lake_area_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#谁#面积#大#</pattern>
+        <template>
+            task_lake_area_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#哪个#大#</pattern>
+        <template>
+            task_lake_area_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#哪个#面积#大#</pattern>
+        <template>
+            task_lake_area_more
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#LAKE#LAKE#谁#深#</pattern>
+        <template>
+            task_lake_deep_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#哪个#深#</pattern>
+        <template>
+            task_lake_deep_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#比#LAKE#深#</pattern>
+        <template>
+            task_lake_deep_more
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#LAKE#LAKE#谁#蓄水#大#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#谁#蓄水#多#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#谁#库容#大#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#谁#库容#多#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#LAKE#LAKE#哪个#蓄水#大#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#哪个#蓄水#多#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#哪个#库容#大#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+    <category>
+        <pattern>#LAKE#LAKE#哪个#库容#多#</pattern>
+        <template>
+            task_lake_volume_more
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#LAKE#LAKE#谁#小#</pattern>
+        <template>
+            task_lake_area_less
+        </template>
+    </category>
+    <category>
+        <pattern>#SEA#SEA#谁#面积#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#谁#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#哪个#面积#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#哪个#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#谁#浅#</pattern>
+        <template>
+            task_sea_deep_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#哪个#浅#</pattern>
+        <template>
+            task_sea_deep_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#谁#面积#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#谁#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#哪个#面积#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#哪个#小#</pattern>
+        <template>
+            task_sea_area_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#谁#浅#</pattern>
+        <template>
+            task_sea_deep_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SEA#SEA#哪个#浅#</pattern>
+        <template>
+            task_sea_deep_less
+        </template>
+    </category>
+
+
+
+
+
+    <category>
+        <pattern>#RIVER#RIVER#谁#流量#大#</pattern>
+        <template>
+            task_river_flow_more
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#哪个#流量#大#</pattern>
+        <template>
+            task_river_flow_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#RIVER#RIVER#谁#流量#小#</pattern>
+        <template>
+            task_river_flow_less
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#哪个#流量#小#</pattern>
+        <template>
+            task_river_flow_less
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#RIVER#RIVER#谁#大#</pattern>
+        <template>
+            task_river_area_more
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#哪个#大#</pattern>
+        <template>
+            task_river_area_more
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#谁#面积#大#</pattern>
+        <template>
+            task_river_area_more
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#哪个#面积#大#</pattern>
+        <template>
+            task_river_area_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#RIVER#RIVER#谁#小#</pattern>
+        <template>
+            task_river_area_less
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#哪个#小#</pattern>
+        <template>
+            task_river_area_less
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#谁#面积#小#</pattern>
+        <template>
+            task_river_area_less
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#RIVER#哪个#面积#小#</pattern>
+        <template>
+            task_river_area_less
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#RIVER#RIVER#谁#长#</pattern>
+        <template>
+            task_river_long_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#RIVER#RIVER#哪个#长#</pattern>
+        <template>
+            task_river_long_more
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#比#RIVER#长#</pattern>
+        <template>
+            task_river_long_more
+        </template>
+    </category>
+
+    <category>
+        <pattern>#RIVER#RIVER#谁#短#</pattern>
+        <template>
+            task_river_long_less
+        </template>
+    </category>
+
+    <category>
+        <pattern>#RIVER#RIVER#哪个#短#</pattern>
+        <template>
+            task_river_long_less
+        </template>
+    </category>
+    <category>
+        <pattern>#RIVER#比#RIVER#短#</pattern>
+        <template>
+            task_river_long_less
+        </template>
+    </category>
+
+
+</aiml>

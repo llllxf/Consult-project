@@ -1,0 +1,64 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <!-- 是否问题 -->
+    <category>
+        <pattern>#是不是#</pattern>
+        <template>
+            task_whether
+        </template>
+    </category>
+    <category>
+        <pattern>#是#吗</pattern>
+        <template>
+            task_whether
+        </template>
+    </category>
+    <category>
+        <pattern>#是否#</pattern>
+        <template>
+            task_whether
+        </template>
+    </category>
+    <category>
+        <pattern>#有没有#</pattern>
+        <template>
+            task_whether
+        </template>
+    </category>
+    <category>
+        <pattern>#有#吗</pattern>
+        <template>
+            task_whether
+        </template>
+    </category>
+
+
+    <!-- 询问子集问题 -->
+    <category>
+        <pattern>#有哪些#</pattern>
+        <template>
+            task_subset
+        </template>
+    </category>
+    <category>
+        <pattern>#有什么#</pattern>
+        <template>
+            task_subset
+        </template>
+    </category>
+    <category>
+        <pattern>#哪些#</pattern>
+        <template>
+            task_subset
+        </template>
+    </category>
+
+    <!-- 其他问题 -->
+    <category>
+        <pattern>*</pattern>
+        <template>
+            task_normal
+        </template>
+    </category>
+
+
+</aiml>

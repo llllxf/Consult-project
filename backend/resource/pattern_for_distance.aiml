@@ -1,0 +1,150 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+
+    <!-- 计算山之间的直线距离 -->
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#相距#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#MOUNTAIN#距离#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#相距#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#HILL#距离#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#相距#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#MOUNTAIN#距离#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#MOUNTAIN#相距#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#MOUNTAIN#距离#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+
+
+    <category>
+        <pattern>#MOUNTAIN#离#MOUNTAIN#多远</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#离#MOUNTAIN#多少*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#离#MOUNTAIN#几*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#HILL#相距#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#HILL#距离#</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+    <category>
+        <pattern>#HILL#离#HILL#多远</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#离#HILL#多少*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#HILL#离#HILL#几*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#MOUNTAIN#离#HILL#多远</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#离#HILL#多少*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#离#HILL#几*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+    <category>
+        <pattern>#MOUNTAIN#离#HILL#多远</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#离#HILL#多少*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+    <category>
+        <pattern>#MOUNTAIN#离#HILL#几*</pattern>
+        <template>
+            task_mountain_distance
+        </template>
+    </category>
+
+
+</aiml>

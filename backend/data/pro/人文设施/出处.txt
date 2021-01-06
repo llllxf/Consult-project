@@ -1,0 +1,3 @@
+出处
+天安门广场:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[14]/text()[1],'',16))/range-to(string-range(//BODY/P[14]/text()[1],'',21)))
+

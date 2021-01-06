@@ -1,0 +1,3 @@
+出处
+大西洋中部海岭:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[439]/text()[1],'',11))/range-to(string-range(//BODY/P[439]/text()[1],'',18)))
+

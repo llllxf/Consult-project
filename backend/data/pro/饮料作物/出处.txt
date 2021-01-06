@@ -1,0 +1,3 @@
+出处
+茶:http://kb.cs.tsinghua.edu.cn/apibztask/label/17772#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[4]/TD[1]/text()[1],'',1)))
+

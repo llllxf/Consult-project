@@ -1,0 +1,5 @@
+出处
+森林:http://kb.cs.tsinghua.edu.cn/apibztask/label/2308#xpointer(start-point(string-range(//BODY/P[4]/text()[1],'',1))/range-to(string-range(//BODY/P[4]/text()[1],'',3)))
+
+森林:http://kb.cs.tsinghua.edu.cn/apibztask/label/2308#xpointer(start-point(string-range(//BODY/P[5]/text()[1],'',1))/range-to(string-range(//BODY/P[5]/text()[1],'',3)))
+

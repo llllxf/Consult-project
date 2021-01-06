@@ -1,0 +1,11 @@
+出处
+同心圆模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2129#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',5)))
+
+扇形模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2129#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[1]/text()[1],'',4)))
+
+多核心模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2129#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',5)))
+
+城市内部空间结构:http://kb.cs.tsinghua.edu.cn/apibztask/label/2129#xpointer(start-point(string-range(//BODY/P[2]/text()[1],'',32))/range-to(string-range(//BODY/P[2]/text()[1],'',38)))
+
+城市地域结构:http://kb.cs.tsinghua.edu.cn/apibztask/label/2129#xpointer(start-point(string-range(//BODY/P[2]/text()[1],'',32))/range-to(string-range(//BODY/P[2]/text()[1],'',38)))
+

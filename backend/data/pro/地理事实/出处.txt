@@ -1,0 +1,9 @@
+出处
+沿海航线:http://kb.cs.tsinghua.edu.cn/apibztask/label/2268#xpointer(start-point(string-range(//BODY/P[9]/text()[1],'',15))/range-to(string-range(//BODY/P[9]/text()[1],'',19)))
+
+远洋航线:http://kb.cs.tsinghua.edu.cn/apibztask/label/2268#xpointer(start-point(string-range(//BODY/P[9]/text()[1],'',20))/range-to(string-range(//BODY/P[9]/text()[1],'',24)))
+
+海洋运输:http://kb.cs.tsinghua.edu.cn/apibztask/label/2268#xpointer(start-point(string-range(//BODY/P[9]/text()[1],'',3))/range-to(string-range(//BODY/P[9]/text()[1],'',7)))
+
+火山口:http://kb.cs.tsinghua.edu.cn/apibztask/label/2098#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',3)))
+

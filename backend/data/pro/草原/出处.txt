@@ -1,0 +1,7 @@
+出处
+潘帕斯草原:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[3]/text()[1],'',9))/range-to(string-range(//BODY/P[3]/text()[1],'',14)))
+
+潘帕斯草原:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[197]/text()[1],'',11))/range-to(string-range(//BODY/P[197]/text()[1],'',16)))
+
+潘帕斯草原:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[46]/text()[1],'',16))/range-to(string-range(//BODY/P[46]/text()[1],'',21)))
+

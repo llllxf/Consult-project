@@ -1,0 +1,5 @@
+出处
+三圈环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/2058#xpointer(start-point(string-range(//BODY/P[4]/text()[1],'',0))/range-to(string-range(//BODY/P[4]/text()[1],'',4)))
+
+三圈环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[467]/text()[1],'',11))/range-to(string-range(//BODY/P[467]/text()[1],'',15)))
+

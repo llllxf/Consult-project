@@ -1,0 +1,7 @@
+实体限制
+长江流域:http://edukb.org/knowledge/0.1/instance/geo#-02fb2601b29a18f8cd1bdc2a1522f0f2
+
+长江流域:http://edukb.org/knowledge/0.1/instance/geo#-66ce5da4d7e648342db22b1923acbad1
+
+长江流域:http://edukb.org/knowledge/0.1/instance/geo#-74070e0afb7c310860064b5d5fa4d899
+

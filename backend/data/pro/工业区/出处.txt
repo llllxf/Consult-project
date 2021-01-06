@@ -1,0 +1,13 @@
+出处
+工业区:http://kb.cs.tsinghua.edu.cn/apibztask/label/2128#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[6]/TD[1]/text()[1],'',3)))
+
+工业区:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[356]/text()[1],'',9))/range-to(string-range(//BODY/P[356]/text()[1],'',12)))
+
+工业区:http://kb.cs.tsinghua.edu.cn/apibztask/label/2129#xpointer(start-point(string-range(//BODY/P[5]/text()[1],'',94))/range-to(string-range(//BODY/P[5]/text()[1],'',97)))
+
+工业区:http://kb.cs.tsinghua.edu.cn/apibztask/label/2252#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[1]/STRONG[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[1]/STRONG[1]/text()[1],'',3)))
+
+工业区:http://kb.cs.tsinghua.edu.cn/apibztask/label/2254#xpointer(start-point(string-range(//BODY/P[18]/text()[1],'',3))/range-to(string-range(//BODY/P[18]/text()[1],'',6)))
+
+“硅谷”高技术工业区:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[485]/text()[1],'',11))/range-to(string-range(//BODY/P[485]/text()[1],'',21)))
+

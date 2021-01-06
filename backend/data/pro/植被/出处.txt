@@ -1,0 +1,5 @@
+出处
+植被:http://kb.cs.tsinghua.edu.cn/apibztask/label/2107#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[5]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[5]/TD[1]/text()[1],'',2)))
+
+热带雨林:http://kb.cs.tsinghua.edu.cn/apibztask/label/2255#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',1))/range-to(string-range(//BODY/P[10]/text()[1],'',5)))
+

@@ -1,0 +1,5 @@
+出处
+湿地:http://kb.cs.tsinghua.edu.cn/apibztask/label/2204#xpointer(start-point(string-range(//BODY/H5[1]/text()[1],'',7))/range-to(string-range(//BODY/H5[1]/text()[1],'',9)))
+
+湿地:http://kb.cs.tsinghua.edu.cn/apibztask/label/2203#xpointer(start-point(string-range(//BODY/H5[1]/text()[1],'',4))/range-to(string-range(//BODY/H5[1]/text()[1],'',6)))
+

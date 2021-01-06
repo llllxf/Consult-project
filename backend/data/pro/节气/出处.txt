@@ -1,0 +1,5 @@
+出处
+春分:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[145]/text()[1],'',33))/range-to(string-range(//BODY/P[145]/text()[1],'',35)))
+
+冬至:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[456]/text()[1],'',9))/range-to(string-range(//BODY/P[456]/text()[1],'',11)))
+

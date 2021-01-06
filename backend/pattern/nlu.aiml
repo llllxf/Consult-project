@@ -1,0 +1,35 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <!-- 单实体属性问题 -->
+    <category>
+        <pattern>#ent#pro#</pattern>
+        <template>
+            task_common
+        </template>
+    </category>
+    <category>
+        <pattern>#pro#ent#</pattern>
+        <template>
+            task_common
+        </template>
+    </category>
+
+    <!-- 两个实体属性问题 -->
+    <category>
+        <pattern>#ent#pro#ent#</pattern>
+        <template>
+            task_pro_rel
+        </template>
+    </category>
+    <category>
+        <pattern>#ent#ent#pro#</pattern>
+        <template>
+            task_pro_rel
+        </template>
+    </category>
+    <category>
+        <pattern>#pro#ent#ent</pattern>
+        <template>
+            task_pro_rel
+        </template>
+    </category>
+</aiml>

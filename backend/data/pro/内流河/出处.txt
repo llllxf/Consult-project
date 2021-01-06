@@ -1,0 +1,13 @@
+出处
+弱水:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[3]/TD[3]/text()[1],'',5))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[3]/TD[3]/text()[1],'',7)))
+
+内流河:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/P[6]/text()[1],'',22))/range-to(string-range(//BODY/P[6]/text()[1],'',25)))
+
+塔里木河:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[3]/TD[3]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[3]/TD[3]/text()[1],'',4)))
+
+塔里木河:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[6]/TD[1]/text()[1],'',4)))
+
+塔里木河:http://kb.cs.tsinghua.edu.cn/apibztask/label/17753#xpointer(start-point(string-range(//BODY/P[16]/text()[1],'',27))/range-to(string-range(//BODY/P[16]/text()[1],'',31)))
+
+塔里木河:http://kb.cs.tsinghua.edu.cn/apibztask/label/17854#xpointer(start-point(string-range(//BODY/P[12]/text()[1],'',8))/range-to(string-range(//BODY/P[12]/text()[1],'',12)))
+

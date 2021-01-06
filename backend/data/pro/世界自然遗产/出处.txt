@@ -1,0 +1,5 @@
+出处
+世界自然遗产:http://kb.cs.tsinghua.edu.cn/apibztask/label/2280#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[1]/STRONG[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[1]/STRONG[1]/text()[1],'',6)))
+
+中国南方喀斯特:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[472]/text()[1],'',11))/range-to(string-range(//BODY/P[472]/text()[1],'',18)))
+

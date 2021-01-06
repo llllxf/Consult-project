@@ -1,0 +1,5 @@
+出处
+油菜:http://kb.cs.tsinghua.edu.cn/apibztask/label/2266#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[9]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[9]/TD[1]/text()[1],'',2)))
+
+油菜:http://kb.cs.tsinghua.edu.cn/apibztask/label/17887#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[5]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[5]/TD[1]/text()[1],'',2)))
+

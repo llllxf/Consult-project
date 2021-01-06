@@ -1,0 +1,15 @@
+出处
+钢铁工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/2155#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[3]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[3]/text()[1],'',4)))
+
+钢铁工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/2155#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[4]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[4]/text()[1],'',4)))
+
+钢铁工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[347]/text()[1],'',38))/range-to(string-range(//BODY/P[347]/text()[1],'',42)))
+
+钢铁工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[439]/text()[1],'',11))/range-to(string-range(//BODY/P[439]/text()[1],'',15)))
+
+化学工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[347]/text()[1],'',24))/range-to(string-range(//BODY/P[347]/text()[1],'',28)))
+
+汽车制造工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[347]/text()[1],'',30))/range-to(string-range(//BODY/P[347]/text()[1],'',36)))
+
+电力工业:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[347]/text()[1],'',44))/range-to(string-range(//BODY/P[347]/text()[1],'',48)))
+

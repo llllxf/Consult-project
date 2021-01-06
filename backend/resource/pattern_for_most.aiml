@@ -1,0 +1,425 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+
+
+    <!-- 计算模块 最值 -->
+    <category>
+        <pattern>#湖#最大#</pattern>
+        <template>
+            请问你问的是湖泊的面积还是蓄水量
+        </template>
+    </category>
+
+    <category>
+        <pattern>#湖#最大#</pattern>
+        <template>
+            请问你问的是湖泊的面积还是蓄水量
+        </template>
+    </category>
+
+     <category>
+        <pattern>#最大#湖#</pattern>
+        <template>
+            请问你问的是湖泊的面积还是蓄水量
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#</pattern>
+        <that>
+            请问你问的是湖泊的面积还是蓄水量
+        </that>
+        <template>
+            task_lake_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#蓄水量#</pattern>
+        <that>
+            请问你问的是湖泊的面积还是蓄水量
+        </that>
+        <template>
+            task_lake_most_vol
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#湖#面积#最#大#</pattern>
+        <template>
+            task_lake_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#最#大#湖#</pattern>
+        <template>
+            task_lake_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#湖#蓄水量#最#大#</pattern>
+        <template>
+            task_lake_most_vol
+        </template>
+    </category>
+
+    <category>
+        <pattern>#蓄水量#最#大#湖#</pattern>
+        <template>
+            task_lake_most_vol
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#湖#最#深#</pattern>
+        <template>
+            task_lake_most_deep
+        </template>
+    </category>
+    <category>
+        <pattern>#最#深#湖#</pattern>
+        <template>
+            task_lake_most_deep
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#河#面积#最#大#</pattern>
+        <template>
+            task_river_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#最#大#河#</pattern>
+        <template>
+            task_river_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#河#流量#最#大#</pattern>
+        <template>
+            task_river_most_flow
+        </template>
+    </category>
+
+    <category>
+        <pattern>#流量#最#大#河#</pattern>
+        <template>
+            task_river_most_flow
+        </template>
+    </category>
+
+    <category>
+        <pattern>#最#长#河#</pattern>
+        <template>
+            task_river_most_long
+        </template>
+    </category>
+    <category>
+        <pattern>#河#最#长#</pattern>
+        <template>
+            task_river_most_long
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#山#最#高#</pattern>
+        <template>
+            task_mountain_most_high
+        </template>
+    </category>
+    <category>
+        <pattern>#最#高#山#</pattern>
+        <template>
+            task_mountain_most_high
+        </template>
+    </category>
+
+    <category>
+        <pattern>#山#最#南#</pattern>
+        <template>
+            task_mountain_most_dir_south
+        </template>
+    </category>
+    <category>
+        <pattern>#最#南#山#</pattern>
+        <template>
+            task_mountain_most_dir_south
+        </template>
+    </category>
+
+    <category>
+        <pattern>#山#最#北#</pattern>
+        <template>
+            task_mountain_most_dir_north
+        </template>
+    </category>
+    <category>
+        <pattern>#最#北#山#</pattern>
+        <template>
+            task_mountain_most_dir_north
+        </template>
+    </category>
+
+    <category>
+        <pattern>#山#最#西#</pattern>
+        <template>
+            task_mountain_most_dir_west
+        </template>
+    </category>
+    <category>
+        <pattern>#最#西#山#</pattern>
+        <template>
+            task_mountain_most_dir_west
+        </template>
+    </category>
+
+    <category>
+        <pattern>#山#最#东#</pattern>
+        <template>
+            task_mountain_most_dir_east
+        </template>
+    </category>
+    <category>
+        <pattern>#最#东#山#</pattern>
+        <template>
+            task_mountain_most_dir_east
+        </template>
+    </category>
+
+    <category>
+        <pattern>#山#最#长#</pattern>
+        <template>
+            task_mountain_most_long
+        </template>
+    </category>
+    <category>
+        <pattern>#最#长#山#</pattern>
+        <template>
+            task_mountain_most_long
+        </template>
+    </category>
+
+    <category>
+        <pattern>#海#面积#最#大#</pattern>
+        <template>
+            task_sea_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#最#大#海#</pattern>
+        <template>
+            task_sea_most_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#海#最#深#</pattern>
+        <template>
+            task_sea_most_deep
+        </template>
+    </category>
+    <category>
+        <pattern>#最#深#海#</pattern>
+        <template>
+            task_sea_most_deep
+        </template>
+    </category>
+
+
+
+
+
+
+
+
+
+
+    <category>
+        <pattern>#湖#最小#</pattern>
+        <template>
+            task_lake_least_area
+
+        </template>
+    </category>
+
+
+     <category>
+        <pattern>#最小#湖#</pattern>
+        <template>
+            task_lake_least_area
+
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#湖#面积#最#小#</pattern>
+        <template>
+            task_lake_least_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#最#小#湖#</pattern>
+        <template>
+            task_lake_least_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#湖#蓄水量#最#小#</pattern>
+        <template>
+            task_lake_least_vol
+        </template>
+    </category>
+
+    <category>
+        <pattern>#蓄水量#最#小#湖#</pattern>
+        <template>
+            task_lake_least_vol
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>#湖#最#浅#</pattern>
+        <template>
+            task_lake_least_deep
+        </template>
+    </category>
+    <category>
+        <pattern>#最#浅#湖#</pattern>
+        <template>
+            task_lake_least_deep
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#河#面积#最#小#</pattern>
+        <template>
+            task_river_least_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#最#小#河#</pattern>
+        <template>
+            task_river_least_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#河#流量#最#小#</pattern>
+        <template>
+            task_river_least_flow
+        </template>
+    </category>
+
+    <category>
+        <pattern>#流量#最#小#河#</pattern>
+        <template>
+            task_river_least_flow
+        </template>
+    </category>
+
+    <category>
+        <pattern>#最#短#河#</pattern>
+        <template>
+            task_river_least_long
+        </template>
+    </category>
+    <category>
+        <pattern>#河#最#短#</pattern>
+        <template>
+            task_river_least_long
+        </template>
+    </category>
+
+
+
+
+    <category>
+        <pattern>#山#最#低#</pattern>
+        <template>
+            task_mountain_least_high
+        </template>
+    </category>
+    <category>
+        <pattern>#最#低#山#</pattern>
+        <template>
+            task_mountain_least_high
+        </template>
+    </category>
+    <category>
+        <pattern>#山#最#矮#</pattern>
+        <template>
+            task_mountain_least_high
+        </template>
+    </category>
+    <category>
+        <pattern>#最#矮#山#</pattern>
+        <template>
+            task_mountain_least_high
+        </template>
+    </category>
+
+    <category>
+        <pattern>#山#最#短#</pattern>
+        <template>
+            task_mountain_least_long
+        </template>
+    </category>
+    <category>
+        <pattern>#最#短#山#</pattern>
+        <template>
+            task_mountain_least_long
+        </template>
+    </category>
+
+    <category>
+        <pattern>#海#面积#最#小#</pattern>
+        <template>
+            task_sea_least_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#面积#最#小#海#</pattern>
+        <template>
+            task_sea_least_area
+        </template>
+    </category>
+
+    <category>
+        <pattern>#海#最#浅#</pattern>
+        <template>
+            task_sea_least_deep
+        </template>
+    </category>
+    <category>
+        <pattern>#最#浅#海#</pattern>
+        <template>
+            task_sea_least_deep
+        </template>
+    </category>
+
+
+
+</aiml>

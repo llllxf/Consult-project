@@ -1,0 +1,3 @@
+出处
+大豆:http://kb.cs.tsinghua.edu.cn/apibztask/label/2216#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[3]/text()[1],'',27))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[3]/text()[1],'',29)))
+

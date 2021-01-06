@@ -1,0 +1,11 @@
+出处
+龙羊峡:http://kb.cs.tsinghua.edu.cn/apibztask/label/17877#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',3)))
+
+刘家峡:http://kb.cs.tsinghua.edu.cn/apibztask/label/17877#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[1]/text()[1],'',3)))
+
+龙滩:http://kb.cs.tsinghua.edu.cn/apibztask/label/17877#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',2)))
+
+二滩:http://kb.cs.tsinghua.edu.cn/apibztask/label/17877#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[5]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[5]/TD[1]/text()[1],'',2)))
+
+丹江口:http://kb.cs.tsinghua.edu.cn/apibztask/label/17877#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[6]/TD[1]/text()[1],'',3)))
+

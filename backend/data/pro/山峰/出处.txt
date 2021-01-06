@@ -1,0 +1,15 @@
+出处
+珠穆朗玛峰:http://kb.cs.tsinghua.edu.cn/apibztask/label/17753#xpointer(start-point(string-range(//BODY/P[5]/text()[1],'',34))/range-to(string-range(//BODY/P[5]/text()[1],'',39)))
+
+富士山:http://kb.cs.tsinghua.edu.cn/apibztask/label/2250#xpointer(start-point(string-range(//BODY/P[6]/text()[1],'',24))/range-to(string-range(//BODY/P[6]/text()[1],'',27)))
+
+富士山:http://kb.cs.tsinghua.edu.cn/apibztask/label/17758#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',0))/range-to(string-range(//BODY/P[10]/text()[1],'',3)))
+
+勃朗峰:http://kb.cs.tsinghua.edu.cn/apibztask/label/2242#xpointer(start-point(string-range(//BODY/P[6]/text()[1],'',98))/range-to(string-range(//BODY/P[6]/text()[1],'',101)))
+
+勃朗峰:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[352]/text()[1],'',28))/range-to(string-range(//BODY/P[352]/text()[1],'',31)))
+
+麦金利峰:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[352]/text()[1],'',47))/range-to(string-range(//BODY/P[352]/text()[1],'',51)))
+
+文森峰:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[352]/text()[1],'',67))/range-to(string-range(//BODY/P[352]/text()[1],'',70)))
+

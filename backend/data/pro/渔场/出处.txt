@@ -1,0 +1,17 @@
+出处
+北海道渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/2085#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[2]/TD[1]/text()[1],'',5)))
+
+纽芬兰渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/2085#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[4]/TD[1]/text()[1],'',5)))
+
+北海渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/2085#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[5]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[5]/TD[1]/text()[1],'',4)))
+
+舟山渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/17827#xpointer(start-point(string-range(//BODY/TABLE[5]/TBODY[1]/TR[3]/TD[2]/text()[1],'',42))/range-to(string-range(//BODY/TABLE[5]/TBODY[1]/TR[3]/TD[2]/text()[1],'',46)))
+
+秘鲁渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/2085#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[3]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[3]/TD[1]/text()[1],'',4)))
+
+秘鲁渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[474]/text()[1],'',9))/range-to(string-range(//BODY/P[474]/text()[1],'',13)))
+
+秘鲁渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[55]/text()[1],'',9))/range-to(string-range(//BODY/P[55]/text()[1],'',13)))
+
+秘鲁渔场:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[376]/text()[1],'',55))/range-to(string-range(//BODY/P[376]/text()[1],'',59)))
+

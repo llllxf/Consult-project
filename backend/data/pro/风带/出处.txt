@@ -1,0 +1,17 @@
+出处
+信风带:http://kb.cs.tsinghua.edu.cn/apibztask/label/2060#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',3)))
+
+西风带:http://kb.cs.tsinghua.edu.cn/apibztask/label/2060#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[6]/TD[1]/text()[1],'',3)))
+
+西风带:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[343]/text()[1],'',13))/range-to(string-range(//BODY/P[343]/text()[1],'',16)))
+
+极地东风带:http://kb.cs.tsinghua.edu.cn/apibztask/label/2060#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[8]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[8]/TD[1]/text()[1],'',5)))
+
+风带:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[188]/text()[1],'',15))/range-to(string-range(//BODY/P[188]/text()[1],'',17)))
+
+东北信风:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[101]/text()[1],'',81))/range-to(string-range(//BODY/P[101]/text()[1],'',85)))
+
+东北信风:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[3]/text()[1],'',48))/range-to(string-range(//BODY/P[3]/text()[1],'',52)))
+
+中纬西风带:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[343]/text()[1],'',11))/range-to(string-range(//BODY/P[343]/text()[1],'',16)))
+

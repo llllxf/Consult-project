@@ -1,0 +1,13 @@
+出处
+常规能源:http://kb.cs.tsinghua.edu.cn/apibztask/label/2207#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[7]/TD[2]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[7]/TD[2]/text()[1],'',4)))
+
+煤炭资源:http://kb.cs.tsinghua.edu.cn/apibztask/label/2208#xpointer(start-point(string-range(//BODY/H5[1]/text()[1],'',7))/range-to(string-range(//BODY/H5[1]/text()[1],'',11)))
+
+天然气:http://kb.cs.tsinghua.edu.cn/apibztask/label/2224#xpointer(start-point(string-range(//BODY/P[16]/text()[1],'',3))/range-to(string-range(//BODY/P[16]/text()[1],'',6)))
+
+铁矿:http://kb.cs.tsinghua.edu.cn/apibztask/label/2263#xpointer(start-point(string-range(//BODY/P[38]/text()[1],'',1))/range-to(string-range(//BODY/P[38]/text()[1],'',3)))
+
+石油:http://kb.cs.tsinghua.edu.cn/apibztask/label/2241#xpointer(start-point(string-range(//BODY/P[10]/text()[1],'',77))/range-to(string-range(//BODY/P[10]/text()[1],'',79)))
+
+煤:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[26]/text()[1],'',42))/range-to(string-range(//BODY/P[26]/text()[1],'',43)))
+

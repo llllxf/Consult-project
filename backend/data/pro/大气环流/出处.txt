@@ -1,0 +1,15 @@
+出处
+低纬环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/2058#xpointer#低纬环流
+
+中纬环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/2058#xpointer#中纬环流
+
+高纬环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/2058#xpointer#高纬环流
+
+大气环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[44]/text()[1],'',51))/range-to(string-range(//BODY/P[44]/text()[1],'',55)))
+
+季风环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[69]/text()[1],'',10))/range-to(string-range(//BODY/P[69]/text()[1],'',14)))
+
+三圈环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/2058#xpointer(start-point(string-range(//BODY/P[4]/text()[1],'',0))/range-to(string-range(//BODY/P[4]/text()[1],'',4)))
+
+三圈环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[467]/text()[1],'',11))/range-to(string-range(//BODY/P[467]/text()[1],'',15)))
+

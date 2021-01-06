@@ -1,0 +1,9 @@
+图片
+锋:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/110/Figure-0000-204
+
+暖锋:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T00580010202
+
+准静止锋:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T00580010203
+
+冷锋:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T00580010201
+

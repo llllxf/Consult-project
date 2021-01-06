@@ -1,0 +1,7 @@
+图片
+地震:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T02700010101
+
+台风:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/110/Figure-0000-621
+
+自然灾害:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/110/Figure-0000-620
+

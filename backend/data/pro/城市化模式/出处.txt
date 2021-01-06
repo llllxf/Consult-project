@@ -1,0 +1,13 @@
+出处
+珠江三角洲模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2220#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[2]/TD[1]/text()[1],'',7)))
+
+苏南模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2220#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[3]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[3]/TD[1]/text()[1],'',4)))
+
+云南德宏模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2220#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[6]/TD[1]/text()[1],'',6)))
+
+东北模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2220#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[5]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[5]/TD[1]/text()[1],'',4)))
+
+城市化模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2220#xpointer(start-point(string-range(//BODY/P[3]/SPAN[1]/text()[1],'',7))/range-to(string-range(//BODY/P[3]/SPAN[1]/text()[1],'',12)))
+
+温州模式:http://kb.cs.tsinghua.edu.cn/apibztask/label/2220#xpointer#温州模式
+

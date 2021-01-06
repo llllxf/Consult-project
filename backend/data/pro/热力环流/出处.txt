@@ -1,0 +1,15 @@
+出处
+城市风:http://kb.cs.tsinghua.edu.cn/apibztask/label/2053#xpointer(start-point(string-range(//BODY/P[19]/text()[1],'',3))/range-to(string-range(//BODY/P[19]/text()[1],'',6)))
+
+海风:http://kb.cs.tsinghua.edu.cn/apibztask/label/2053#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[2]/text()[1],'',34))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[2]/text()[1],'',36)))
+
+陆风:http://kb.cs.tsinghua.edu.cn/apibztask/label/2053#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[3]/text()[1],'',34))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[3]/text()[1],'',36)))
+
+谷风:http://kb.cs.tsinghua.edu.cn/apibztask/label/2053#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[2]/text()[1],'',35))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[2]/text()[1],'',37)))
+
+山风:http://kb.cs.tsinghua.edu.cn/apibztask/label/2053#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[3]/text()[1],'',35))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[3]/text()[1],'',37)))
+
+热力环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[464]/text()[1],'',11))/range-to(string-range(//BODY/P[464]/text()[1],'',15)))
+
+热力环流:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[414]/text()[1],'',9))/range-to(string-range(//BODY/P[414]/text()[1],'',13)))
+

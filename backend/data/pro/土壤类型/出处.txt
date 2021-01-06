@@ -1,0 +1,7 @@
+出处
+红壤:http://kb.cs.tsinghua.edu.cn/apibztask/label/17922#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[2]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[2]/text()[1],'',2)))
+
+紫色土:http://kb.cs.tsinghua.edu.cn/apibztask/label/17922#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[3]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[3]/text()[1],'',3)))
+
+水稻土:http://kb.cs.tsinghua.edu.cn/apibztask/label/17922#xpointer(start-point(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[4]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[3]/TBODY[1]/TR[1]/TD[4]/text()[1],'',3)))
+

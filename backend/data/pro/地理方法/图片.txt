@@ -1,0 +1,11 @@
+图片
+线段式:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/495/CS090002T00120010201
+
+一般定向法:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/495/Figure-0000-49
+
+指向标定向法:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/495/Figure-0000-51
+
+经纬网定向法:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/495/Figure-0000-53
+
+根据需要选择比例尺合适的地图:http://kb.cs.tsinghua.edu.cn/apihtml/getjpg/495/Figure-0000-57
+

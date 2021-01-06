@@ -1,0 +1,5 @@
+出处
+大陆漂移说:http://kb.cs.tsinghua.edu.cn/apibztask/label/17703#xpointer(start-point(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',2))/range-to(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',7)))
+
+运动方向:http://kb.cs.tsinghua.edu.cn/apibztask/label/17704#xpointer(start-point(string-range(//BODY/P[7]/SPAN[1]/text()[1],'',10))/range-to(string-range(//BODY/P[7]/SPAN[1]/text()[1],'',14)))
+

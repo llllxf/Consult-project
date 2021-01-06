@@ -1,0 +1,9 @@
+出处
+棉花:http://kb.cs.tsinghua.edu.cn/apibztask/label/17887#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[6]/TD[1]/text()[1],'',2)))
+
+棉花:http://kb.cs.tsinghua.edu.cn/apibztask/label/17902#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[2]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[2]/text()[1],'',2)))
+
+纤维作物:http://kb.cs.tsinghua.edu.cn/apibztask/label/17902#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[1]/text()[1],'',4)))
+
+黄麻:http://kb.cs.tsinghua.edu.cn/apibztask/label/17772#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[3]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[3]/TD[1]/text()[1],'',2)))
+

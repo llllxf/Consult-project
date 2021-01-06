@@ -1,0 +1,7 @@
+降水位置图
+暖锋:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T00580010208
+
+准静止锋:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T00580010209
+
+冷锋:http://kb.cs.tsinghua.edu.cn/apihtml/getpng/110/CS010069T00580010207
+

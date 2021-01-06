@@ -1,0 +1,11 @@
+出处
+北京故宫:http://kb.cs.tsinghua.edu.cn/apibztask/label/17918#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[1]/TD[1]/text()[1],'',4)))
+
+颐和园:http://kb.cs.tsinghua.edu.cn/apibztask/label/17918#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[2]/TD[1]/text()[1],'',3)))
+
+前门大街:http://kb.cs.tsinghua.edu.cn/apibztask/label/17918#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[3]/TD[1]/text()[1],'',4)))
+
+南锣鼓巷:http://kb.cs.tsinghua.edu.cn/apibztask/label/17918#xpointer(start-point(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[1]/TBODY[1]/TR[4]/TD[1]/text()[1],'',4)))
+
+庐山:http://kb.cs.tsinghua.edu.cn/apibztask/label/38290#xpointer(start-point(string-range(//BODY/P[297]/text()[1],'',13))/range-to(string-range(//BODY/P[297]/text()[1],'',15)))
+

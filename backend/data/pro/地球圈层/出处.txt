@@ -1,0 +1,11 @@
+出处
+岩石圈:http://kb.cs.tsinghua.edu.cn/apibztask/label/2092#xpointer(start-point(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',2))/range-to(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',5)))
+
+岩石圈:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[14]/text()[1],'',73))/range-to(string-range(//BODY/P[14]/text()[1],'',76)))
+
+岩石圈:http://kb.cs.tsinghua.edu.cn/apibztask/label/38275#xpointer(start-point(string-range(//BODY/P[194]/text()[1],'',56))/range-to(string-range(//BODY/P[194]/text()[1],'',59)))
+
+岩石圈:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[339]/text()[1],'',25))/range-to(string-range(//BODY/P[339]/text()[1],'',28)))
+
+岩石圈:http://kb.cs.tsinghua.edu.cn/apibztask/label/38287#xpointer(start-point(string-range(//BODY/P[376]/text()[1],'',11))/range-to(string-range(//BODY/P[376]/text()[1],'',14)))
+

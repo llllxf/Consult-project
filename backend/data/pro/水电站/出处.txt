@@ -1,0 +1,15 @@
+出处
+伊泰普水电站:http://kb.cs.tsinghua.edu.cn/apibztask/label/2255#xpointer(start-point(string-range(//BODY/P[12]/text()[1],'',27))/range-to(string-range(//BODY/P[12]/text()[1],'',33)))
+
+龙羊峡水电站:http://kb.cs.tsinghua.edu.cn/apibztask/label/17856#xpointer(start-point(string-range(//BODY/P[11]/text()[1],'',16))/range-to(string-range(//BODY/P[11]/text()[1],'',22)))
+
+李家峡水电站:http://kb.cs.tsinghua.edu.cn/apibztask/label/17856#xpointer(start-point(string-range(//BODY/P[11]/text()[1],'',23))/range-to(string-range(//BODY/P[11]/text()[1],'',29)))
+
+刘家峡水电站:http://kb.cs.tsinghua.edu.cn/apibztask/label/17856#xpointer(start-point(string-range(//BODY/P[11]/text()[1],'',34))/range-to(string-range(//BODY/P[11]/text()[1],'',40)))
+
+青铜峡水电站:http://kb.cs.tsinghua.edu.cn/apibztask/label/17856#xpointer(start-point(string-range(//BODY/P[11]/text()[1],'',49))/range-to(string-range(//BODY/P[11]/text()[1],'',55)))
+
+三门峡水电站:http://kb.cs.tsinghua.edu.cn/apibztask/label/17856#xpointer(start-point(string-range(//BODY/P[12]/text()[1],'',14))/range-to(string-range(//BODY/P[12]/text()[1],'',20)))
+
+小浪底水利枢纽工程:http://kb.cs.tsinghua.edu.cn/apibztask/label/17856#xpointer(start-point(string-range(//BODY/P[12]/text()[1],'',21))/range-to(string-range(//BODY/P[12]/text()[1],'',30)))
+

@@ -1,0 +1,13 @@
+出处
+油料作物:http://kb.cs.tsinghua.edu.cn/apibztask/label/2266#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[1]/text()[1],'',4)))
+
+油料作物:http://kb.cs.tsinghua.edu.cn/apibztask/label/17902#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[6]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[6]/TD[1]/text()[1],'',4)))
+
+油料作物:http://kb.cs.tsinghua.edu.cn/apibztask/label/17887#xpointer(start-point(string-range(//BODY/P[13]/text()[1],'',26))/range-to(string-range(//BODY/P[13]/text()[1],'',30)))
+
+花生:http://kb.cs.tsinghua.edu.cn/apibztask/label/2266#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[2]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[8]/TD[2]/text()[1],'',2)))
+
+花生:http://kb.cs.tsinghua.edu.cn/apibztask/label/17887#xpointer(start-point(string-range(//BODY/TABLE[4]/TBODY[1]/TR[4]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[4]/TBODY[1]/TR[4]/TD[1]/text()[1],'',2)))
+
+花生:http://kb.cs.tsinghua.edu.cn/apibztask/label/17902#xpointer(start-point(string-range(//BODY/TABLE[2]/TBODY[1]/TR[7]/TD[1]/text()[1],'',0))/range-to(string-range(//BODY/TABLE[2]/TBODY[1]/TR[7]/TD[1]/text()[1],'',2)))
+

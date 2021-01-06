@@ -1,0 +1,9 @@
+出处
+地图:http://kb.cs.tsinghua.edu.cn/apibztask/label/2018#xpointer(start-point(string-range(//BODY/P[12]/SPAN[1]/text()[1],'',9))/range-to(string-range(//BODY/P[12]/SPAN[1]/text()[1],'',11)))
+
+地图:http://kb.cs.tsinghua.edu.cn/apibztask/label/17685#xpointer(start-point(string-range(//BODY/P[1]/text()[1],'',0))/range-to(string-range(//BODY/P[1]/text()[1],'',2)))
+
+地图:http://kb.cs.tsinghua.edu.cn/apibztask/label/17686#xpointer(start-point(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',2))/range-to(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',4)))
+
+一月等温线分布图:http://kb.cs.tsinghua.edu.cn/apibztask/label/38266#xpointer(start-point(string-range(//BODY/P[40]/text()[1],'',14))/range-to(string-range(//BODY/P[40]/text()[1],'',22)))
+

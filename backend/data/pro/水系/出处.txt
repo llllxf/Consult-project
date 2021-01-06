@@ -1,0 +1,15 @@
+出处
+长江水系:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/P[11]/SPAN[1]/text()[1],'',3))/range-to(string-range(//BODY/P[11]/SPAN[1]/text()[1],'',7)))
+
+黄河水系:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/P[15]/SPAN[1]/text()[1],'',3))/range-to(string-range(//BODY/P[15]/SPAN[1]/text()[1],'',7)))
+
+珠江水系:http://kb.cs.tsinghua.edu.cn/apibztask/label/2262#xpointer(start-point(string-range(//BODY/P[19]/SPAN[1]/text()[1],'',3))/range-to(string-range(//BODY/P[19]/SPAN[1]/text()[1],'',7)))
+
+水系:http://kb.cs.tsinghua.edu.cn/apibztask/label/2211#xpointer(start-point(string-range(//BODY/P[3]/text()[1],'',0))/range-to(string-range(//BODY/P[3]/text()[1],'',2)))
+
+水螅:http://kb.cs.tsinghua.edu.cn/apibztask/label/2211#xpointer(start-point(string-range(//BODY/P[3]/text()[1],'',0))/range-to(string-range(//BODY/P[3]/text()[1],'',2)))
+
+水系:http://kb.cs.tsinghua.edu.cn/apibztask/label/2211#xpointer(start-point(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',5))/range-to(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',7)))
+
+水螅:http://kb.cs.tsinghua.edu.cn/apibztask/label/2211#xpointer(start-point(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',5))/range-to(string-range(//BODY/P[1]/SPAN[1]/text()[1],'',7)))
+

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Free Contact Form :: W3layouts</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/nouislider.css') }}">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <link rel="stylesheet" href="static/input/assets/css/style.css">
+  <link rel="stylesheet" href="static/input/assets/css/nav.css">
+
+
+</head>
+
+<body>
+<section  id="navigations">
+      <div class="container-fluid px-md-0">
+				<div class="row no-gutters">
+					<div class="col-md-12">
+						<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+
+
+						  <div class="collapse navbar-collapse" id="navbarsExample06">
+						    <ul class="navbar-nav ml-auto">
+
+						      <li class="nav-item d-flex">
+						        <a href="/" class="nav-link icon d-flex align-items-center"><i class="icon ion-navigate mr-1"></i> 首页</a>
+						      </li>
+						      <li class="nav-item d-flex">
+						        <a href="goChoose" class="nav-link icon d-flex align-items-center"><i class="icon ion-grid mr-1"></i> 菜单</a>
+						      </li>
+						      <li class="dropdown nav-item d-flex">
+                    <a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
+                      <i class="ion-ios-apps mr-1"></i>
+                      科目
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                      <a href="goChinese" class="dropdown-item">语文</a>
+                      <a href="goMath" class="dropdown-item">数学</a>
+                      <a href="goEnglisg" class="dropdown-item">英语</a>
+                      <a href="goPhysics" class="dropdown-item">物理</a>
+                      <a href="goChemistry" class="dropdown-item">化学</a>
+                      <a href="goBiology" class="dropdown-item">生物</a>
+                      <a href="goPolitics" class="dropdown-item">政治</a>
+                      <a href="goHistory" class="dropdown-item">历史</a>
+                      <a href="goGeography" class="dropdown-item">地理</a>
+                    </div>
+                  </li>
+						    </ul>
+						  </div>
+						</nav>
+					</div>
+				</div>
+			</div>
+  </section>
+  <!-- contacts -->
+<section class="w3l-contact-4">
+  <div class="contacts-9 section-gap">
+    <div class="wrapper">
+      <div class="top-map">
+
+        <div class="map-content-9">
+
+            <div class="form-top1">
+
+              <h3 class="text-center">{{ subject }}科目</h3>
+
+              <form>
+              <div class="form-top">
+                <div class="form-top-righ">
+                  <p id="input"><textarea id="question" name="question" placeholder="请在此处输入你的问题" required="" ></textarea></p>
+                </div>
+              </div>
+              </form>
+              <div class="text-center">
+                <button name="btn_add" id="btn_add"  type="button">查询</button>
+
+              </div>
+
+
+              <div>
+               <p id="ans" name="ans" style="font-size:20px">
+               </p>
+
+            </div>
+            </div>
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+      </div>
+
+
+
+</section>
+
+<section>
+
+
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body" ><p align-items-center id="feedback"></p></div>
+
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" id="no">否</button>
+									        <button type="button" class="btn btn-warning" id="yes" name="yes">是</button>
+                                              <button type="button" class="btn btn-warning" id="point" name="point">知识点</button>
+									      </div>
+									    </div>
+									  </div>
+                                        </div>
+
+  </section>
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery-migrate-3.0.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='js/nouislider.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+      $(document).ready(function() {
+	$("#btn_add").on("click", function() {
+
+        var question = $("#question").val()
+
+        $.ajax({
+        type:'POST',
+        data:JSON.stringify({'question':question}),
+        contentType :'application/json',
+        dataType:'json',
+        url :'qa',
+        success :function(reply) {
+            if(reply['flag'] == 1) {
+
+                $("#ans").html(reply['ans'])
+                $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题" required="" ></textarea>')
+            }
+            if(reply['flag'] == 0) {
+
+                $("#ans").html(reply['ans'])
+                $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题" required="" ></textarea>')
+            }
+            if (reply['flag'] == 2) {
+
+                $("#exampleModalLongTitle").append("确认问题")
+                 $("#feedback").html("<p>请问您是否询问："+reply['ask_back']+"</p>")
+                $("#exampleModalCenter").modal()
+                $("#yes").on("click", function() {
+                    $("#ans").html(reply['ans'])
+                    $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题"></textarea>')
+                    $("#exampleModalCenter").modal('hide')
+
+                });
+                $("#no").on("click", function() {
+
+                    $("#ans").html("很抱歉，无法回答该问题。")
+                    $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题"></textarea>')
+                    $("#exampleModalCenter").modal('hide')
+
+                });
+                $("#point").on("click", function() {
+                    window.location.href = "/goGraph?entity=" + reply['entity']
+                });
+
+
+            }
+        },
+        error :function(e) {
+            $("#ans").html("很抱歉，无法回答该问题。")
+            $("#question").html('')
+
+        }
+    });
+
+
+	});
+});
+
+</script>
+
+
+<!-- //contacts -->
+</body>
+
+
+</html>
