@@ -32,21 +32,28 @@ class DialogManagement(object):
             return [ans[2],2,nlu_results[2],ans[0]]
 
     def getEntName(self,entity,nlu_results):
-        print(nlu_results,"nlu_results")
+
         pro_list = self.normal_bussiness.searchEnt(entity,nlu_results[0])
         pro_value = np.array(pro_list)[:,1]
-        print(pro_value)
-
         similarPro = self.nlu_util.parse_util.getSimilarPro(nlu_results[1],pro_value)
-        print(similarPro)
 
         ind = list(pro_value).index(similarPro[0])
 
         return [pro_list[ind][0]+"的"+nlu_results[0]+":"+pro_list[ind][1],1,pro_list[ind][0]]
 
     def doNLU(self, words):
+
+        """
+        :param words: 句子
+        :return:
+        标识 答案 反问 实体
+        无法回答：0
+        可以回答：1
+        确认问题：2
+        """
+
         entity, nlu_results = self.nlu_util.process(words)
-        print(entity,nlu_results[0])
+
         if int(nlu_results[0]) == 0:
             return [0,"无法回答"+entity+"相关的问题。"]
         elif int(nlu_results[0]) == 1:
@@ -54,6 +61,7 @@ class DialogManagement(object):
             return [1, ans[2], ans[0]]
         elif int(nlu_results[0]) == 2:
             ans = self.normal_bussiness.doNormal([entity], nlu_results[1])
+
             return [2, ans[2], nlu_results[2],entity]
 
 
@@ -66,9 +74,6 @@ class DialogManagement(object):
         if task is None:
             return ['无法回答',0,None]
         """
-
-
-
 
     def AEntityInformation(self,entity):
         ans = self.normal_bussiness.getOneEntity(entity)

@@ -5,18 +5,12 @@
 """
 
 """
-import sys
-import os
 
 from backend.nlu.processNLU import processNLU
 from backend.nlg.generateAns import generateAns
-
-
-
 from backend.graphSearch.calculateBussiness import calculateBussiness
 from backend.graphSearch.compareBussiness import compareBussiness
 from backend.graphSearch.normalBussiness import normalBussiness
-
 import configparser
 
 config = configparser.ConfigParser()
@@ -40,9 +34,6 @@ class DialogManagement(object):
         self.wether = []
 
         self.repertoryDict = {'地理':'geo4'}
-
-
-
 
     def doNLU(self,words):
 

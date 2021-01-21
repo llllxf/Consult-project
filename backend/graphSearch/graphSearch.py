@@ -22,15 +22,21 @@ subject = config['DEFAULT']['subject']
 repertoryName = config['TRANSFORM'][subject]
 
 
-
-
-
 class graphSearch(object):
 
     def __init__(self):
         
 
         self.adapetion_stop = {'湖泊':['出处','图片']}
+
+    def getAll(self):
+        uri = "http://localhost:8004/getAll?repertoryName=" + repertoryName
+        r = requests.post(uri)
+        tri_list = list(r.json())
+        return tri_list
+
+
+
 
     def getRelByType(self,type):
         """

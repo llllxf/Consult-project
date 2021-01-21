@@ -6,6 +6,7 @@ import numpy as np
 ltp = LTP(path="base")
 
 
+
 config = configparser.ConfigParser()
 config.read("../backend/config.ini")
 
@@ -28,7 +29,8 @@ def getDEP(hidden):
     return ltp.dep(hidden)
 
 
-def dealLTP(hidden):
+
+def dealLTP(seg,hidden):
     pos = ltp.pos(hidden)
     dep = ltp.dep(hidden)
     dep_array = np.array(dep[0])

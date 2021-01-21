@@ -8,7 +8,6 @@ import configparser
 config = configparser.ConfigParser()
 config.read("../backend/config.ini")
 subject = config['DEFAULT']['subject']
-from backend.nlu.LTPUtil import *
 from backend.data.data_process import read_file,read_template
 from backend.sentence_similarity import SentenceSimilarity
 import jieba
@@ -17,7 +16,7 @@ class ParseSentence(object):
     def __init__(self):
         self.graph_util = graphSearch()
         self.nlu_util = SentenceSimilarity()
-        """
+
         instanceArray = list(set(read_file("../backend/data/"+subject+"/entity.csv")))
         self.instanceArray = sorted(instanceArray, key=lambda i: len(i), reverse=True)
 
@@ -34,12 +33,12 @@ class ParseSentence(object):
         jieba.load_userdict(self.proArray)
         jieba.load_userdict(self.relArray)
         jieba.load_userdict(self.typeArray)
-        """
 
-    """
+        #self.template_transfer = {'国家':'日本','河流':'长江'}
+
+
     def getCutWords(self, words):
         return list(jieba.cut(words))
-    """
 
     def getEntity(self,words):
         entity = ""
@@ -79,16 +78,17 @@ class ParseSentence(object):
         return words.replace(entity, best_father)
 
 
+
     def getSimilar(self, words, templates):
 
         self.nlu_util.set_sentences(templates)
         self.nlu_util.TfidfModel()
-        return self.nlu_util.similarity_top_k(words,5)
+        return self.nlu_util.similarity_top_k(words,1)[0]
 
     def getSimilarByLsi(self, words, templates):
         self.nlu_util.set_sentences(templates)
         self.nlu_util.LsiModel()
-        return self.nlu_util.similarity_top_k(words,5)[0]
+        return self.nlu_util.similarity_top_k(words,1)[0]
 
 
     def getSimilarPro(self, words, pros):
@@ -117,15 +117,12 @@ class ParseSentence(object):
 
 
     def getMatchResult(self, templates, words):
-
         if words in templates:
             return [1,templates.index(words)]
         else:
             similar_tempalte = self.getSimilar(words, templates)
-            similar_tempalte_index = []
-            for tem in similar_tempalte:
-                similar_tempalte_index.append(templates.index[tem[0]])
-            if similar_tempalte[0][1] >= 0.75:
-                return [2,similar_tempalte_index]
+            print(similar_tempalte)
+            if similar_tempalte[1] >= 0.85:
+                return [2,templates.index(similar_tempalte[0])]
         return [0,"无法回答"]
 

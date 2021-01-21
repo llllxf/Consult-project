@@ -14,7 +14,7 @@ import numpy as np
 
 
 from backend.graphSearch.graphSearch import graphSearch
-from backend.nlu.formWords import formWords
+
 import json
 
 
@@ -22,7 +22,7 @@ class normalBussiness(object):
 
     def __init__(self):
         self.graph_util = graphSearch()
-        self.form_util = formWords()
+        #self.form_util = formWords()
 
 
     def seacrchAll(self,longWords,shortWords):
@@ -43,7 +43,7 @@ class normalBussiness(object):
         匹配三元组的o和句子
         """
 
-        form_words = self.form_util.preProcessWords(words)
+
 
         ans_con = []
         count_rate = []
@@ -51,12 +51,12 @@ class normalBussiness(object):
         for name,key,value in triple:
 
             value = self.form_util.preProcessWords(value)
-            while (name in form_words):
-                form_words = form_words.replace(name, '')
+            while (name in words):
+                words = words.replace(name, '')
             while (name in value):
                 value = value.replace(name, '')
-            count = self.seacrchAll(value, form_words)
-            c_len = len(form_words)
+            count = self.seacrchAll(value, words)
+            c_len = len(words)
             if float(count) / float(c_len) >= 0.65:
                 ans_con.append([name,key,value])
                 count_rate.append(count / c_len)
@@ -83,7 +83,7 @@ class normalBussiness(object):
         :return: 答案或空
         """
 
-        form_words = self.form_util.preProcessWords(words)
+
         ans_con = []
         count_rate = []
 
@@ -97,8 +97,8 @@ class normalBussiness(object):
             """
             去掉问题中的实体方便匹配
             """
-            while (name in form_words):
-                form_words = form_words.replace(name, '')
+            while (name in words):
+                words = words.replace(name, '')
 
             for p in pro:
                 if p[0] != property[0]:
@@ -108,14 +108,14 @@ class normalBussiness(object):
                 while (name in con):
                     con = con.replace(name, '')
 
-                if len(con) > len(form_words):
-                    c_len = len(form_words)
-                    count = self.seacrchAll(con, form_words)
+                if len(con) > len(words):
+                    c_len = len(words)
+                    count = self.seacrchAll(con, words)
 
                 else:
 
                     c_len = len(con)
-                    count = self.seacrchAll(form_words, con)
+                    count = self.seacrchAll(words, con)
                 if float(count) / float(c_len) >= 0.65:
                     ans_con.append([name, p[0], p[1]])
                     count_rate.append(count / c_len)
@@ -140,7 +140,7 @@ class normalBussiness(object):
         :return: 答案或空
         """
 
-        form_words = self.form_util.preProcessWords(words)
+
 
         ans_con = []
         count_rate = []
@@ -155,8 +155,8 @@ class normalBussiness(object):
             """
             去掉问题中的实体方便匹配
             """
-            while (name in form_words):
-                form_words = form_words.replace(name, '')
+            while (name in words):
+                words = words.replace(name, '')
 
             for p in pro:
 
@@ -165,12 +165,12 @@ class normalBussiness(object):
                 while (name in con):
                     con = con.replace(name, '')
 
-                if len(con) > len(form_words):
-                    c_len = len(form_words)
-                    count = self.seacrchAll(con, form_words)
+                if len(con) > len(words):
+                    c_len = len(words)
+                    count = self.seacrchAll(con, words)
                 else:
                     c_len = len(con)
-                    count = self.seacrchAll(form_words, con)
+                    count = self.seacrchAll(words, con)
                 if c_len == 0:
                     continue
                 if float(count) / float(c_len) >= 0.65:
@@ -180,10 +180,10 @@ class normalBussiness(object):
             revers_count = []
 
             for ans in ans_con:
-                if len(form_words) >= len(ans[2]):
-                    revers_count.append(self.seacrchAll(form_words, ans[2]) / len(form_words))
+                if len(words) >= len(ans[2]):
+                    revers_count.append(self.seacrchAll(words, ans[2]) / len(words))
                 else:
-                    revers_count.append(self.seacrchAll(ans[2], form_words) / len(ans[2]))
+                    revers_count.append(self.seacrchAll(ans[2], words) / len(ans[2]))
             max_index = np.argmax(np.array(revers_count))
             return ans_con[max_index]
         return None

@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from .matchWords import *
-from .LTPUtil import *
-from .analysisPattern import *
-from .formWords import *
-from .parseSentence import *
+# @Time : 2021/1/14 6:20 PM 
+# @Author : LinXiaofei
+# @File : __init__.py.py 

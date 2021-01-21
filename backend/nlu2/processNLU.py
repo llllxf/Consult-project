@@ -4,40 +4,26 @@
 
 
 from backend.nlu.parseSentence import ParseSentence
-from backend.nlu.analysisWords import analysisWords
-from backend.nlu.LTPUtil import *
+#from backend.nlu.LTPUtil import LTPUtil
 from backend.template_library.templateManage import TemplateManage
 
 class processNLU(object):
     def __init__(self):
         self.parse_util = ParseSentence()
-        self.analysis_util = analysisWords()
-
+        #self.ltp_util = LTPUtil()
         self.template_util = TemplateManage()
 
 
     def process(self, words):
 
         entity = self.parse_util.getEntity(words)
-        cut_words = self.parse_util.getCutWords(words)
-        flag, template_mode = self.analysis_util.getTemplateMode(cut_words)
-
         template, template_pro, template_index, template_ask = self.template_util.templateManage(entity)
-        match_result = self.parse_util.getMatchResult(template,template_mode)
+        match_result = self.parse_util.getMatchResult(template,words)
         if match_result[0] == 1:
             pro, ask = self.template_util.getPro(match_result[1],template_index, template_pro, template_ask)
             return entity, [1,pro, ask]
         if match_result[0] == 2:
-            pro_array = []
-            ask_array = []
-            for temp in match_result[1]:
-
-                pro, ask = self.template_util.getPro(temp, template_index, template_pro, template_ask)
-                pro_array.append(pro)
-                ask_array.append(ask)
-
-            seg
-
+            pro, ask = self.template_util.getPro(match_result[1], template_index, template_pro, template_ask)
             return entity, [2, pro, ask]
         if match_result[0] == 0:
             return entity, [0,"无法回答。"]

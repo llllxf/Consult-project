@@ -8,7 +8,7 @@
 
 
 from backend.data.data_process import read_file
-from backend.nlu.formWords import formWords
+
 from backend.graphSearch.graphSearch import graphSearch
 
 class localtionInfernce(object):

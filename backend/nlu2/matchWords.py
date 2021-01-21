@@ -5,7 +5,7 @@ import urllib.parse
 
 
 from backend.data.data_process import read_file
-from backend.nlu.LTPUtil import LTPUtil
+#from backend.nlu.LTPUtil import LTPUtil
 from backend.graphSearch.graphSearch import graphSearch
 from backend.dealNLU.compareNLU import compareNLU
 from backend.dealNLU.calculateNLU import calculateNLU
@@ -28,7 +28,7 @@ class parsehWords(object):
         4. 设定停用词和过滤符号
 
         """
-        self.ltp_util = LTPUtil()
+        #self.ltp_util = LTPUtil()
         self.compare_util = compareNLU()
         self.calculate_util = calculateNLU()
         self.graph_util = graphSearch()
