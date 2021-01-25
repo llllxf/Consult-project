@@ -1,8 +1,8 @@
 # @Time : 2020/12/28 3:07 PM
 # @Author : LinXiaofei
 # @File : templateManage.py
-import os
 
+import numpy as np
 from backend.template_library.NumPro import NumPro
 from backend.template_library.ConPro import *
 from backend.graphSearch.graphSearch import graphSearch
@@ -31,7 +31,7 @@ class TemplateManage(object):
 
         for p in pro_list:
             if p in ['定义','示例','图片','内容','降水位置图','出处','河流',
-                     '干湿状况','天气图','符号图','最低值','最高值','分类编号']:
+                     '干湿状况','天气图','符号图','最低值','最高值','分类编号','内容','定义']:
                 continue
 
             key = list(config[p])
@@ -183,43 +183,94 @@ class TemplateManage(object):
                 ask = template_ask[i]
 
                 return pro,ask
-    def getBestPro(self,pro_list,words):
+
+    def getBestPro(self,pro_list,words,pos):
+
         best_pro = []
+        key_word = []
         for pro in pro_list:
             if pro in words:
-                return pro
+                best_pro.append(pro)
+                key_word.append(pro)
+
         for pro in pro_list:
 
             if 'alias' in list(config[pro]):
                 alias = config[pro]['alias'].split(",")
                 for a in alias:
                     if a in words:
-                        return pro
+                        best_pro.append(pro)
+                        key_word.append(a)
+                        #return pro
         for pro in pro_list:
             if 'verb' in list(config[pro]):
                 verb = config[pro]['verb'].split(",")
                 for a in verb:
                     if a in words:
-                        return pro
+                        best_pro.append(pro)
+                        key_word.append(a)
         for pro in pro_list:
             if 'verb' in list(config[pro]):
                 verb = config[pro]['verb'].split(",")
                 for a in verb:
                     if a in words:
-                        return pro
+                        best_pro.append(pro)
+                        key_word.append(a)
 
         for pro in pro_list:
             if 'verb' in list(config[pro]):
                 verb = config[pro]['verb'].split(",")
                 for a in verb:
                     if a in words:
-                        return pro
+                        best_pro.append(pro)
+                        key_word.append(a)
+
+        for pro in pro_list:
+            if 'none' in list(config[pro]):
+                none = config[pro]['none'].split(",")
+                for a in none:
+                    if a in words and pos[words.index(a)-1]=='r':
+                        best_pro.append(pro)
+                        key_word.append(a)
+
+        for pro in pro_list:
+            if 'adj' in list(config[pro]):
+                adj = config[pro]['adj'].split(",")
+                for a in adj:
+                    if a in words and pos[words.index(a)-1]=='r':
+                        best_pro.append(pro)
+                        key_word.append(a)
+        if len(best_pro)>0:
+            return best_pro,key_word
+        else:
+            return [pro_list[0]],key_word
+
+    def analysisPro(self,words,pro_list,key_list):
 
 
+        best_pro = pro_list[0]
+
+        if '什么' in words:
+            r_index = words.index('什么')
+        if '多少' in words:
+            r_index = words.index('多少')
+        if '怎么' in words:
+            r_index = words.index('多少')
 
 
+        dis = 1000000
+        index = 0
+        for k in key_list:
+            p = pro_list[index]
+            k_index = words.index(k)
+            tem_dis = np.abs(k_index-r_index)
+            if tem_dis < dis:
+                dis = tem_dis
+                best_pro = p
+            index = index+1
 
 
+        return best_pro
 
 
 if __name__ == '__main__':

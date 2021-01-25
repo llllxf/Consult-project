@@ -6,9 +6,11 @@ import os
 from backend.template_library.NumPro import NumPro
 from backend.template_library.ConPro import *
 from backend.graphSearch.graphSearch import graphSearch
+from backend.nlu.LTPUtil import *
 import configparser
 config = configparser.ConfigParser()
 config.read("../backend/proconfig.ini")
+
 
 
 class TemplateManage(object):
@@ -77,7 +79,7 @@ class TemplateManage(object):
                 desconpro.setConPro(p)
                 if 'alias' in key:
                     desconpro.setAlias(config[p]['alias'])
-                #print(desconpro.alias)
+
                 temp = desconpro.getTemplate()
                 print(temp)
                 none_template += temp
@@ -143,5 +145,8 @@ class TemplateManage(object):
 
 
 if __name__ == '__main__':
-    t = TemplateManage()
+    pass
+
+
+
 

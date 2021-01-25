@@ -6,7 +6,7 @@ import numpy as np
 ltp = LTP(path="base")
 
 
-
+"""
 config = configparser.ConfigParser()
 config.read("../backend/config.ini")
 
@@ -15,6 +15,7 @@ subject = config['DEFAULT']['subject']
 ltp.init_dict(path="../backend/data/"+subject+"/allentity.csv", max_window=10)
 ltp.init_dict(path="../backend/data/"+subject+"/cleanpro.csv", max_window=10)
 ltp.init_dict(path="../backend/data/"+subject+"/cleanrel.csv", max_window=10)
+"""
 
 
 def getSEG(words):
@@ -43,5 +44,6 @@ def dealLTP(seg,hidden):
     print(dep_role)
 
 if __name__ == '__main__':
-    seg, hidden = getSEG("俄罗斯主的农业有哪些特征")
+    seg, hidden = getSEG("世界上最大的湖泊是什么")
+    print(seg)
     dealLTP(seg, hidden)

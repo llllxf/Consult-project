@@ -41,6 +41,28 @@ class DialogManagement(object):
 
         return [pro_list[ind][0]+"的"+nlu_results[0]+":"+pro_list[ind][1],1,pro_list[ind][0]]
 
+
+    def dealNormal(self,entity, nlu_results):
+        if int(nlu_results[0]) == 0:
+            return [0,"无法回答"+entity+"相关的问题。"]
+        elif int(nlu_results[0]) == 1:
+            ans = self.normal_bussiness.doNormal([entity], nlu_results[1])
+            return [1, ans[2], ans[0]]
+        elif int(nlu_results[0]) == 2:
+            ans = self.normal_bussiness.doNormal([entity], nlu_results[1])
+            return [2, ans[2], nlu_results[2],entity]
+
+    def dealMost(self,etype,nlu_results):
+
+        ans = self.normal_bussiness.doMost(etype,nlu_results)
+
+        if ans:
+            return [1,ans,ans]
+        else:
+            return [0,"对不起，无法回答该问题。"]
+
+
+
     def doNLU(self, words):
 
         """
@@ -52,17 +74,21 @@ class DialogManagement(object):
         确认问题：2
         """
 
-        entity, nlu_results = self.nlu_util.process(words)
+        print("得到问句:",words)
+        print("===========================")
 
-        if int(nlu_results[0]) == 0:
-            return [0,"无法回答"+entity+"相关的问题。"]
-        elif int(nlu_results[0]) == 1:
-            ans = self.normal_bussiness.doNormal([entity], nlu_results[1])
-            return [1, ans[2], ans[0]]
-        elif int(nlu_results[0]) == 2:
-            ans = self.normal_bussiness.doNormal([entity], nlu_results[1])
+        entity, nlu_results,task = self.nlu_util.process(words)
 
-            return [2, ans[2], nlu_results[2],entity]
+        if task == "normal":
+            print(entity,nlu_results,"normal============")
+            print(self.dealNormal(entity, nlu_results))
+            return self.dealNormal(entity,nlu_results)
+        if task == "most":
+            print(entity,nlu_results,"most==============")
+            print(self.dealMost(entity, nlu_results))
+            return self.dealMost(entity,nlu_results)
+        if task == "content":
+            print(entity,nlu_results,"content==============")
 
 
         """

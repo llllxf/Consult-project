@@ -68,6 +68,7 @@ class HowPro(object):
 
         standard_template = []
         standard_template.append( self.ent + "是怎么" + self.howpro + "的")
+        standard_template.append(self.ent + "是怎么" + self.howpro + "的")
         standard_template.append("怎么" + self.howpro + self.ent)
 
         return standard_template
@@ -75,6 +76,7 @@ class HowPro(object):
     def getAlias(self):
         alias_template = []
         for a in self.alias:
+            alias_template.append(self.ent + "是怎么" + a + "的")
             alias_template.append(self.ent + "是怎么" + a + "的")
             alias_template.append("怎么" + a + self.ent)
 
@@ -115,6 +117,7 @@ class SepHowPro(object):
 
         standard_template.append(self.ent + "的" + self.sephowpro + "是什么")
         standard_template.append(self.ent + "的" + front_none + "是怎么" + end_verb + "的")
+        standard_template.append(self.ent + "的" + front_none + "是怎么" + end_verb + "的")
 
         return standard_template
 
@@ -124,6 +127,7 @@ class SepHowPro(object):
             front_none = a[:-2]
             end_verb = self.sephowpro[-2:]
             alias_template.append(self.ent + "的" + a + "是什么")
+            alias_template.append(self.ent + "的" + front_none + "是怎么" + end_verb + "的")
             alias_template.append(self.ent + "的" + front_none + "是怎么" + end_verb + "的")
 
         return alias_template
@@ -173,7 +177,6 @@ class SepNonePro(object):
         standard_template.append(self.ent + "的" + front_pro + "以什么" + end_pro + "为主")
         standard_template.append(self.ent + "的" + front_pro + "是什么" + end_pro)
 
-
         return standard_template
 
     def getAlias(self):
@@ -182,6 +185,8 @@ class SepNonePro(object):
             front_pro = a[:-2]
             end_pro = a[-2:]
             alias_template.append(self.ent + "的" + a + "是什么")
+            alias_template.append(self.ent + "主要的" + a + "是什么")
+            alias_template.append(self.ent + "的" + front_pro + "以什么" + end_pro + "为主")
             alias_template.append(self.ent + "的" + front_pro + "是什么" + end_pro)
 
         return alias_template
@@ -227,6 +232,7 @@ class SepVerbPro(object):
         standard_template.append(self.ent + front_pro + "什么" + end_pro)
 
         for v in self.verb:
+            self.standard_template.append(self.ent + v + "什么")
             self.standard_template.append(self.ent + v + "什么")
         return self.standard_template
 
@@ -368,6 +374,9 @@ class OnlyConPro(object):
     def getStandard(self):
         standard_template = []
         standard_template.append(self.ent + "的" +self.conpro + "是什么")
+        standard_template.append(self.ent + "的" + self.conpro + "是什么")
+        standard_template.append(self.ent + "的" + self.conpro + "是什么")
+
         for v in self.verb:
             standard_template.append(self.ent + v + "什么")
         return standard_template
@@ -376,6 +385,10 @@ class OnlyConPro(object):
         alias_template = []
         for a in self.alias:
             alias_template.append(self.ent + "的" + a + "是什么")
+            alias_template.append(self.ent + "的" + a + "是什么")
+            alias_template.append(self.ent + "的" + a + "是什么")
+
+
         return alias_template
 
     def getTemplate(self):
@@ -420,10 +433,11 @@ class RangeConPro(object):
         standard_template.append(self.ent + "主要的" + self.conpro + "是什么")
         standard_template.append(self.ent + "的" +self.conpro + "是什么")
         standard_template.append(self.ent + "以什么" + self.conpro + "为主")
-        standard_template.append(self.ent + "是什么" + self.conpro)
+
 
         for v in self.verb:
             standard_template.append(self.ent + v + "的"+ self.conpro + "是什么")
+            standard_template.append(self.ent + v + "的" + self.conpro + "是什么")
 
         return standard_template
 
@@ -435,7 +449,7 @@ class RangeConPro(object):
             alias_template.append(self.ent + "主要的" + a + "是什么")
             alias_template.append(self.ent + "的" + a + "是什么")
             alias_template.append(self.ent + "以什么" + a + "为主")
-            alias_template.append(self.ent + "是什么" + a)
+
 
             for v in self.verb:
                 alias_template.append(self.ent + v + "的" + a + "是什么")

@@ -427,12 +427,26 @@ class normalBussiness(object):
 
 
     def doNormal(self,entity,property):
-        print(entity,property,"???")
+        print(entity,property)
         ans = self.searchBinaryFactoid(entity,property)
         if ans is None:
             return [entity[0],property,'对不起，没有'+entity[0]+"关于"+property+"的信息"]
 
         return ans
+
+    def doMost(self,etype,match):
+
+        most_pro = ['地位','作用','特征','内容','定义']
+        for p in most_pro:
+            result = self.graph_util.getValueByPro(etype,p)
+            for i in range(len(result)):
+                if len(match)==2:
+                    if match[0] in result[i][1] and match[1] in result[i][1]:
+                        return result[i][0]
+                elif len(match) == 1:
+                    if match[0] in result[i][1]:
+                        return result[i][0]
+        return None
 
     def searchEnt(self,entity,property):
         pro_list = self.graph_util.getValueByPro(entity,property)

@@ -11,13 +11,13 @@ subject = config['DEFAULT']['subject']
 from backend.nlu.LTPUtil import *
 from backend.data.data_process import read_file,read_template
 from backend.sentence_similarity import SentenceSimilarity
-import jieba
+
 
 class ParseSentence(object):
     def __init__(self):
         self.graph_util = graphSearch()
         self.nlu_util = SentenceSimilarity()
-        """
+
         instanceArray = list(set(read_file("../backend/data/"+subject+"/entity.csv")))
         self.instanceArray = sorted(instanceArray, key=lambda i: len(i), reverse=True)
 
@@ -29,6 +29,7 @@ class ParseSentence(object):
 
         etype = list(set(read_file("../backend/data/" + subject + "/etype.csv")))
         self.typeArray = sorted(etype, key=lambda i: len(i), reverse=True)
+        """
 
         jieba.load_userdict(self.instanceArray)
         jieba.load_userdict(self.proArray)
@@ -42,22 +43,96 @@ class ParseSentence(object):
     """
 
     def getEntity(self,words):
-        entity = ""
-        cut_words = self.getCutWords(words)
-        for word in cut_words:
-            if word in self.instanceArray:
-                entity = word
-                return entity
-        return None
+        entity = []
+        for word in words:
 
-    def getType(self,words):
-        etype = ""
-        cut_words = self.getCutWords(words)
-        for word in cut_words:
+            if word in self.instanceArray:
+                entity.append(word)
+
+        return entity
+
+
+
+    def getEtype(self,words):
+        etype = []
+
+        for word in words:
             if word in self.typeArray:
-                etype = word
-                return etype
-        return None
+                etype.append(word)
+
+        return etype
+
+    def getCount(self,index,dep):
+
+        if dep[index][2] == 'SBV':
+            return 5
+        if dep[index][2] == 'ATT':
+            att_obeject = dep[index][1]-1
+
+            if dep[att_obeject][2] == 'SBV':
+                return 4
+            if dep[att_obeject][2] == 'VOB':
+                return 2
+        if dep[index][2] == 'VOB':
+            return 3
+
+        return 0
+
+
+    def extractBestEnt(self,words,dep):
+        entity = self.getEntity(words)
+        etype = self.getEtype(words)
+
+        if len(entity) == 0 and len(etype)==0:
+            return None,"false"
+        if len(entity)==1 and len(etype)==0:
+            return entity[0],"entity"
+        if len(entity)==0 and len(etype)==1:
+            return etype[0],"etype"
+
+        ent_count = []
+        type_count = []
+        for e in entity:
+            e_index = words.index(e)
+            ent_count.append(self.getCount(e_index,dep))
+
+        for t in etype:
+            t_index = words.index(t)
+            c = self.getCount(t_index,dep)
+            if c in self.proArray:
+                c = c-4
+            type_count.append(c)
+
+        ent_index = -1
+        ent_c = 0
+
+        type_c = 0
+        type_index = -1
+        print(dep)
+        print(entity)
+        print(ent_count)
+        print(etype)
+        print(type_count)
+
+        for c_i in range(len(ent_count)):
+
+
+            if ent_count[c_i] > ent_c:
+                ent_c = ent_count[c_i]
+                ent_index = c_i
+
+        for c_i in range(len(type_count)):
+
+
+            if type_count[c_i] > type_c:
+                type_c = type_count[c_i]
+                type_index = c_i
+
+        if ent_c >= type_c:
+            return entity[ent_index],"entity"
+        else:
+            return etype[type_index],"etype"
+
 
     def getConcept(self, entity):
 
@@ -75,7 +150,6 @@ class ParseSentence(object):
         return best_father
 
     def getStandard(self,entity,best_father,words):
-        #return words.replace(entity,self.template_transfer[best_father])
         return words.replace(entity, best_father)
 
 
@@ -122,10 +196,11 @@ class ParseSentence(object):
             return [1,templates.index(words)]
         else:
             similar_tempalte = self.getSimilar(words, templates)
+            print(similar_tempalte)
             similar_tempalte_index = []
             for tem in similar_tempalte:
-                similar_tempalte_index.append(templates.index[tem[0]])
-            if similar_tempalte[0][1] >= 0.75:
+                similar_tempalte_index.append(templates.index(tem[0]))
+            if similar_tempalte[0][1] >= 0.6:
                 return [2,similar_tempalte_index]
         return [0,"无法回答"]
 

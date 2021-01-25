@@ -15,8 +15,8 @@ ltp.init_dict(path="../backend/data/"+subject+"/allentity.csv", max_window=10)
 ltp.init_dict(path="../backend/data/"+subject+"/cleanpro.csv", max_window=10)
 ltp.init_dict(path="../backend/data/"+subject+"/cleanrel.csv", max_window=10)
 
-
 def getSEG(words):
+
     seg, hidden = ltp.seg([words])
     return seg,hidden
 

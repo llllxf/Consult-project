@@ -11,10 +11,12 @@ class analysisWords(object):
 
 
     def getTemplateMode(self,words):
-        template_mode = np.copy(words)
+        template_mode = list(np.copy(words))
+        #print(template_mode)
         index = 0
         flag = ""
         for word in template_mode:
+
             if word == '有':
                 template_mode[index] = '是'
             if word in self.none_req[:-1]:

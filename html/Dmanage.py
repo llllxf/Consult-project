@@ -20,22 +20,17 @@ from backend.data.data_process import read_file,read_template
 config = configparser.ConfigParser()
 #config.read("../backend/config.ini")
 from backend.nlu.parseSentence import ParseSentence
-from backend.nlu.LTPUtil import LTPUtil
+from backend.nlu.LTPUtil import *
 
 """
 问答引擎
 """
 
 if __name__ == '__main__':
-    graph = graphSearch()
-    pro_list = read_file("../backend/data/地理/cleanpro.csv")
-    for p in pro_list:
-        config[p] = {
-            'type': 'desconpro',
-            'alias': p
-        }
-    with open('proconfig.ini', 'w') as file:
-        config.write(file)
+    d = DialogManagement()
+    while(1):
+        s = input()
+        d.doNLU(s)
 
 
 

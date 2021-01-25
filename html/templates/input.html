@@ -188,7 +188,7 @@
             }
             if (reply['flag'] == 2) {
 
-                $("#exampleModalLongTitle").append("确认问题")
+                $("#exampleModalLongTitle").html("确认问题")
                  $("#feedback").html("<p>请问您是否询问："+reply['ask_back']+"</p>")
                 $("#exampleModalCenter").modal()
                 $("#yes").on("click", function() {
