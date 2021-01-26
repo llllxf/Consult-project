@@ -203,6 +203,7 @@ class SepVerbPro(object):
         self.ent = ""
         self.sepverbpro = ""
         self.alias = []
+        self.verb = []
 
     def setEnt(self,ent):
         self.ent = ent
@@ -223,8 +224,8 @@ class SepVerbPro(object):
             self.verb.append(v)
 
     def getStandard(self):
-        front_pro = self.sepnonepro[:-2]
-        end_pro = self.sepnonepro[-2:]
+        front_pro = self.sepverbpro[:-2]
+        end_pro = self.sepverbpro[-2:]
 
         standard_template = []
         standard_template.append(self.ent + "的" + self.sepverbpro + "是什么")
@@ -232,9 +233,9 @@ class SepVerbPro(object):
         standard_template.append(self.ent + front_pro + "什么" + end_pro)
 
         for v in self.verb:
-            self.standard_template.append(self.ent + v + "什么")
-            self.standard_template.append(self.ent + v + "什么")
-        return self.standard_template
+            standard_template.append(self.ent + v + "什么")
+            standard_template.append(self.ent + v + "什么")
+
 
         return standard_template
 
@@ -374,8 +375,8 @@ class OnlyConPro(object):
     def getStandard(self):
         standard_template = []
         standard_template.append(self.ent + "的" +self.conpro + "是什么")
-        standard_template.append(self.ent + "的" + self.conpro + "是什么")
-        standard_template.append(self.ent + "的" + self.conpro + "是什么")
+        standard_template.append(self.ent + "有什么" + self.conpro)
+        standard_template.append(self.ent + "的" + self.conpro + "有什么")
 
         for v in self.verb:
             standard_template.append(self.ent + v + "什么")
@@ -385,8 +386,8 @@ class OnlyConPro(object):
         alias_template = []
         for a in self.alias:
             alias_template.append(self.ent + "的" + a + "是什么")
-            alias_template.append(self.ent + "的" + a + "是什么")
-            alias_template.append(self.ent + "的" + a + "是什么")
+            alias_template.append(self.ent + "有什么" + a)
+            alias_template.append(self.ent + "的" + a + "有什么")
 
 
         return alias_template

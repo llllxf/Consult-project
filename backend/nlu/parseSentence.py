@@ -29,8 +29,8 @@ class ParseSentence(object):
 
         etype = list(set(read_file("../backend/data/" + subject + "/etype.csv")))
         self.typeArray = sorted(etype, key=lambda i: len(i), reverse=True)
-        """
 
+        """
         jieba.load_userdict(self.instanceArray)
         jieba.load_userdict(self.proArray)
         jieba.load_userdict(self.relArray)
@@ -50,7 +50,6 @@ class ParseSentence(object):
                 entity.append(word)
 
         return entity
-
 
 
     def getEtype(self,words):
@@ -99,8 +98,9 @@ class ParseSentence(object):
         for t in etype:
             t_index = words.index(t)
             c = self.getCount(t_index,dep)
-            if c in self.proArray:
+            if t in self.proArray:
                 c = c-4
+
             type_count.append(c)
 
         ent_index = -1
@@ -108,16 +108,16 @@ class ParseSentence(object):
 
         type_c = 0
         type_index = -1
-        print(dep)
-        print(entity)
-        print(ent_count)
-        print(etype)
-        print(type_count)
+        #print(dep)
+        #print(entity)
+        #print(ent_count)
+        #print(etype)
+        #print(type_count)
 
         for c_i in range(len(ent_count)):
 
 
-            if ent_count[c_i] > ent_c:
+            if ent_count[c_i] >= ent_c:
                 ent_c = ent_count[c_i]
                 ent_index = c_i
 
@@ -154,10 +154,10 @@ class ParseSentence(object):
 
 
     def getSimilar(self, words, templates):
-
+        print(templates)
         self.nlu_util.set_sentences(templates)
         self.nlu_util.TfidfModel()
-        return self.nlu_util.similarity_top_k(words,5)
+        return self.nlu_util.similarity_top_k(words,3)
 
     def getSimilarByLsi(self, words, templates):
         self.nlu_util.set_sentences(templates)
@@ -166,7 +166,7 @@ class ParseSentence(object):
 
 
     def getSimilarPro(self, words, pros):
-        print(words,"words")
+
 
         self.nlu_util.set_sentences(list(pros))
         self.nlu_util.LsiModel()

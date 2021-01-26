@@ -3,17 +3,17 @@
 from gensim import corpora, models, similarities
 from backend.sentence_similarity.sentence import Sentence
 from collections import defaultdict
-import jieba
+
 class SentenceSimilarity():
 
     def __init__(self):
-        self.seg = jieba
+        pass
 
     def set_sentences(self,sentences):
         self.sentences = []
 
         for i in range(0,len(sentences)):
-            self.sentences.append(Sentence(sentences[i],self.seg,i))
+            self.sentences.append(Sentence(sentences[i],i))
 
     # 获取切过词的句子
     def get_cuted_sentences(self):
@@ -30,18 +30,23 @@ class SentenceSimilarity():
 
         # 删除低频词
         frequency = defaultdict(int)
+        print(self.texts)
+        print(frequency)
         for text in self.texts:
             for token in text:
-                frequency[token] += 1
 
+                frequency[token] += 1
+        #print(frequency)
+        #print("===========frequency===========")
         #词汇至少出现一次
         self.texts = [[token for token in text if frequency[token] > min_frequency] for text in self.texts]
-        print(self.texts)
+
 
         self.dictionary = corpora.Dictionary(self.texts)
         #print(self.dictionary)
         self.corpus_simple = [self.dictionary.doc2bow(text) for text in self.texts]
         #print(self.corpus_simple)
+        #print("===============corpus_simple===============")
 
     # tfidf模型
     def TfidfModel(self):
@@ -52,6 +57,8 @@ class SentenceSimilarity():
         self.corpus = self.model[self.corpus_simple]
 
         # 创建相似度矩阵
+        #print(self.corpus)
+        #print("======================")
         self.index = similarities.MatrixSimilarity(self.corpus)
 
     # lsi模型
@@ -77,7 +84,7 @@ class SentenceSimilarity():
         self.index = similarities.MatrixSimilarity(self.corpus)
 
     def sentence2vec(self,sentence):
-        sentence = Sentence(sentence,self.seg)
+        sentence = Sentence(sentence)
         vec_bow = self.dictionary.doc2bow(sentence.get_cuted_sentence())
         return self.model[vec_bow]
 

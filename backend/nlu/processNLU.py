@@ -12,7 +12,6 @@ class processNLU(object):
     def __init__(self):
         self.parse_util = ParseSentence()
         self.analysis_util = analysisWords()
-
         self.template_util = TemplateManage()
 
 
@@ -20,11 +19,17 @@ class processNLU(object):
 
         flag, template_mode = self.analysis_util.getTemplateMode(cut_words)
 
+
         template, template_pro, template_index, template_ask = self.template_util.templateManage(entity)
+        if len(template)==0:
+            valuable_words = self.analysis_util.getValuableWords(cut_words, pos)
+            return entity, [3, valuable_words], "normal"
+
         match_result = self.parse_util.getMatchResult(template, template_mode)
         if match_result[0] == 1:
             pro, ask = self.template_util.getPro(match_result[1], template_index, template_pro, template_ask)
             return entity, [1, pro, ask],"normal"
+
         if match_result[0] == 2:
             pro_array = []
             ask_array = []
@@ -36,17 +41,15 @@ class processNLU(object):
             best_pro, key_words = self.template_util.getBestPro(pro_array, cut_words, pos)
             if len(best_pro) == 1:
                 return entity, [2, best_pro[0], ask_array[pro_array.index(best_pro[0])]],"normal"
+
             elif len(best_pro) > 1:
-                final_pro = self.template_util.analysisPro(cut_words, best_pro, key_words)
+                final_pro = self.analysis_util.analysisPro(cut_words, best_pro, key_words)
                 return entity, [2, final_pro, ask_array[pro_array.index(final_pro)]],"normal"
 
         if match_result[0] == 0:
-            return entity, [0, "无法回答。"],"normal"
 
-
-
-
-
+            valuable_words = self.analysis_util.getValuableWords(cut_words,pos)
+            return entity,[3,valuable_words],"normal"
 
 
 
@@ -59,6 +62,9 @@ class processNLU(object):
         pos = getPOS(hidden)[0]
         dep = getDEP(hidden)[0]
         cut_words = list(seg)[0]
+        print("分词: ",cut_words)
+        print("依存句法：",dep)
+        print("词性分析",pos)
 
         entity,ent_type = self.parse_util.extractBestEnt(cut_words,dep)
         print(entity,ent_type,"entity=============")
@@ -79,7 +85,9 @@ class processNLU(object):
                     cut_words[begin-left]
                     break
                 left = left+1
+
             key_adj = cut_words[cut_words.index('最') + 1]
+
             if left > begin:
 
                 return entity,[key_adj],"most"
@@ -87,20 +95,35 @@ class processNLU(object):
                 key_pro = cut_words[begin-left]
                 return entity,[key_pro,key_adj],"most"
 
-        elif ent_type == "etype" and cut_words.index(entity):
+        elif ent_type == "etype":
 
-            procon = []
-
-            dep_list = dep
             for i in range(len(cut_words)):
-                if dep_list[i][2] == 'HED':
+                if dep[i][2] == 'HED':
                     hed_index = i
                     break
             type_index = cut_words.index(entity)
-            if type_index > hed_index and pos[type_index-1]=='r':
-                procon = cut_words[:hed_index]
+            if type_index == 0:
+                temp = cut_words[type_index:hed_index]
+                temp_pos = pos[type_index:hed_index]
+                procon = self.analysis_util.getValuableWords(temp, temp_pos)
+
+            elif type_index > hed_index and pos[type_index-1]=='r':
+
+                temp = cut_words[:hed_index]
+                temp_pos = pos[:hed_index]
+                procon = self.analysis_util.getValuableWords(temp,temp_pos)
+            elif type_index < hed_index and pos[type_index-1] == "r":
+                temp = cut_words[type_index:hed_index]
+                temp_pos = pos[type_index:hed_index]
+                procon = self.analysis_util.getValuableWords(temp, temp_pos)
+
             else:
-                procon = cut_words[:type_index]
+                temp = cut_words[:type_index]
+                temp_pos = pos[:type_index]
+                procon = self.analysis_util.getValuableWords(temp, temp_pos)
+            print(procon,"procon===============")
+
+
 
             return entity,procon,"content"
 

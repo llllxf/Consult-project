@@ -5,9 +5,10 @@ import numpy as np
 
 class analysisWords(object):
     def __init__(self):
-        self.none_req = ['哪','哪里','何','哪些','什么']
+        self.none_req = ['哪','哪里','何','哪些','什么','哪些','哪个']
         self.v_req = ['如何','怎么']
-        self.num_req = ['多','多少']
+        self.num_req = ['多少','多']
+        self.valuable_pos = ['a','b','m','n','nd','ni','nl','ns','nt','nz','v']
 
 
     def getTemplateMode(self,words):
@@ -32,7 +33,43 @@ class analysisWords(object):
         return flag,"".join(template_mode)
 
 
+    def getRIndex(self,words):
+
+        r_array = self.none_req+self.v_req+self.num_req
+
+        for r in r_array:
+            if r in words:
+                return words.index(r)
 
 
+    def analysisPro(self,words,pro_list,key_list):
 
+
+        best_pro = pro_list[0]
+        r_index = self.getRIndex(words)
+
+        dis = 1000000
+        index = 0
+        for k in key_list:
+            p = pro_list[index]
+            k_index = words.index(k)
+            tem_dis = np.abs(k_index-r_index)
+            if tem_dis < dis:
+                dis = tem_dis
+                best_pro = p
+            index = index+1
+
+
+        return best_pro
+
+
+    def getValuableWords(self,words,pos):
+
+        valuable_words = []
+
+        for i in range(len(words)):
+            if pos[i] in self.valuable_pos:
+                valuable_words.append(words[i])
+
+        return valuable_words
 

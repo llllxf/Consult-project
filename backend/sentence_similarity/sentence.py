@@ -1,20 +1,21 @@
 #encoding=utf-8
 
 
-
+from backend.nlu.LTPUtil import *
 from backend.sentence_similarity.zhcnSegment import zhcnSeg
 
 class Sentence(object):
 
-    def __init__(self,sentence,seg,id = 0):
+    def __init__(self,sentence,id = 0):
         self.id = id
         self.origin_sentence = sentence
-        self.cuted_sentence = self.cut(seg)
+        self.cuted_sentence = self.cut()
         #print(self.cuted_sentence)
 
     # 对句子分词
-    def cut(self,seg):
-        return list(seg.cut_for_search(self.origin_sentence))
+    def cut(self):
+        seg,hidden = getSEG(self.origin_sentence)
+        return seg[0]
 
     # 获取切词后的词列表
     def get_cuted_sentence(self):

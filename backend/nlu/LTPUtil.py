@@ -10,8 +10,8 @@ config = configparser.ConfigParser()
 config.read("../backend/config.ini")
 
 subject = config['DEFAULT']['subject']
-
-ltp.init_dict(path="../backend/data/"+subject+"/allentity.csv", max_window=10)
+ltp.init_dict(path="../backend/data/"+subject+"/etype.csv", max_window=10)
+ltp.init_dict(path="../backend/data/"+subject+"/entity.csv", max_window=10)
 ltp.init_dict(path="../backend/data/"+subject+"/cleanpro.csv", max_window=10)
 ltp.init_dict(path="../backend/data/"+subject+"/cleanrel.csv", max_window=10)
 

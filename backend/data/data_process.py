@@ -6,13 +6,13 @@
 import xlrd
 
 def deleteType():
-    pro = read_file('地理/cleanpro.csv')
-    entity = read_file('地理/allentity.csv')
+    pro = read_file('地理/etype.csv')
+    entity = read_file('地理/ent.csv')
     clean_entity = []
     for e in entity:
-        if e in pro:
+        if e not in pro:
             clean_entity.append(e)
-    wf = open("proent.csv","w")
+    wf = open("entity.csv","w")
     for e in clean_entity:
         wf.writelines(e+"\n")
     wf.close()
@@ -50,13 +50,13 @@ def read_template(filename):
     rf.close()
     return array
 
-if __name__ == '__main__':
+def deal100():
     book = xlrd.open_workbook('../../100.xlsx')
     print('sheet页名称:', book.sheet_names())
     sheet = book.sheet_by_index(0)
     rows = sheet.nrows
     cols = sheet.ncols
-    wf = open("100.csv","w")
+    wf = open("100.csv", "w")
     for i in range(sheet.nrows):
         value = sheet.cell(i, 1).value
         clean_value = ""
@@ -71,5 +71,11 @@ if __name__ == '__main__':
             c_v += c
         if c_v == "" or c_v == "\n":
             continue
-        wf.writelines(c_v+"\n")
+        wf.writelines(c_v + "\n")
+
+
+if __name__ == '__main__':
+    deleteType()
+
+
 

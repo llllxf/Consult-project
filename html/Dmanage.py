@@ -28,9 +28,31 @@ from backend.nlu.LTPUtil import *
 
 if __name__ == '__main__':
     d = DialogManagement()
+
+    rf = open("../backend/data/100.csv","r")
+    wf = open("ans100.csv","a")
+    rl = rf.readlines()
+    for l in rl:
+        if len(l)<3:
+            continue
+        ans = d.doNLU(l)
+        wf.writelines(l+"\n")
+        wf.writelines(ans[1]+"\n")
+        wf.writelines("=========================\n")
+    """
+
     while(1):
         s = input()
-        d.doNLU(s)
+        ans = d.doNLU(s)
+        print(ans)
+    """
+
+
+
+
+
+
+
 
 
 

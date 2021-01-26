@@ -335,9 +335,6 @@ class normalBussiness(object):
 
     def taskNormalPro(self, entity, property):
         ans = self.matchByProName(entity, property)
-
-
-
         return ans
 
 
@@ -427,12 +424,73 @@ class normalBussiness(object):
 
 
     def doNormal(self,entity,property):
-        print(entity,property)
+
         ans = self.searchBinaryFactoid(entity,property)
         if ans is None:
             return [entity[0],property,'对不起，没有'+entity[0]+"关于"+property+"的信息"]
 
         return ans
+
+    def compareContent(self, entity, con):
+
+        con_count = []
+
+
+        entity_value = self.graph_util.dealWithEnitity(entity)
+
+        con_pro = ['作用','特征','内容','定义']
+        con_value = []
+
+        name, content = list(entity_value.items())[0]
+        pro = np.array(content['p'])
+        for p in pro:
+            temp_c = 0
+            if p[0] in con_pro:
+
+                for c in con:
+                    if c in p[1]:
+                        temp_c = temp_c+1
+
+            if temp_c > 0:
+                con_count.append(temp_c)
+                con_value.append(p[1])
+
+        if len(con_value) == 0:
+            return None
+        else:
+            return con_value[np.argmax(con_count)]
+
+    def doNormalbyCon(self, entity, con):
+        return self.compareContent(entity,con)
+
+    def doCon(self, entity, con):
+        name = []
+        content = []
+        count = []
+        pro_list = self.graph_util.getProByType(entity)
+
+        for pro in pro_list:
+            value_list = self.graph_util.getValueByPro(entity,pro)
+            print(value_list)
+            for value in value_list:
+                temp = 0
+                for c in con:
+                    if c in value[1]:
+                        temp = temp+1
+                if temp>0:
+                    name.append(value[0])
+                    content.append(value[1])
+                    count.append(temp)
+        max_count_index = np.argmax(count)
+
+        print(name)
+        print(count)
+        print(len(content),count[max_count_index],count[max_count_index]/len(content))
+        if count[max_count_index]/len(content)>=1/3:
+
+            return name[max_count_index]+": "+content[max_count_index]
+        else:
+            return None
 
     def doMost(self,etype,match):
 
@@ -448,6 +506,8 @@ class normalBussiness(object):
                         return result[i][0]
         return None
 
+
+
     def searchEnt(self,entity,property):
         pro_list = self.graph_util.getValueByPro(entity,property)
         return pro_list
@@ -457,7 +517,6 @@ class normalBussiness(object):
 
 
         if task_type == 'task_normal_pro':
-
 
             ans = self.taskNormalPro(entity,property)
 
