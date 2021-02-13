@@ -4,7 +4,7 @@
 
 import numpy as np
 from backend.template_library.NumPro import NumPro
-from backend.template_library.ConPro import *
+from backend.template_library.ConProTemplate import *
 from backend.graphSearch.graphSearch import graphSearch
 
 
@@ -21,6 +21,7 @@ class TemplateManage(object):
     def templateManage(self,ent):
 
         pro_list = self.graph_util.getProList(ent)
+        print(pro_list)
 
         none_template = []
         none_template_pro = []
@@ -39,6 +40,7 @@ class TemplateManage(object):
             key = list(config[p])
 
             if config[p]['type'] == 'numpro':
+                print(p,"asjdkhaksldhaklsdjasljdaksdhalksjdhals")
 
                 numpro.setEnt(ent)
                 numpro.setPro(p)
@@ -51,10 +53,12 @@ class TemplateManage(object):
                 if 'noun' in key:
                     numpro.setNoun(config[p]['noun'])
                 temp = numpro.getTemplate()
+
                 none_template += temp
                 none_template_pro.append(p)
                 none_template_index.append(len(none_template))
                 none_template_ask.append(temp[0])
+                print(none_template)
 
             if config[p]['type'] == 'rangeconpro':
 
@@ -64,6 +68,9 @@ class TemplateManage(object):
                     rangeconpro.setAlias(config[p]['alias'])
                 if 'verb' in key:
                     rangeconpro.setVerb(config[p]['verb'])
+                if 'passive_verb' in key:
+                    rangeconpro.setPassiveVerb(config[p]['passive_verb'])
+
                 temp = rangeconpro.getTemplate()
                 none_template += temp
                 none_template_pro.append(p)
@@ -92,6 +99,8 @@ class TemplateManage(object):
                     onlyconpro.setAlias(config[p]['alias'])
                 if 'verb' in key:
                     onlyconpro.setVerb(config[p]['verb'])
+                if 'passive_verb' in key:
+                    rangeconpro.setPassiveVerb(config[p]['passive_verb'])
                 temp = onlyconpro.getTemplate()
                 none_template += temp
                 none_template_pro.append(p)
@@ -188,10 +197,13 @@ class TemplateManage(object):
 
     def getBestPro(self,pro_list,words,pos):
 
+        print(pro_list,words)
+
         best_pro = []
         key_word = []
         for pro in pro_list:
             if pro in words:
+                print("addpro",pro)
                 best_pro.append(pro)
                 key_word.append(pro)
 
@@ -199,9 +211,11 @@ class TemplateManage(object):
 
             if 'alias' in list(config[pro]):
                 alias = config[pro]['alias'].split(",")
+                print(alias)
                 for a in alias:
                     if a in words:
                         if pro not in best_pro:
+                            print("addalias", a)
                             best_pro.append(pro)
                             key_word.append(a)
                         #return pro
@@ -211,25 +225,20 @@ class TemplateManage(object):
                 for a in verb:
                     if a in words:
                         if pro not in best_pro:
+                            print("addverb", a)
                             best_pro.append(pro)
                             key_word.append(a)
         for pro in pro_list:
-            if 'verb' in list(config[pro]):
-                verb = config[pro]['verb'].split(",")
+            if 'passive_verb' in list(config[pro]):
+                verb = config[pro]['passive_verb'].split(",")
                 for a in verb:
                     if a in words:
                         if pro not in best_pro:
+                            print("addpassive_verb", a)
                             best_pro.append(pro)
                             key_word.append(a)
 
-        for pro in pro_list:
-            if 'verb' in list(config[pro]):
-                verb = config[pro]['verb'].split(",")
-                for a in verb:
-                    if a in words:
-                        if pro not in best_pro:
-                            best_pro.append(pro)
-                            key_word.append(a)
+
 
         for pro in pro_list:
             if 'none' in list(config[pro]):
@@ -237,6 +246,7 @@ class TemplateManage(object):
                 for a in none:
                     if a in words and pos[words.index(a)-1]=='r':
                         if pro not in best_pro:
+                            print("addnone", a)
                             best_pro.append(pro)
                             key_word.append(a)
 
@@ -246,12 +256,14 @@ class TemplateManage(object):
                 for a in adj:
                     if a in words and pos[words.index(a)-1]=='r':
                         if pro not in best_pro:
+                            print("addadj", a)
                             best_pro.append(pro)
                             key_word.append(a)
-        if len(best_pro)>0:
-            return best_pro,key_word
-        else:
-            return [pro_list[0]],key_word
+        print(best_pro,key_word)
+        print("========================")
+
+        return best_pro,key_word
+
 
 
 if __name__ == '__main__':

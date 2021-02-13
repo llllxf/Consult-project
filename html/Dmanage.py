@@ -21,17 +21,23 @@ config = configparser.ConfigParser()
 #config.read("../backend/config.ini")
 from backend.nlu.parseSentence import ParseSentence
 from backend.nlu.LTPUtil import *
-
+from backend.dm.GeoDM import GeoDM
+from backend.dm.HistoryDM import HistoryDM
 """
 问答引擎
 """
 
 if __name__ == '__main__':
-    d = DialogManagement()
 
-    rf = open("../backend/data/100.csv","r")
-    wf = open("ans100.csv","a")
-    rl = rf.readlines()
+    d = HistoryDM()
+    """
+    rf = open("../backend/data/history_100.csv","r")
+    wf = open("history100_3.csv","w")
+    rl = rf.readlines()[200:300]
+
+
+    count = 0
+
     for l in rl:
         if len(l)<3:
             continue
@@ -39,13 +45,15 @@ if __name__ == '__main__':
         wf.writelines(l+"\n")
         wf.writelines(ans[1]+"\n")
         wf.writelines("=========================\n")
-    """
+        count = count+1
+        print(str(count)+"=========================\n")
 
+    """
     while(1):
         s = input()
         ans = d.doNLU(s)
         print(ans)
-    """
+
 
 
 

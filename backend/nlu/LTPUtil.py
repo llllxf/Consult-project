@@ -3,6 +3,7 @@
 from ltp import LTP
 import configparser
 import numpy as np
+from backend.data.data_process import read_file
 ltp = LTP(path="base")
 
 
@@ -10,10 +11,19 @@ config = configparser.ConfigParser()
 config.read("../backend/config.ini")
 
 subject = config['DEFAULT']['subject']
-ltp.init_dict(path="../backend/data/"+subject+"/etype.csv", max_window=10)
-ltp.init_dict(path="../backend/data/"+subject+"/entity.csv", max_window=10)
-ltp.init_dict(path="../backend/data/"+subject+"/cleanpro.csv", max_window=10)
-ltp.init_dict(path="../backend/data/"+subject+"/cleanrel.csv", max_window=10)
+
+
+instanceArray = list(set(read_file("../backend/data/"+subject+"/entforcut.csv")))
+instanceArray = sorted(instanceArray, key=lambda i: len(i), reverse=True)
+
+proArray = read_file("../backend/data/"+subject+"/cleanpro.csv")
+proArray = sorted(proArray, key=lambda i: len(i), reverse=True)
+
+relArray = read_file("../backend/data/"+subject+"/cleanrel.csv")
+relArray = sorted(relArray, key=lambda i: len(i), reverse=True)
+
+combine = instanceArray+proArray+relArray
+ltp.add_words(words=combine, max_window=30)
 
 def getSEG(words):
 
@@ -41,5 +51,5 @@ def dealLTP(hidden):
     print(dep_role)
 
 if __name__ == '__main__':
-    seg, hidden = getSEG("俄罗斯主的农业有哪些特征")
+    seg, hidden = getSEG("西周的分封制")
     dealLTP(seg, hidden)

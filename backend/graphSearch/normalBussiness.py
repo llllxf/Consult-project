@@ -4,8 +4,6 @@
 # @Date  : 2020-06-22
 """
 
-
-
 """
 
 
@@ -23,6 +21,9 @@ class normalBussiness(object):
     def __init__(self):
         self.graph_util = graphSearch()
         #self.form_util = formWords()
+
+
+
 
 
     def seacrchAll(self,longWords,shortWords):
@@ -139,8 +140,6 @@ class normalBussiness(object):
         :param deal_entity: 实体及其信息
         :return: 答案或空
         """
-
-
 
         ans_con = []
         count_rate = []
@@ -282,8 +281,6 @@ class normalBussiness(object):
         for name, content in entity_deal.items():
             name_dict = {}
             pro = np.array(content['p'])
-
-
             for p in pro:
                 if p[0] in property:
 
@@ -431,14 +428,18 @@ class normalBussiness(object):
 
         return ans
 
-    def compareContent(self, entity, con):
+    def compareContent(self, entity, con_cnt, con_pro):
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+
+        print("compareContent",con,word_count)
 
         con_count = []
 
 
         entity_value = self.graph_util.dealWithEnitity(entity)
 
-        con_pro = ['作用','特征','内容','定义']
+
         con_value = []
 
         name, content = list(entity_value.items())[0]
@@ -446,64 +447,143 @@ class normalBussiness(object):
         for p in pro:
             temp_c = 0
             if p[0] in con_pro:
+                for c in range(len(con)):
+                    if con[c] in p[1]:
+                        print(con[c],p[1])
+                        temp_c += word_count[c]
 
-                for c in con:
-                    if c in p[1]:
-                        temp_c = temp_c+1
+            print(temp_c,temp_c/len(con))
 
-            if temp_c > 0:
+            if temp_c>=len(con):
                 con_count.append(temp_c)
                 con_value.append(p[1])
+
+        print(con_count)
+        print(con_value)
 
         if len(con_value) == 0:
             return None
         else:
             return con_value[np.argmax(con_count)]
 
-    def doNormalbyCon(self, entity, con):
-        return self.compareContent(entity,con)
+    def doNormalbyCon(self, entity, con, conpro):
+        return self.compareContent(entity,con, conpro)
 
-    def doCon(self, entity, con):
+    def doNormalForFalse(self, entity, con_cnt):
+
+        print(entity)
+
+        print("asdhgalshjdgsajkdashd")
+        print(con_cnt)
+
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+        print(con,word_count)
+        con_count = []
+        con_value = []
+        value_list = self.graph_util.fuzzySearchForNormalFalse("?o",entity)
+        for v in value_list:
+            temp_c = 0
+            for c in range(len(con)):
+                if con[c] in v[2]:
+                    print(v)
+                    temp_c += word_count[c]
+
+            if temp_c>=len(con):
+                con_count.append(temp_c)
+                con_value.append(v[0]+":"+v[2])
+
+        print(con_count,con_value,"asdaskdjgasdjlagsdh")
+
+        if len(con_value) == 0:
+            return None
+        else:
+            return con_value[np.argmax(con_count)]
+
+    def doCon(self, entity, con_cnt):
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+
         name = []
         content = []
         count = []
         pro_list = self.graph_util.getProByType(entity)
-
         for pro in pro_list:
+
             value_list = self.graph_util.getValueByPro(entity,pro)
             print(value_list)
             for value in value_list:
                 temp = 0
-                for c in con:
-                    if c in value[1]:
-                        temp = temp+1
-                if temp>0:
+                for c in range(len(con)):
+                    if con[c] in value[1]:
+                        print(con[c],word_count[c],value[0])
+                        temp += word_count[c]
+                if temp>=len(con):
                     name.append(value[0])
                     content.append(value[1])
                     count.append(temp)
+        if len(count)==0:
+            return None
         max_count_index = np.argmax(count)
 
         print(name)
         print(count)
         print(len(content),count[max_count_index],count[max_count_index]/len(content))
-        if count[max_count_index]/len(content)>=1/3:
+        if count[max_count_index]>=len(con):
 
             return name[max_count_index]+": "+content[max_count_index]
         else:
             return None
 
     def doMost(self,etype,match):
+        print("doMost",etype,match)
 
-        most_pro = ['地位','作用','特征','内容','定义']
+
+        tri_list = self.graph_util.fuzzySearchOne("?plabel","特征",etype)
+        for i in range(len(tri_list)):
+            flag = True
+            for m in match:
+                if m not in tri_list[i][2]:
+                    flag = False
+                    break
+            if flag:
+                return tri_list[i][0]
+
+
+        most_pro = ['地位','作用','定义','内容']
         for p in most_pro:
             result = self.graph_util.getValueByPro(etype,p)
             for i in range(len(result)):
-                if len(match)==2:
-                    if match[0] in result[i][1] and match[1] in result[i][1]:
-                        return result[i][0]
-                elif len(match) == 1:
-                    if match[0] in result[i][1]:
-                        return result[i][0]
+                flag = True
+                for m in match:
+                    if m not in result[i][1]:
+                        flag = False
+                        break
+                if flag:
+                    return result[i][0]
+
+        if '世界' in match or '地球' in match:
+            for i in range(len(tri_list)):
+                flag = True
+                for m in match:
+                    if m == '世界' or m == '地球':
+                        continue
+                    if m not in tri_list[i][2]:
+                        flag = False
+                        break
+                if flag:
+                    return tri_list[i][0]
+            for i in range(len(result)):
+                flag = True
+                for m in match:
+                    if m == '世界' or m == '地球':
+                        continue
+                    if m not in result[i][1]:
+                        flag = False
+                        break
+                if flag:
+                    return result[i][0]
+
         return None
 
 

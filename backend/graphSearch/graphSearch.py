@@ -6,10 +6,6 @@
 
 """
 
-
-
-
-
 import requests
 import numpy as np
 from backend.data.data_process import read_file
@@ -21,21 +17,21 @@ subject = config['DEFAULT']['subject']
 
 repertoryName = config['TRANSFORM'][subject]
 
+#subject = '地理'
+#repertoryName = 'geo4'
 
 class graphSearch(object):
 
     def __init__(self):
         
 
-        self.adapetion_stop = {'湖泊':['出处','图片']}
+        pass
 
     def getAll(self):
         uri = "http://localhost:8004/getAll?repertoryName=" + repertoryName
         r = requests.post(uri)
         tri_list = list(r.json())
         return tri_list
-
-
 
 
     def getRelByType(self,type):
@@ -358,7 +354,18 @@ class graphSearch(object):
 
 
 
+    def fuzzySearchOne(self, fuzzy, fuzzyCon, etype):
+        uri = "http://localhost:8004/fuzzySearchOne?repertoryName=" + repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzyCon + "&etype=" + etype
+        r = requests.post(uri)
+        tri_list = list(r.json())
+        return tri_list
 
+    def fuzzySearchForNormalFalse(self, fuzzy, fuzzycon):
+
+        uri = "http://localhost:8004/fuzzySearchForNormalFalse?repertoryName=" + repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon[0]
+        r = requests.post(uri)
+        tri_list = list(r.json())
+        return tri_list
 
     def getEntByfuzzySearch(self, description):
         """
@@ -496,9 +503,13 @@ class graphSearch(object):
         uri = "http://localhost:8004/getPro?repertoryName="+repertoryName+"&entity=" + entity
         r = requests.post(uri)
         pro_list = list(r.json())
+        if '出处' in pro_list:
+            pro_list.remove('出处')
+        if '图片' in pro_list:
+            pro_list.remove('图片')
 
         if pro_list == []:
-            return None
+            return []
 
         return pro_list
     """
@@ -640,7 +651,11 @@ class graphSearch(object):
 
 
 
-
+if __name__ == '__main__':
+    graph = graphSearch()
+    pro,rel = graph.searchEntity("埃及")
+    for p in pro:
+        print(p)
 
 
 

@@ -145,7 +145,8 @@ class TemplateManage(object):
 
 
 if __name__ == '__main__':
-    pass
+    seg,hidden = getSEG("西周的分封制")
+    print(seg)
 
 
 

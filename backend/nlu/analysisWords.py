@@ -8,12 +8,12 @@ class analysisWords(object):
         self.none_req = ['哪','哪里','何','哪些','什么','哪些','哪个']
         self.v_req = ['如何','怎么']
         self.num_req = ['多少','多']
-        self.valuable_pos = ['a','b','m','n','nd','ni','nl','ns','nt','nz','v']
+        self.valuable_pos = ['a','b','m','n','nd','ni','nl','ns','nt','nz','v','j']
 
 
     def getTemplateMode(self,words):
         template_mode = list(np.copy(words))
-        #print(template_mode)
+
         index = 0
         flag = ""
         for word in template_mode:
@@ -63,13 +63,5 @@ class analysisWords(object):
         return best_pro
 
 
-    def getValuableWords(self,words,pos):
 
-        valuable_words = []
-
-        for i in range(len(words)):
-            if pos[i] in self.valuable_pos:
-                valuable_words.append(words[i])
-
-        return valuable_words
 
