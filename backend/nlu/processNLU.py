@@ -4,18 +4,46 @@
 
 
 from backend.nlu.parseSentence import ParseSentence
-from backend.nlu.analysisWords import analysisWords
-from backend.nlu.LTPUtil import *
-from backend.template_library.templateManage import TemplateManage
-from backend.template_library.ConPro import *
+
+from backend.nlu.LTPUtil import LTPUtil
+#from backend.template_library.ConPro import *
+from backend.nlu.extractEntity import ExtractEntity
+import numpy as np
 class processNLU(object):
+
     def __init__(self):
         self.parse_util = ParseSentence()
-        self.analysis_util = analysisWords()
-        self.template_util = TemplateManage()
-    def dealNormal(self, entity, ent_list, cut_words, pos, dep):
-        entity_index = cut_words.index(entity)
-        ent,best_pro, key_word = getpro(cut_words,pos,dep,entity,ent_list,entity_index)
+        self.ent_util = ExtractEntity()
+        self.ltp_util = LTPUtil()
+
+
+    def dealNormalFalse(self, entity, cut_words, pos, dep):
+        print(entity, cut_words, pos,dep,"split_false")
+
+        valuable_words,word_count = self.parse_util.getValuableWords(cut_words, pos, dep)
+        return entity, [4, valuable_words,word_count], "normal"
+    """
+    def dealNormalCoo(self, entity_arg, ent_list, cut_words, pos, dep):
+        entity = entity_arg[0]
+        entity_index = entity_arg[1]
+        ent,best_pro, key_word = self.pro_util.getpro(cut_words,pos,dep,entity,ent_list,entity_index)
+        if best_pro:
+            if ent == entity:
+                return entity,[1,best_pro],"normal"
+            else:
+                return ent, [2, best_pro,ent+"的"+best_pro], "normal"
+        else:
+            valuable_words,word_count = self.parse_util.getValuableWords(cut_words, pos, dep)
+            return entity, [3, valuable_words,word_count], "normal"
+    """
+
+    def dealNormalCoo(self, entity_arg, ent_list,  cut_words, pos, dep):
+        entity = entity_arg[0]
+        entity_index = entity_arg[1]
+
+        ent,best_pro = self.ent_util.getBestEntPro(cut_words,pos,dep,ent_list,entity_index)
+
+        #ent,best_pro, key_word = self.pro_util.getpro(cut_words,pos,dep,entity,entity_index)
         if best_pro:
 
             if ent == entity:
@@ -26,37 +54,39 @@ class processNLU(object):
             valuable_words,word_count = self.parse_util.getValuableWords(cut_words, pos,dep)
             return entity, [3, valuable_words,word_count], "normal"
 
-    def dealNormalFalse(self, entity, cut_words, pos, dep):
-        print(entity, cut_words, pos,"split_false")
+    def dealNormal(self, entity, ent_list,  cut_words, pos, dep):
+        #entity = entity_arg[0]
+        entity_index = cut_words.index(entity)
 
-        valuable_words,word_count = self.parse_util.getValuableWords(cut_words, pos, dep)
-        return entity, [4, valuable_words,word_count], "normal"
+        ent,best_pro = self.ent_util.getBestEntPro(cut_words,pos,dep,ent_list,entity_index)
 
-    def dealNormalCoo(self, entity_arg, ent_list, cut_words, pos, dep):
-        entity = entity_arg[0]
-        entity_index = entity_arg[1]
-        ent,best_pro, key_word = getpro(cut_words,pos,dep,entity,ent_list,entity_index)
+        #ent,best_pro, key_word = self.pro_util.getpro(cut_words,pos,dep,entity,entity_index)
         if best_pro:
+
             if ent == entity:
                 return entity,[1,best_pro],"normal"
             else:
                 return ent, [2, best_pro,ent+"的"+best_pro], "normal"
         else:
-            valuable_words,word_count = self.parse_util.getValuableWords(cut_words, pos, dep)
+            valuable_words,word_count = self.parse_util.getValuableWords(cut_words, pos,dep)
             return entity, [3, valuable_words,word_count], "normal"
-
+    """
     def getValuableWords(self, words,dep):
-        seg, hidden = getSEG(words)
-        pos = getPOS(hidden)[0]
+        seg, hidden = self.ltp_util.getSEG(words)
+        pos = self.ltp_util.getPOS(hidden)[0]
         con,word_count = self.parse_util.getValuableWords(words,pos,dep)
         return [con,word_count]
+    """
 
     def process(self, words):
 
-        seg,hidden = getSEG(words)
-        pos = getPOS(hidden)[0]
-        dep = getDEP(hidden)[0]
+        cut_words,pos,dep = self.ltp_util.get_sentence_data(words)
+        """
+        seg,hidden = self.ltp_util.getSEG(words)
+        pos = self.ltp_util.getPOS(hidden)[0]
+        dep = self.ltp_util.getDEP(hidden)[0]
         cut_words = list(seg)[0]
+        """
         print("分词: ",cut_words)
         print("依存句法：",dep)
         print("词性分析",pos)
@@ -76,12 +106,13 @@ class processNLU(object):
             split_index = extract_words[1]
             entity = extract_words[2]
             ent_type = "etype"
-
+        """
         if extract_type == "split_false":
             split_con = extract_words[0]
             split_index = extract_words[1]
 
             ent_type = "entity"
+        """
 
         print("抽取的实体: ",entity)
         print("实体的类型: ", ent_type)
@@ -93,40 +124,40 @@ class processNLU(object):
 
             con,con_count = self.parse_util.getValuableWords(cut_words,pos,dep)
 
+
             for i in range(len(cut_words)):
                 print(dep[i][2])
-                if dep[i][2] == 'HED' and pos[i] in ['n','nd','ni','nl','ns','nt','nz']:
+                if dep[i][2] == 'HED' and pos[i] in ['n','nd','ni','nl','ns','nt','nz','i']:
                     print("HED=============", cut_words[i], [con, con_count], "false")
                     return cut_words[i],[con,con_count],"false"
             for i in range(len(cut_words)):
 
-                if dep[i][2] == 'SBV' and pos[i] in ['n','nd','ni','nl','ns','nt','nz']:
+                if dep[i][2] == 'SBV' and pos[i] in ['n','nd','ni','nl','ns','nt','nz','i']:
                     print("SBV=============", cut_words[i], [con, con_count], "false")
                     return cut_words[i], [con,con_count], "false"
             for i in range(len(cut_words)):
-                if dep[i][2] == 'VOB' and pos[i] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz']:
+                if dep[i][2] == 'VOB' and pos[i] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz','i']:
                     return cut_words[i], [con,con_count], "false"
             for i in range(len(cut_words)):
-                if dep[i][2] == 'POB' and pos[i] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz']:
+                if dep[i][2] == 'POB' and pos[i] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz','i']:
                     return cut_words[i], [con,con_count], "false"
             for i in range(len(cut_words)):
-                if dep[i][2] == 'ATT' and pos[i] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz']:
+                if dep[i][2] == 'ATT' and pos[i] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz','i']:
                     return cut_words[i], [con,con_count], "false"
+            return con[np.argmax(con_count)],[con,con_count], "false"
 
         elif ent_type=="entity":
+            #if extract_type == "split_false":
+            #   return self.dealNormalFalse(entity,split_con,pos[:split_index],dep[:split_index])
             entity, ans,task_type = self.dealNormal(entity,array,cut_words,pos,dep)
             if ans[0] <= 2:
                 return entity, ans,task_type
-            if extract_type == "split_false":
-               return self.dealNormalFalse(entity,split_con,pos[:split_index],dep[:split_index])
+
 
             return entity, ans,task_type
 
         elif ent_type=="coo_entity":
             return self.dealNormalCoo(entity,array,cut_words,pos,dep)
-
-
-
 
         elif ent_type == "etype":
             key_entity = self.parse_util.getEntity(cut_words)
@@ -150,7 +181,7 @@ class processNLU(object):
                 procon, con_count = self.parse_util.getValuableWords(temp, temp_pos,temp_dep)
 
             elif type_index > hed_index and pos[type_index-1]=='r':
-                print("properly here1??????")
+
 
                 temp = cut_words[:hed_index]
                 temp_pos = pos[:hed_index]
@@ -203,95 +234,12 @@ class processNLU(object):
             return entity,[procon,con_count,key_entity],"content"
 
 
-    def ansProValue(self, entity,words):
-
-        best_father = self.parse_util.getConcept(entity)
-        standard_words = self.parse_util.getStandard(entity, best_father, words)
-        print(standard_words, "standard_words")
-        matchResults = self.parse_util.getMatchResult(best_father, standard_words, entity)
-        print(matchResults, standard_words, best_father, entity)
-        return entity, matchResults
-
-    def ansEntName(self, etype, words):
-        pass
-
-    def processOLD(self, words):
-
-        entity = self.parse_util.getEntity(words)
-
-        if entity:
-            entity, matchResults = self.ansProValue(entity,words)
-            return entity, matchResults,"proValue"
-
-        etype = self.parse_util.getType(words)
 
 
-        if etype:
-            pro,pro_value = self.ansEntName(etype,words)
-
-            if pro_value != "":
-                return etype, [pro,pro_value], "entName"
-
-        return None,None,None
 
 
-    def dealNormal2(self, entity, cut_words, pos):
-
-        flag, template_mode = self.analysis_util.getTemplateMode(cut_words)
-
-        template, template_pro, template_index, template_ask = self.template_util.templateManage(entity)
-        if len(template)==0:
-            valuable_words = self.analysis_util.getValuableWords(cut_words, pos)
-            return entity, [3, valuable_words], "normal"
-
-        match_result = self.parse_util.getMatchResult(template, template_mode)
-        if match_result[0] == 1:
-            pro, ask = self.template_util.getPro(match_result[1], template_index, template_pro, template_ask)
-            return entity, [1, pro, ask],"normal"
-
-        if match_result[0] == 2:
-            pro_array = []
-            ask_array = []
-            for temp in match_result[1]:
-                pro, ask = self.template_util.getPro(temp, template_index, template_pro, template_ask)
-                if pro not  in pro_array:
-                    pro_array.append(pro)
-                    ask_array.append(ask)
 
 
-            best_pro, key_words = self.template_util.getBestPro(pro_array, cut_words, pos)
-            if len(best_pro) == 0:
-                valuable_words = self.analysis_util.getValuableWords(cut_words, pos)
-                return entity,[3,valuable_words],"normal"
-            if len(best_pro) == 1:
-                return entity, [2, best_pro[0], ask_array[pro_array.index(best_pro[0])]],"normal"
-
-            elif len(best_pro) > 1:
-                final_pro = self.analysis_util.analysisPro(cut_words, best_pro, key_words)
-                return entity, [2, final_pro, ask_array[pro_array.index(final_pro)]],"normal"
-
-        if match_result[0] == 0:
-
-            valuable_words = self.analysis_util.getValuableWords(cut_words,pos)
-            return entity,[3,valuable_words],"normal"
-
-        return entity, [0, "无法回答。"],"normal"
-
-
-    def process2(self, words):
-
-        entity = self.parse_util.getEntity(words)
-        template, template_pro, template_index, template_ask = self.template_util.templateManage(entity)
-        match_result = self.parse_util.getMatchResult(template,words)
-        if match_result[0] == 1:
-            pro, ask = self.template_util.getPro(match_result[1],template_index, template_pro, template_ask)
-            return entity, [1,pro, ask]
-        if match_result[0] == 2:
-            pro, ask = self.template_util.getPro(match_result[1], template_index, template_pro, template_ask)
-            return entity, [2, pro, ask]
-        if match_result[0] == 0:
-            return entity, [0,"无法回答。"]
-        return entity, [0,"无法回答。"]
 
 
 

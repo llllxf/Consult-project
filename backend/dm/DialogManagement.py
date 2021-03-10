@@ -10,6 +10,7 @@ from backend.graphSearch import normalBussiness
 
 
 class DialogManagement(object):
+
     def __init__(self):
         self.nlu_util = processNLU()
         self.normal_bussiness = normalBussiness()
@@ -49,7 +50,6 @@ class DialogManagement(object):
 
     def dealMost(self,etype,nlu_results):
 
-
         type_con = nlu_results[0]
         con = nlu_results[1:]
         ans = self.normal_bussiness.doMost(etype,type_con)
@@ -69,11 +69,12 @@ class DialogManagement(object):
         content = nlu_results[:2]
         key_entity = nlu_results[2:]
 
-        print(content)
-        ans = self.normal_bussiness.doCon(etype,content)
+        print(content,"dealContent")
+        ans,ent = self.normal_bussiness.doCon(etype,content)
+        print(ans,ent, "dealContent")
 
         if ans:
-            return [1,ans,etype]
+            return [1,ans,ent]
         else:
             for e in key_entity:
                 ans = self.normal_bussiness.doNormalForFalse(e,content)
@@ -123,6 +124,58 @@ class DialogManagement(object):
         if task is None:
             return ['无法回答',0,None]
         """
+
+    def getEntName(self,entity,nlu_results):
+
+        pro_list = self.normal_bussiness.searchEnt(entity,nlu_results[0])
+        pro_value = np.array(pro_list)[:,1]
+        similarPro = self.nlu_util.parse_util.getSimilarPro(nlu_results[1],pro_value)
+
+        ind = list(pro_value).index(similarPro[0])
+
+        return [pro_list[ind][0]+"的"+nlu_results[0]+":"+pro_list[ind][1],1,pro_list[ind][0]]
+
+    def AEntityInformation(self,entity):
+        ans = self.normal_bussiness.getOneEntity(entity)
+        print(ans)
+        return ans
+
+    def getProValue(self,entity,nlu_results):
+        """
+        :param entity:
+        :param nlu_results:
+        :return:
+        """
+        if nlu_results[1] == 0:
+            return nlu_results
+        if nlu_results[1] == 1:
+            ans = self.normal_bussiness.doNormal([entity],nlu_results[0])
+            return [ans[2],1,ans[0]]
+
+        if nlu_results[1] == 2:
+            ans = self.normal_bussiness.doNormal([entity], nlu_results[0])
+            return [ans[2],2,nlu_results[2],ans[0]]
+    def setConpro(self, con_pro):
+        self.con_pro = con_pro
+
+
+
+
+    def dealMost(self,etype,nlu_results):
+
+        type_con = nlu_results[0]
+        con = nlu_results[1:]
+        ans = self.normal_bussiness.doMost(etype,type_con)
+
+        if ans:
+            return [1,ans,etype]
+        else:
+            ans = self.normal_bussiness.doNormalForFalse(etype,con)
+            if ans:
+                return [1, ans, etype]
+        return [0,"对不起，无法回答该问题。"]
+
+
 
     def getEntName(self,entity,nlu_results):
 

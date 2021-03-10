@@ -20,11 +20,6 @@ class normalBussiness(object):
 
     def __init__(self):
         self.graph_util = graphSearch()
-        #self.form_util = formWords()
-
-
-
-
 
     def seacrchAll(self,longWords,shortWords):
         """
@@ -428,6 +423,59 @@ class normalBussiness(object):
 
         return ans
 
+    def compareContentStrict(self, entity, con_cnt, con_pro):
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+
+
+        if len(con) == 2:
+            return None
+
+
+        print("compareContentStrict",con,word_count)
+
+        con_count = []
+
+
+        entity_value = self.graph_util.dealWithEnitity(entity)
+
+
+        con_value = []
+
+        name, content = list(entity_value.items())[0]
+        pro = np.array(content['p'])
+        for p in pro:
+            temp_c = 0
+            if p[0] in con_pro:
+                for c in range(len(con)):
+                    if con[c] in p[1]:
+                        print(con[c],p[1])
+                        temp_c += word_count[c]
+
+            print(temp_c,temp_c/len(con))
+
+            if (temp_c >= (2*np.sum(word_count))/3 and len(con) > 2) or (temp_c == np.sum(word_count)):
+                con_count.append(temp_c)
+                con_value.append(p[1])
+
+        print(con_count)
+        print(con_value)
+
+        if len(con_value) == 0:
+            return None
+        else:
+            max_count = np.max(con_count)
+            min_len = 1000
+            best_value = ""
+            for v_index in range(len(con_value)):
+                if con_count[v_index] == max_count:
+                    v_len = len(con_value[v_index])
+                    if v_len < min_len:
+                        best_value = con_value[v_index]
+
+            return best_value
+
+
     def compareContent(self, entity, con_cnt, con_pro):
         con = con_cnt[0]
         word_count = con_cnt[1]
@@ -454,7 +502,7 @@ class normalBussiness(object):
 
             print(temp_c,temp_c/len(con))
 
-            if temp_c>=len(con):
+            if (temp_c>=len(con) and len(con)>2) or (temp_c == np.sum(word_count)):
                 con_count.append(temp_c)
                 con_value.append(p[1])
 
@@ -464,7 +512,19 @@ class normalBussiness(object):
         if len(con_value) == 0:
             return None
         else:
-            return con_value[np.argmax(con_count)]
+            max_count = np.max(con_count)
+            min_len = 1000
+            best_value = ""
+            for v_index in range(len(con_value)):
+                if con_count[v_index] == max_count:
+                    v_len = len(con_value[v_index])
+                    if v_len < min_len:
+                        best_value = con_value[v_index]
+
+            return best_value
+
+    def doNormalbyConStrict(self, entity, con, conpro):
+        return self.compareContentStrict(entity, con, conpro)
 
     def doNormalbyCon(self, entity, con, conpro):
         return self.compareContent(entity,con, conpro)
@@ -489,7 +549,7 @@ class normalBussiness(object):
                     print(v)
                     temp_c += word_count[c]
 
-            if temp_c>=len(con):
+            if (temp_c >= len(con) and len(con) > 2) or (temp_c == np.sum(word_count)):
                 con_count.append(temp_c)
                 con_value.append(v[0]+":"+v[2])
 
@@ -498,11 +558,110 @@ class normalBussiness(object):
         if len(con_value) == 0:
             return None
         else:
-            return con_value[np.argmax(con_count)]
+            cal_value = []
+            value_len = []
+            max_count = np.max(con_count)
+            for i in range(len(con_count)):
+                if con_count[i] == max_count:
+                    cal_value.append(con_value[i])
+                    value_len.append(len(con_value[i]))
+
+            return cal_value[np.argmin(value_len)]
+
+
+    def doNormalForFalseStrict(self, entity, con_cnt):
+
+        print(entity)
+
+        print("asdhgalshjdgsajkdashd")
+        print(con_cnt)
+
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+
+        if len(con) == 2:
+            return None
+
+
+        print(con,word_count)
+        con_count = []
+        con_value = []
+        value_list = self.graph_util.fuzzySearchForNormalFalse("?o",entity)
+        for v in value_list:
+            temp_c = 0
+            for c in range(len(con)):
+                if con[c] in v[2]:
+                    print(v)
+                    temp_c += word_count[c]
+
+            if ((temp_c >= (2*np.sum(word_count))/3) and len(con) > 2) or (temp_c == np.sum(word_count)):
+                con_count.append(temp_c)
+                con_value.append(v[0]+":"+v[2])
+
+        print(con_count,con_value,"asdaskdjgasdjlagsdh")
+
+        if len(con_value) == 0:
+            return None
+        else:
+            cal_value = []
+            value_len = []
+            max_count = np.max(con_count)
+            for i in range(len(con_count)):
+                if con_count[i] == max_count:
+                    cal_value.append(con_value[i])
+                    value_len.append(len(con_value[i]))
+
+            return cal_value[np.argmin(value_len)]
 
     def doCon(self, entity, con_cnt):
         con = con_cnt[0]
         word_count = con_cnt[1]
+
+        sum_count = np.sum(word_count)
+
+        name = []
+        content = []
+        count = []
+        pro_list = self.graph_util.getProByType(entity)
+        for pro in pro_list:
+            if pro in ['图片','出处','分类编号']:
+                continue
+
+            value_list = self.graph_util.getValueByPro(entity,pro)
+            #print(value_list)
+            for value in value_list:
+                temp = 0
+                for c in range(len(con)):
+                    if con[c] in value[1]:
+                        print(con[c],word_count[c],value[0])
+                        temp += word_count[c]
+
+                if temp >= (np.sum(word_count)/2):
+                    name.append(value[0])
+                    content.append(value[1])
+                    count.append(temp)
+        if len(count)==0:
+            return None,None
+        cal_value = []
+        value_len = []
+        cal_name = []
+        max_count = np.max(count)
+        for i in range(len(count)):
+            if count[i] == max_count:
+                cal_value.append(content[i])
+                value_len.append(len(content[i]))
+                cal_name.append(name[i])
+        return cal_name[np.argmin(value_len)]+": "+cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
+
+
+
+    def doConStrict(self, entity, con_cnt):
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+
+
+
+        sum_count = np.sum(word_count)
 
         name = []
         content = []
@@ -518,22 +677,23 @@ class normalBussiness(object):
                     if con[c] in value[1]:
                         print(con[c],word_count[c],value[0])
                         temp += word_count[c]
-                if temp>=len(con):
+
+                if (temp >= (2*np.sum(word_count))/3 and len(con) > 2) or (temp == np.sum(word_count)):
                     name.append(value[0])
                     content.append(value[1])
                     count.append(temp)
         if len(count)==0:
-            return None
-        max_count_index = np.argmax(count)
-
-        print(name)
-        print(count)
-        print(len(content),count[max_count_index],count[max_count_index]/len(content))
-        if count[max_count_index]>=len(con):
-
-            return name[max_count_index]+": "+content[max_count_index]
-        else:
-            return None
+            return None,None
+        cal_value = []
+        value_len = []
+        cal_name = []
+        max_count = np.max(count)
+        for i in range(len(count)):
+            if count[i] == max_count:
+                cal_value.append(content[i])
+                value_len.append(len(content[i]))
+                cal_name.append(name[i])
+        return cal_name[np.argmin(value_len)]+": "+cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
 
     def doMost(self,etype,match):
         print("doMost",etype,match)

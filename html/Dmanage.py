@@ -21,27 +21,53 @@ config = configparser.ConfigParser()
 #config.read("../backend/config.ini")
 from backend.nlu.parseSentence import ParseSentence
 from backend.nlu.LTPUtil import *
-from backend.dm.GeoDM import GeoDM
+
+from backend.dm.GeoDMNormal import GeoDMNormal
 from backend.dm.HistoryDM import HistoryDM
+from backend.dm.HistoryDMNormal import HistoryDMNormal
+from backend.dm.GeoDM import GeoDM
 """
 问答引擎
 """
 
 if __name__ == '__main__':
+    config = configparser.ConfigParser()
+    content = config.read("../backend/config.ini")
 
-    d = HistoryDM()
+    config['DEFAULT']['subject'] = '地理'
+
+    with open('../backend/config.ini', 'w') as file:
+        config.write(file)
+    file.close()
+
+    rf = open("../backend/data/bad100.csv", "r")
+    wf = open("geo_2.csv", "w")
+    rl = rf.readlines()
+
+
+    #h = HistoryDM()
+    g = GeoDM()
+    #gn = GeoDMNormal()
+
+    #d = DialogManagement()
     """
-    rf = open("../backend/data/history_100.csv","r")
-    wf = open("history100_3.csv","w")
-    rl = rf.readlines()[200:300]
-
+    rf = open("history_good.csv","r")
+    wf = open("history100_g2.csv","w")
+    rl = rf.readlines()
+    """
 
     count = 0
 
     for l in rl:
         if len(l)<3:
             continue
-        ans = d.doNLU(l)
+
+
+        print("=========================")
+        #l = l.rstrip()
+        print(l)
+        print("=========================")
+        ans = g.doNLU(l)
         wf.writelines(l+"\n")
         wf.writelines(ans[1]+"\n")
         wf.writelines("=========================\n")
@@ -51,19 +77,6 @@ if __name__ == '__main__':
     """
     while(1):
         s = input()
-        ans = d.doNLU(s)
+        ans = g.doNLU(s)
         print(ans)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    """

@@ -7,7 +7,9 @@ from backend.template_library.NumPro import NumPro
 from backend.template_library.ConPro import *
 from backend.graphSearch.graphSearch import graphSearch
 from backend.nlu.LTPUtil import *
+from backend.data.data_process import *
 import configparser
+import jieba
 config = configparser.ConfigParser()
 config.read("../backend/proconfig.ini")
 
@@ -102,14 +104,6 @@ class TemplateManage(object):
                 none_template_index.append(len(none_template))
                 none_template_ask.append(temp[0])
 
-
-
-
-        #print("=================得到的模版===============",)
-        #for t in none_template:
-        #    print(t)
-        #print("模版对应的属性: ", none_template)
-        #print("属性对应的下标: ",none_template_index)
         for ask in none_template_ask:
             print(ask)
         #print("模版对应的标准问法: ",none_template_ask)
@@ -145,8 +139,18 @@ class TemplateManage(object):
 
 
 if __name__ == '__main__':
-    seg,hidden = getSEG("西周的分封制")
-    print(seg)
+
+    #jieba.load_userdict(['三大原始居民'])
+    #word = list(jieba.cut("三大原始居民是一个实体吗"))
+    ltp_util = LTPUtil()
+    #postags = ltp_util.get_postag(word)
+    #arcs = ltp_util.get_parse(word,postags)
+    cut_words, postags, dep = ltp_util.get_sentence_data("三大原始居民是一个实体吗")
+    print(cut_words)
+    print(postags)
+    print(dep)
+
+
 
 
 

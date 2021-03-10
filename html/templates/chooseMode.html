@@ -1,0 +1,197 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Save Poor - Charity Category Responsive Website Template | Home : W3layouts</title>
+
+    <link href="//fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="static/assets/css/style-starter.css">
+  </head>
+  <body>
+
+
+<section class="w3-services-ab py-5" id="mission">
+    <div class="container py-lg-5 py-md-4">
+
+        <div class="w3-services-grids">
+
+            <div class="fea-gd-vv row">
+                <div class="col-lg-4 col-md-6">
+
+
+                </div>
+                <div class="col-lg-4 col-md-6">
+
+
+                </div>
+                <div class="col-lg-4 col-md-6">
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-services-grids">
+
+            <div class="fea-gd-vv row">
+
+
+                <div class="col-lg-4 col-md-6">
+                    <a href="goNormal">
+                    <div class="float-lt feature-gd">
+                        <div class="icon">
+                            <img src="static/assets/images/education.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="icon-info">
+                            <h5>普通问题</h5>
+                            <p> 日常学习模块，解决知识点明确的问题</p>
+
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+
+                </div>
+                <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+                    <a href="goText">
+                    <div class="float-mid feature-gd">
+                        <div class="icon">
+                            <img src="static/assets/images/education.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="icon-info">
+                            <h5>试卷题目</h5>
+                            <p> 处理真实试卷问题处理真实试卷问题</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="static/assets/js/jquery-3.3.1.min.js"></script> <!-- Common jquery plugin -->
+
+<script src="static/assets/js/theme-change.js"></script><!-- theme switch js (light and dark)-->
+<script src="static/assets/js/owl.carousel.js"></script>
+
+<!-- script for banner slider-->
+<script>
+  $(document).ready(function () {
+    $('.owl-one').owlCarousel({
+      loop: true,
+      dots: false,
+      margin: 0,
+      nav: true,
+      responsiveClass: true,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplaySpeed: 1000,
+      autoplayHoverPause: false,
+      responsive: {
+        0: {
+          items: 1
+        },
+        480: {
+          items: 1
+        },
+        667: {
+          items: 1
+        },
+        1000: {
+          items: 1
+        }
+      }
+    })
+  })
+</script>
+<!-- //script -->
+
+<!-- script for tesimonials carousel slider -->
+<script>
+  $(document).ready(function () {
+    $("#owl-demo1").owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: false,
+      responsiveClass: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        736: {
+          items: 1
+        },
+        1000: {
+          items: 2,
+          loop: false
+        }
+      }
+    })
+  })
+</script>
+<!-- //script for tesimonials carousel slider -->
+
+<script src="static/assets/js/counter.js"></script>
+
+<!--/MENU-JS-->
+<script>
+  $(window).on("scroll", function () {
+    var scroll = $(window).scrollTop();
+
+    if (scroll >= 80) {
+      $("#site-header").addClass("nav-fixed");
+    } else {
+      $("#site-header").removeClass("nav-fixed");
+    }
+  });
+
+  //Main navigation Active Class Add Remove
+  $(".navbar-toggler").on("click", function () {
+    $("header").toggleClass("active");
+  });
+  $(document).on("ready", function () {
+    if ($(window).width() > 991) {
+      $("header").removeClass("active");
+    }
+    $(window).on("resize", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+    });
+  });
+</script>
+<!--//MENU-JS-->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- //disable body scroll which navbar is in active -->
+
+<!--bootstrap-->
+<script src="static/assets/js/bootstrap.min.js"></script>
+<!-- //bootstrap-->
+</body>
+
+</html>

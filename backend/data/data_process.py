@@ -3,11 +3,12 @@
 # @Author: LinXiaofei
 # @Date  : 2020-03-18
 
-import xlrd
+
 import csv
-from ltp import LTP
+#from ltp import LTP
 import jieba
-myltp = LTP(path="base")
+#myltp = LTP(path="base")
+
 
 
 
@@ -30,12 +31,14 @@ def dealEntity():
 
 def deleteType():
     pro = read_file('地理/etype.csv')
-    entity = read_file('地理/ent.csv')
+    entity = read_file('地理/entity.csv')
+    print(len(entity),len(pro))
     clean_entity = []
     for e in entity:
         if e not in pro:
             clean_entity.append(e)
-    wf = open("entity.csv","w")
+    print(len(clean_entity))
+    wf = open("地理/entity.csv","w")
     for e in clean_entity:
         wf.writelines(e+"\n")
     wf.close()
@@ -141,7 +144,7 @@ def deal100():
         if c_v == "" or c_v == "\n":
             continue
         wf.writelines(c_v + "\n")
-
+"""
 def generateQuestion():
     ent = read_file('地理/type.csv')
 
@@ -156,7 +159,7 @@ def generateQuestion():
 
         if e not in cut_words:
             wf.writelines(e+"\n")
-
+"""
 def recordnormalent():
     ent = read_file('地理/check.csv')
     unnormal = read_file('generatequestion.csv')
@@ -264,7 +267,7 @@ def getTypeQues():
 
                 wf.writelines("=========================\n")
     wf.close()
-
+"""
 def dealsplitent():
     sep_ent = read_file("历史/sep_ent.csv")
 
@@ -278,12 +281,26 @@ def dealsplitent():
             combine_ent.writelines("".join(sub[de_index+1:])+"\n")
 
     combine_ent.close()
+"""
 
+def deleteOneVale(graph):
+    ent = read_file("../backend/data/地理/entity.csv")
+    wf = open("../backend/data/地理/entity.csv","w")
+    flag = False
+    for e in ent:
+        flag = False
+        pro_list, rel_list = graph.searchEntity(e)
+        for pro in pro_list:
+            if pro[0] not in ['出处','分类编号']:
+                flag = True
+                break
+        if flag:
 
-
+            wf.writelines(e+"\n")
+    wf.close()
 
 if __name__ == '__main__':
-    dealsplitent()
+    deleteType()
 
 
 

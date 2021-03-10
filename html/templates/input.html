@@ -5,26 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Free Contact Form :: W3layouts</title>
+  <title>K-12 Education.</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
-
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}">
-
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/nouislider.css') }}">
-
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -41,8 +33,6 @@
 				<div class="row no-gutters">
 					<div class="col-md-12">
 						<nav class="navbar navbar-expand-lg navbar-light bg-warning">
-
-
 						  <div class="collapse navbar-collapse" id="navbarsExample06">
 						    <ul class="navbar-nav ml-auto">
 
@@ -51,6 +41,9 @@
 						      </li>
 						      <li class="nav-item d-flex">
 						        <a href="goChoose" class="nav-link icon d-flex align-items-center"><i class="icon ion-grid mr-1"></i> 菜单</a>
+						      </li>
+                                <li class="nav-item d-flex">
+						        <a id="knowledgepoint" class="nav-link icon d-flex align-items-center"><i class="icon ion-grid mr-1"></i> 知识点</a>
 						      </li>
 						      <li class="dropdown nav-item d-flex">
                     <a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
@@ -70,6 +63,23 @@
                       <a href="goHistory" class="dropdown-item">历史</a>
                       <a href="goGeography" class="dropdown-item">地理</a>
                     </div>
+
+
+                  </li>
+                                <li class="dropdown nav-item d-flex">
+                    <a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
+                      <i class="ion-ios-apps mr-1"></i>
+                      模式
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                      <a href="goNormal" class="dropdown-item">普通模式</a>
+                      <a href="goTest" class="dropdown-item">试题模式</a>
+
+                    </div>
+
+
                   </li>
 						    </ul>
 						  </div>
@@ -106,8 +116,7 @@
               <div>
                <p id="ans" name="ans" style="font-size:20px">
                </p>
-
-            </div>
+              </div>
             </div>
 
 
@@ -180,11 +189,18 @@
 
                 $("#ans").html(reply['ans'])
                 $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题" required="" ></textarea>')
+                $("#knowledgepoint").on("click", function() {
+                    window.location.href = "/goGraph?entity=" + reply['entity']
+                });
+
             }
             if(reply['flag'] == 0) {
 
                 $("#ans").html(reply['ans'])
                 $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题" required="" ></textarea>')
+                $("#knowledgepoint").on("click", function() {
+                    alert("无相关知识点信息")
+                });
             }
             if (reply['flag'] == 2) {
 
@@ -207,13 +223,19 @@
                 $("#point").on("click", function() {
                     window.location.href = "/goGraph?entity=" + reply['entity']
                 });
-
+                $("#knowledgepoint").on("click", function() {
+                    window.location.href = "/goGraph?entity=" + reply['entity']
+                });
 
             }
         },
         error :function(e) {
             $("#ans").html("很抱歉，无法回答该问题。")
             $("#question").html('')
+
+            $("#knowledgepoint").on("click", function() {
+                    alert("无相关知识点信息")
+                });
 
         }
     });

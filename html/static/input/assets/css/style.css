@@ -19,6 +19,8 @@ textarea {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+
+
 }
 
 @media (min-width: 576px) {
@@ -223,6 +225,7 @@ a.action img {
 .map iframe {
   width: 100%;
   min-height: 300px;
+  max-height: 500px;
   display: block;
 }
 
@@ -245,6 +248,11 @@ p.sub-para {
   line-height: 25px;
   font-weight: normal;
   margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 45px;
+  color: #ffa020;
 }
 
 h3 {

@@ -3,24 +3,26 @@
 # @File : parseSentence.py
 
 
-from backend.graphSearch.graphSearch import graphSearch
+
 import configparser
-config = configparser.ConfigParser()
-config.read("../backend/config.ini")
-subject = config['DEFAULT']['subject']
-from backend.nlu.LTPUtil import *
-from backend.data.data_process import read_file,read_template
-from backend.sentence_similarity import SentenceSimilarity
+from backend.data.data_process import read_file
+
 
 
 class ParseSentence(object):
     def __init__(self):
-        self.graph_util = graphSearch()
-        self.nlu_util = SentenceSimilarity()
+        config = configparser.ConfigParser()
+        config.read("../backend/config.ini")
+        subject = config['DEFAULT']['subject']
+
         self.valuable_pos = ['a', 'b', 'm', 'n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz', 'v', 'j','i','nh']
 
         instanceArray = list(set(read_file("../backend/data/"+subject+"/entity.csv")))
         self.instanceArray = sorted(instanceArray, key=lambda i: len(i), reverse=True)
+        print("=====================================================================")
+        print(self.instanceArray)
+        print("=====================================================================")
+
 
         proArray = read_file("../backend/data/"+subject+"/cleanpro.csv")
         self.proArray = sorted(proArray, key=lambda i: len(i), reverse=True)
@@ -33,9 +35,9 @@ class ParseSentence(object):
 
         self.r = ['什么','何','怎么','哪里','哪','哪些','哪个','如何','多少','多']
 
-
-
     def getEntity(self,words):
+
+
         entity = []
         for word in words:
 
@@ -76,6 +78,8 @@ class ParseSentence(object):
                 return 2
         if dep[index][2] == 'VOB':
             return 3
+        if dep[index][2] == 'FOB':
+            return 3
 
         return 0
 
@@ -107,7 +111,7 @@ class ParseSentence(object):
 
 
                 de_index = i
-                if words[i + 1] in self.typeArray and words[i + 1] not in self.proArray:
+                if words[i + 1] in self.typeArray:
                     split_index = i
                     front_words = words[:split_index]
                     end_words = words[split_index + 1:]
@@ -128,26 +132,7 @@ class ParseSentence(object):
             if dep[i][2] == 'VOB':
                 VOB = VOB+1
         if VOB >=2 or SBV >=2:
-            """
-            if ',' in words:
-                split_index = words.index(",")
-                front_words = words[:split_index]
-                end_words = words[split_index+1:]
-                for r in self.r:
-                    if r in end_words:
-                        return [front_words,end_words,split_index,"end"],"WPwords"
-                return [front_words,end_words,split_index,"front"],"WPwords"
 
-            if '，' in words:
-                split_index = words.index("，")
-
-                front_words = words[:split_index]
-                end_words = words[split_index+1:]
-                for r in self.r:
-                    if r in end_words:
-                        return [front_words,end_words,split_index,"end"],"WPwords"
-                return [front_words, end_words, split_index,"front"], "WPwords"
-            """
             de_index = -1
             r_index = -1
             for i in range(len(words)):
@@ -182,7 +167,7 @@ class ParseSentence(object):
                         ent = words[split_index+1]
                         print([front_words, split_index, ent],"split")
                         return  [front_words, split_index, ent],"split"
-
+            """
             print(r_index,de_index,pos[de_index + 1],words[de_index + 1])
             if r_index > de_index and (pos[de_index + 1] in ['n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz']
             or words[de_index + 1] in ['是','有','在']):
@@ -198,18 +183,6 @@ class ParseSentence(object):
                 if len(ent)>0:
 
                     return [front_words, split_index, ent], "split_false"
-
-            """
-            if '的' in words:
-
-                split_index = words.index("的")
-
-                front_words = words[:split_index]
-                end_words = words[split_index+1:]
-                for r in self.r:
-                    if r in end_words:
-                        return [front_words,end_words,split_index,"end"],"RADwords"
-                return [front_words, end_words,split_index,"front"], "RADwords"
             """
 
         return None,"normal"
@@ -236,6 +209,11 @@ class ParseSentence(object):
 
         entity = self.getEntity(words)
         etype = self.getEtype(words)
+
+
+        print(entity)
+        print(etype)
+        print("asdjkashdgjasdhgasjkdgaskjdhasdlhgkdkashdgajksdhgkashdgaksdhga")
 
         if len(entity) == 0 and len(etype)==0:
 
@@ -320,77 +298,6 @@ class ParseSentence(object):
             return etype[type_index],[],"etype"
         print("============================4")
 
-
-    def getConcept(self, entity):
-
-        type_list = self.graph_util.getFather(entity)
-
-        best_father = ""
-        max_count = 0
-
-        for father in type_list:
-            son_count = len(self.graph_util.getEntityByType(father))
-            if son_count > max_count:
-                max_count = son_count
-                best_father = father
-
-        return best_father
-
-    def getStandard(self,entity,best_father,words):
-        return words.replace(entity, best_father)
-
-
-    def getSimilar(self, words, templates):
-        print(templates)
-        self.nlu_util.set_sentences(templates)
-        self.nlu_util.TfidfModel()
-        return self.nlu_util.similarity_top_k(words,3)
-
-    def getSimilarByLsi(self, words, templates):
-        self.nlu_util.set_sentences(templates)
-        self.nlu_util.LsiModel()
-        return self.nlu_util.similarity_top_k(words,5)[0]
-
-
-    def getSimilarPro(self, words, pros):
-
-
-        self.nlu_util.set_sentences(list(pros))
-        self.nlu_util.LsiModel()
-
-        return self.nlu_util.similarity_top_k(words,1)[0]
-
-
-    def matchTemplate(self, father, words):
-        raw_template = list(read_file("../backend/template_library/"+subject+"/"+father+".csv"))
-        template_arr = []
-        for template in raw_template:
-
-            if template != "==========":
-                template_arr.append(template)
-            else:
-                if words in template_arr:
-                    #print(template_arr)
-                    return [template_arr[0],template_arr[1]]
-                else:
-                    template_arr = []
-        return None
-
-
-    def getMatchResult(self, templates, words):
-
-        if words in templates:
-            return [1,templates.index(words)]
-        else:
-            similar_tempalte = self.getSimilar(words, templates)
-            print(similar_tempalte,"===============")
-            similar_tempalte_index = []
-            for tem in similar_tempalte:
-                similar_tempalte_index.append(templates.index(tem[0]))
-            if similar_tempalte[0][1] >= 0.6:
-                return [2,similar_tempalte_index]
-        return [0,"无法回答"]
-
     def getValuableWords(self, words, pos, dep):
 
         valuable_words = []
@@ -406,32 +313,39 @@ class ParseSentence(object):
             begin_index = words.index("《")
             end_index = words.index("》")
 
-
-
-
         for i in range(len(words)):
+            print(i,"=======================")
             if begin_index == "-1":
                 if i == "\"" and "\"" in words[i:]:
                     begin_index = i
                     end_index = words[i+1:].index("\"")
 
-            print(dep[i],"=======================")
             if pos[i] in self.valuable_pos:
+                if words[i] in ['是', '有', '在', '于']:
+                    continue
                 valuable_words.append(words[i])
                 if i>begin_index and i < end_index:
-                    word_count.append(10)
+                    word_count.append(20)
                 elif pos[i] in ["m","nt"]:
                     word_count.append(5)
-                elif words[i] in self.instanceArray or words[i] in self.typeArray:
-                    word_count.append(4)
+
                 elif dep[i][2] == 'HED' and words[i] not in ['是','有','在','于']:
                     word_count.append(4)
                 elif dep[i][2] == 'SBV':
-                    word_count.append(3)
+                    word_count.append(4)
                 elif dep[i][2] == 'VOB':
                     word_count.append(3)
+                elif dep[i][2] == 'ATT' and dep[i][1] <= len(words) and dep[dep[i][1]-1][2]=='SBV':
+                    word_count.append(2)
+                elif dep[i][2] == 'ATT' and dep[i][1] <= len(words) and dep[dep[i][1]-1][2]=='VOB':
+                    word_count.append(2)
                 else:
                     word_count.append(1)
+
+                if '最' in words[i]:
+                    word_count[-1] = word_count[-1]+3
+                if words[i] in self.instanceArray or words[i] in self.typeArray:
+                    word_count[-1] = word_count[-1] + 1
 
 
         return valuable_words,word_count

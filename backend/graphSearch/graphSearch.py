@@ -11,11 +11,7 @@ import numpy as np
 from backend.data.data_process import read_file
 import configparser
 
-config = configparser.ConfigParser()
-config.read("../backend/config.ini")
-subject = config['DEFAULT']['subject']
 
-repertoryName = config['TRANSFORM'][subject]
 
 #subject = '地理'
 #repertoryName = 'geo4'
@@ -23,12 +19,14 @@ repertoryName = config['TRANSFORM'][subject]
 class graphSearch(object):
 
     def __init__(self):
-        
-
-        pass
+        config = configparser.ConfigParser()
+        config.read("../backend/config.ini")
+        self.subject = config['DEFAULT']['subject']
+        print("=====================================================================", config)
+        self.repertoryName = config['TRANSFORM'][self.subject]
 
     def getAll(self):
-        uri = "http://localhost:8004/getAll?repertoryName=" + repertoryName
+        uri = "http://localhost:8004/getAll?repertoryName=" + self.repertoryName
         r = requests.post(uri)
         tri_list = list(r.json())
         return tri_list
@@ -40,7 +38,7 @@ class graphSearch(object):
         :param type:
         :return:
         """
-        uri = "http://localhost:8004/getRelByType?repertoryName="+repertoryName+"&type="+type
+        uri = "http://localhost:8004/getRelByType?repertoryName="+self.repertoryName+"&type="+type
         r = requests.post(uri)
         rel_list = list(r.json())
 
@@ -52,7 +50,7 @@ class graphSearch(object):
         :param type:
         :return:
         """
-        uri = "http://localhost:8004/getProByType?repertoryName="+repertoryName+"&type="+type
+        uri = "http://localhost:8004/getProByType?repertoryName="+self.repertoryName+"&type="+type
         r = requests.post(uri)
         pro_list = list(r.json())
 
@@ -65,7 +63,7 @@ class graphSearch(object):
         :return:
         """
 
-        uri = "http://localhost:8004/getProPredicate?repertoryName="+repertoryName+"&label="+label
+        uri = "http://localhost:8004/getProPredicate?repertoryName="+self.repertoryName+"&label="+label
         r = requests.post(uri)
         ans = list(r.json())
         if len(ans)>0:
@@ -79,7 +77,7 @@ class graphSearch(object):
         :param label:
         :return:
         """
-        uri = "http://localhost:8004/getRelPredicate?repertoryName="+repertoryName+"&label="+label
+        uri = "http://localhost:8004/getRelPredicate?repertoryName="+self.repertoryName+"&label="+label
         r = requests.post(uri)
         predicate = list(r.json())[0]
 
@@ -91,7 +89,7 @@ class graphSearch(object):
         :param label:
         :return:
         """
-        uri = "http://localhost:8004/getSubject?repertoryName="+repertoryName+"&label=" + label
+        uri = "http://localhost:8004/getSubject?repertoryName="+self.repertoryName+"&label=" + label
 
         r = requests.post(uri)
         subject = list(r.json())
@@ -106,7 +104,7 @@ class graphSearch(object):
         :param property:
         :return:
         """
-        uri = "http://localhost:8004/getValueByPro?repertoryName="+repertoryName+"&entityType=" + type+"&property="+property
+        uri = "http://localhost:8004/getValueByPro?repertoryName="+self.repertoryName+"&entityType=" + type+"&property="+property
         r = requests.post(uri)
         value_list = list(r.json())
         return value_list
@@ -138,7 +136,7 @@ class graphSearch(object):
         :param property:
         :return:
         """
-        uri = "http://localhost:8004/getValueByRel?repertoryName="+repertoryName+"&entityType=" + type+"&relation="+property
+        uri = "http://localhost:8004/getValueByRel?repertoryName="+self.repertoryName+"&entityType=" + type+"&relation="+property
         r = requests.post(uri)
         value_list = list(r.json())
         return value_list
@@ -152,7 +150,7 @@ class graphSearch(object):
         :return:
         """
 
-        data = {'repertoryName': repertoryName, 'tripleList': str(tripleList)}
+        data = {'repertoryName': self.repertoryName, 'tripleList': str(tripleList)}
         uri = "http://localhost:8004/addTripleToRepertory?"
         ret = requests.post(uri, data=data)
         print(ret)
@@ -166,7 +164,7 @@ class graphSearch(object):
         :param obje:
         :return:
         """
-        data = {'repertoryName': repertoryName, 'tripleList': str(tripleList)}
+        data = {'repertoryName': self.repertoryName, 'tripleList': str(tripleList)}
         uri = "http://localhost:8004/addRelToRepertory?"
         ret = requests.post(uri, data=data)
         print(ret)
@@ -180,7 +178,7 @@ class graphSearch(object):
         :return:
         """
 
-        data = {'repertoryName': repertoryName, 'tripleList': str(tripleList)}
+        data = {'repertoryName': self.repertoryName, 'tripleList': str(tripleList)}
         uri = "http://localhost:8004/deleteTripleToRepertory?"
         ret = requests.post(uri, data=data)
         print(ret)
@@ -355,14 +353,14 @@ class graphSearch(object):
 
 
     def fuzzySearchOne(self, fuzzy, fuzzyCon, etype):
-        uri = "http://localhost:8004/fuzzySearchOne?repertoryName=" + repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzyCon + "&etype=" + etype
+        uri = "http://localhost:8004/fuzzySearchOne?repertoryName=" + self.repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzyCon + "&etype=" + etype
         r = requests.post(uri)
         tri_list = list(r.json())
         return tri_list
 
     def fuzzySearchForNormalFalse(self, fuzzy, fuzzycon):
 
-        uri = "http://localhost:8004/fuzzySearchForNormalFalse?repertoryName=" + repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon[0]
+        uri = "http://localhost:8004/fuzzySearchForNormalFalse?repertoryName=" + self.repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon[0]
         r = requests.post(uri)
         tri_list = list(r.json())
         return tri_list
@@ -375,7 +373,7 @@ class graphSearch(object):
         :return:
         """
 
-        uri = "http://localhost:8004/fuzzySearch?repertoryName="+repertoryName+"&description=" + description
+        uri = "http://localhost:8004/fuzzySearch?repertoryName="+self.repertoryName+"&description=" + description
         r = requests.post(uri)
         ent_list = list(r.json())
 
@@ -391,7 +389,7 @@ class graphSearch(object):
 
         print(description,entity)
 
-        uri = "http://localhost:8004/getCompareKeyword?repertoryName="+repertoryName+"&description=" + description+"&entityname="+entity
+        uri = "http://localhost:8004/getCompareKeyword?repertoryName="+self.repertoryName+"&description=" + description+"&entityname="+entity
         r = requests.post(uri)
         ent_list = list(r.json())
 
@@ -406,12 +404,12 @@ class graphSearch(object):
         """
 
         """获取属性信息"""
-        uri = "http://localhost:8004/getEntityByLabelWithPro?repertoryName="+repertoryName+"&entityName=" + entity
+        uri = "http://localhost:8004/getEntityByLabelWithPro?repertoryName="+self.repertoryName+"&entityName=" + entity
         r = requests.post(uri)
         pro_list = list(r.json())
 
         """获取关系信息"""
-        uri = "http://localhost:8004/getEntityByLabelWithRel?repertoryName="+repertoryName+"&entityName=" + entity
+        uri = "http://localhost:8004/getEntityByLabelWithRel?repertoryName="+self.repertoryName+"&entityName=" + entity
         r = requests.post(uri)
         rel_list = list(r.json())
         return pro_list, rel_list
@@ -500,7 +498,7 @@ class graphSearch(object):
         :return: 实体的属性（限制了类型）
         """
 
-        uri = "http://localhost:8004/getPro?repertoryName="+repertoryName+"&entity=" + entity
+        uri = "http://localhost:8004/getPro?repertoryName="+self.repertoryName+"&entity=" + entity
         r = requests.post(uri)
         pro_list = list(r.json())
         if '出处' in pro_list:
@@ -529,7 +527,7 @@ class graphSearch(object):
         :return: 实体的关系名
         """
 
-        uri = "http://localhost:8004/getRel?repertoryName="+repertoryName+"&entity=" + entity
+        uri = "http://localhost:8004/getRel?repertoryName="+self.repertoryName+"&entity=" + entity
         r = requests.post(uri)
         rel_list = list(r.json())
 
@@ -547,7 +545,7 @@ class graphSearch(object):
 
 
         """获取子类"""
-        uri = "http://localhost:8004/getEntityByType?repertoryName="+repertoryName+"&entityName=" + etype
+        uri = "http://localhost:8004/getEntityByType?repertoryName="+self.repertoryName+"&entityName=" + etype
         r = requests.post(uri)
         son_list = list(r.json())
 
@@ -564,7 +562,7 @@ class graphSearch(object):
         """
 
         """获取父类"""
-        uri = "http://localhost:8004/getFather?repertoryName="+repertoryName+"&entityName=" + entity
+        uri = "http://localhost:8004/getFather?repertoryName="+self.repertoryName+"&entityName=" + entity
 
         r = requests.post(uri)
         father_list = list(r.json())
@@ -600,7 +598,7 @@ class graphSearch(object):
         """
 
 
-        uri = "http://localhost:8004/entitySearchByRelLimitType?repertoryName="+repertoryName+"&entity="+entity+"&relation="+property+"&type="+keyword
+        uri = "http://localhost:8004/entitySearchByRelLimitType?repertoryName="+self.repertoryName+"&entity="+entity+"&relation="+property+"&type="+keyword
         r = requests.post(uri)
         ent_list = list(r.json())
 
