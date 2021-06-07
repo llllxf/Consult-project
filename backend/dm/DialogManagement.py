@@ -19,9 +19,14 @@ class DialogManagement(object):
     def setConpro(self, con_pro):
         self.con_pro = con_pro
 
+
+
     def dealNormal(self,entity, nlu_results):
+        print("dealNormal,nlu_results",nlu_results)
+
+
         if int(nlu_results[0]) == 0:
-            return [0,"无法回答相关的问题。"]
+            return [0,entity,nlu_results[1:]]
         elif int(nlu_results[0]) == 1:
             ans = self.normal_bussiness.doNormal([entity], nlu_results[1])
             return [1, ans[2], ans[0]]
@@ -36,32 +41,21 @@ class DialogManagement(object):
             else:
                 print(nlu_results)
                 print(nlu_results[1])
-                ans = self.normal_bussiness.doNormalForFalse(entity,nlu_results[1:])
+                ans,ent = self.normal_bussiness.doNormalForFalse(entity,nlu_results[1:])
                 if ans:
-                    return [1,ans,entity]
-                return [0,"无法回答相关的问题。"]
+                    return [1,ans,ent]
+                return [0,entity,nlu_results[1:]]
         elif int(nlu_results[0]) == 4:
-            ans = self.normal_bussiness.doNormalForFalse(entity, nlu_results[1:])
+            ans,ent = self.normal_bussiness.doNormalForFalse(entity, nlu_results[1:])
             if ans:
-                return [1, ans, entity]
+                return [1, ans, ent]
 
-            return [0, "无法回答相关的问题。"]
-
-
-    def dealMost(self,etype,nlu_results):
-
-        type_con = nlu_results[0]
-        con = nlu_results[1:]
-        ans = self.normal_bussiness.doMost(etype,type_con)
-
-        if ans:
-            return [1,ans,etype]
-        else:
-            ans = self.normal_bussiness.doNormalForFalse(etype,con)
-            if ans:
-                return [1, ans, etype]
-        return [0,"对不起，无法回答该问题。"]
-
+            return [0, entity,nlu_results[1:]]
+        """
+        elif int(nlu_results[0]) == 5:
+             ans = self.normal_bussiness.searchBinaryRel([entity], nlu_results[1])
+             return [1, ",".join(ans), entity]
+        """
 
     def dealContent(self,etype,nlu_results):
         print(nlu_results,"dealContent")
@@ -75,12 +69,14 @@ class DialogManagement(object):
 
         if ans:
             return [1,ans,ent]
-        else:
-            for e in key_entity:
-                ans = self.normal_bussiness.doNormalForFalse(e,content)
+        elif len(key_entity) >= 1:
+
+            for e in key_entity[0]:
+                print(key_entity,"key_entity")
+                ans,ent = self.normal_bussiness.doNormalForFalse(e,content)
                 if ans:
-                    return [1,ans,e]
-        return [0,"无法回答该问题"]
+                    return [1,ans,ent]
+        return [0,ent,content]
 
 
     def doNLU(self, words):
@@ -99,31 +95,21 @@ class DialogManagement(object):
 
         if task == "false":
             print(nlu_results,"false")
-            ans = self.normal_bussiness.doNormalForFalse(entity, nlu_results)
+            ans,ent = self.normal_bussiness.doNormalForFalse(entity, nlu_results)
             if ans:
-                return [1, ans, None]
-
-            return [0, "对不起，无法回答该问题。"]
-
+                return [1, ans,ent ]
+            return [0, entity, nlu_results]
         if task == "normal":
             return self.dealNormal(entity,nlu_results)
-        """
-        if task == "most":
-            return self.dealMost(entity,nlu_results)
-        """
-
+        if task == "rel_normal":
+            return [5,[nlu_results[1],None],entity]
         if task == "content":
             return self.dealContent(entity, nlu_results)
-
-        """
-        entity,nlu_results,task = self.nlu_util.process(words)
-        if task == "proValue":
-            return self.getProValue(entity,nlu_results)
-        if task == "entName":
-            return self.getEntName(entity,nlu_results)
-        if task is None:
-            return ['无法回答',0,None]
-        """
+        if task == 'sbv_rel':
+            print("sbv_rel===================",nlu_results,entity)
+            return [5,nlu_results,entity]
+        if task == 'vob_rel':
+            return [6,nlu_results,entity]
 
     def getEntName(self,entity,nlu_results):
 
@@ -137,6 +123,11 @@ class DialogManagement(object):
 
     def AEntityInformation(self,entity):
         ans = self.normal_bussiness.getOneEntity(entity)
+        print(ans)
+        return ans
+
+    def AEntityRelation(self,entity):
+        ans = self.normal_bussiness.getOneEntityRelation(entity)
         print(ans)
         return ans
 
@@ -159,8 +150,6 @@ class DialogManagement(object):
         self.con_pro = con_pro
 
 
-
-
     def dealMost(self,etype,nlu_results):
 
         type_con = nlu_results[0]
@@ -174,8 +163,6 @@ class DialogManagement(object):
             if ans:
                 return [1, ans, etype]
         return [0,"对不起，无法回答该问题。"]
-
-
 
     def getEntName(self,entity,nlu_results):
 

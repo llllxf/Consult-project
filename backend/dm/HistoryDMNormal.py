@@ -19,8 +19,8 @@ class HistoryDMNormal(object):
         with open('../backend/config.ini', 'w') as file:
             config.write(file)
         self.dm = DialogManagementNormal()
-        year_pro = read_file("../backend/data/历史/year_pro.csv")
-        self.dm.setConpro(year_pro)
+
+        self.dm.setConpro(['内容', '概况', '定义', '简介', '定义', '发展', '过程', '历史意义', '意义'])
         self.history_business = HistoryBussiness()
 
 
@@ -31,8 +31,6 @@ class HistoryDMNormal(object):
         if '谁' in words or '哪位' in words or '哪个人' in words or '哪一个人' in words or '哪一位' in words:
             nluresult = self.history_business.dealWho(words)
             ans = self.dm.dealContent('单人',nluresult)
-        elif '哪年' in words or '哪一年' in words or '几年' in words or '多少年' in words:
-            ans = self.history_business.dealYear(words)
         elif entity:
             ans = self.dm.dealNormal(entity, book_ans)
         elif self.history_business.checkSplitEnt(words):
@@ -40,6 +38,9 @@ class HistoryDMNormal(object):
 
         if len(ans)==0 or ans[0] == 0:
             ans = self.dm.doNLU(words)
+
+        if ans[0] == 0:
+            return [0,'无法回答']
 
         return ans
 

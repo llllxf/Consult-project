@@ -7,7 +7,6 @@
 """
 
 from backend.nlu.processNLU import processNLU
-from backend.nlg.generateAns import generateAns
 from backend.graphSearch.calculateBussiness import calculateBussiness
 from backend.graphSearch.compareBussiness import compareBussiness
 from backend.graphSearch.normalBussiness import normalBussiness
@@ -39,9 +38,9 @@ if __name__ == '__main__':
     with open('../backend/config.ini', 'w') as file:
         config.write(file)
     file.close()
-
-    rf = open("../backend/data/bad100.csv", "r")
-    wf = open("geo_2.csv", "w")
+    rf = open("../html/geo_test.csv", "r")
+    #rf = open("../backend/data/clean_test/post-processing.csv", "r")
+    wf = open("geo15.csv", "w")
     rl = rf.readlines()
 
 
@@ -61,22 +60,17 @@ if __name__ == '__main__':
     for l in rl:
         if len(l)<3:
             continue
-
-
         print("=========================")
         #l = l.rstrip()
         print(l)
         print("=========================")
         ans = g.doNLU(l)
-        wf.writelines(l+"\n")
-        wf.writelines(ans[1]+"\n")
-        wf.writelines("=========================\n")
-        count = count+1
-        print(str(count)+"=========================\n")
-
-    """
-    while(1):
-        s = input()
-        ans = g.doNLU(s)
-        print(ans)
-    """
+        if ans:
+            wf.writelines(l + "\n")
+            print("=========================")
+            print(ans, "ans")
+            print("=========================")
+            wf.writelines(str(ans[1]) + "\n")
+            wf.writelines("=========================\n")
+            count = count + 1
+            print(str(count) + "=========================\n")

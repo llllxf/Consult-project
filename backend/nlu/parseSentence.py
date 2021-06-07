@@ -2,12 +2,8 @@
 # @Author : LinXiaofei
 # @File : parseSentence.py
 
-
-
 import configparser
 from backend.data.data_process import read_file
-
-
 
 class ParseSentence(object):
     def __init__(self):
@@ -15,10 +11,11 @@ class ParseSentence(object):
         config.read("../backend/config.ini")
         subject = config['DEFAULT']['subject']
 
-        self.valuable_pos = ['a', 'b', 'm', 'n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz', 'v', 'j','i','nh']
+        self.valuable_pos = ['a', 'b','m', 'n', 'nd', 'ni', 'nl', 'ns', 'nt', 'nz', 'v', 'j','i','nh']
 
         instanceArray = list(set(read_file("../backend/data/"+subject+"/entity.csv")))
         self.instanceArray = sorted(instanceArray, key=lambda i: len(i), reverse=True)
+        self.sort_instanceArray = sorted(instanceArray, key=lambda i: len(i))
         print("=====================================================================")
         print(self.instanceArray)
         print("=====================================================================")
@@ -35,50 +32,125 @@ class ParseSentence(object):
 
         self.r = ['什么','何','怎么','哪里','哪','哪些','哪个','如何','多少','多']
 
-    def getEntity(self,words):
 
+    def getSimpleEnt(self,word):
+
+        for ent in self.sort_instanceArray:
+            if len(ent) >= len(word):
+                return word
+            if ent in word:
+                return ent
+
+
+    def getKeyEntity(self,words):
 
         entity = []
         for word in words:
 
-            if word in self.instanceArray:
+            if word in self.instanceArray[::-1]:
+
                 entity.append(word)
 
         return entity
 
-    def getPositionEntity(self,words,pos):
-        entity = []
-        for word_index in range(len(words)):
+    def getEntity(self,words):
 
-            if words[word_index] in self.instanceArray and pos[word_index] == 'ns':
-                entity.append(words[word_index])
+        entity = []
+        for word in words:
+
+            if word in self.sort_instanceArray:
+
+                entity.append(word)
 
         return entity
 
+    def getSimpleEntity(self, words):
+
+        entity = []
+        for word in words:
+            if word in self.sort_instanceArray:
+                simple = self.getSimpleEnt(word)
+                entity.append(simple)
+
+        return entity
+
+    def getEntityTwoBack(self,words,reverse_dep):
+        keys = reverse_dep.keys()
+        for word_index in range(len(words)):
+
+            if words[word_index] in self.sort_instanceArray:
+                #print(reverse_dep)
+                #print(word_index+1)
+                if word_index+1 not in keys:
+                    continue
+                check_list = reverse_dep[word_index+1]
+                for c in check_list:
+                    #print(c[1],c[0],words[c[0]-1])
+                    if c[1] == 'COO' and words[c[0]-1] in self.sort_instanceArray:
+                        return [words[word_index],words[c[0]-1]]
+        return None
+
+    def getEntityTwo(self,words):
+
+        ent_list = []
+
+        for word_index in range(len(words)):
+
+            if words[word_index] in self.sort_instanceArray:
+                ent_list.append(words[word_index] )
+
+        if len(ent_list) == 2:
+            return ent_list
+
+        return None
+
+
+    def getPositionEntity(self,words,pos,ent):
+        entity = []
+        for word_index in range(len(words)):
+            if words[word_index] == ent:
+                continue
+
+            if words[word_index] in self.sort_instanceArray and pos[word_index] == 'ns':
+                entity.append(words[word_index])
+        return entity
 
     def getEtype(self,words):
         etype = []
 
         for word in words:
-            if word in self.typeArray:
-                etype.append(word)
+
+                if word in self.typeArray:
+                    etype.append(word)
 
         return etype
+    def getEtypeForSun(self,words):
+
+
+        for word in words:
+            for etype in self.typeArray[::-1]:
+                if word in etype:
+                    word_index = words.index(word)
+                    return etype,word_index
+        return None,None
+
 
     def getCount(self,index,dep):
 
         if dep[index][2] == 'SBV':
             return 5
-        if dep[index][2] == 'ATT':
-            att_obeject = dep[index][1]-1
+        elif dep[index][2] == 'ATT':
+            while(dep[index][2] == 'ATT'):
+                index = dep[index][1]-1
+            att_obeject = index
 
             if dep[att_obeject][2] == 'SBV':
                 return 4
-            if dep[att_obeject][2] == 'VOB':
+            if dep[att_obeject][2] in ['VOB','POB','FOB']:
                 return 2
-        if dep[index][2] == 'VOB':
+        elif dep[index][2] in ['VOB','POB']:
             return 3
-        if dep[index][2] == 'FOB':
+        elif dep[index][2] == 'FOB':
             return 3
 
         return 0
@@ -158,7 +230,6 @@ class ParseSentence(object):
                     print(words,len(words))
                     print(words[i+1],"asdasdasdasdsadasd")
 
-
                     de_index = i
                     if words[i+1] in self.typeArray and words[i+1] not in self.proArray:
                         split_index = i
@@ -190,7 +261,7 @@ class ParseSentence(object):
     def checkCombineEnt(self, ent, coo):
 
         for e in self.instanceArray:
-            if ent in e and coo in e:
+            if ent in e and coo in e and ('和' in e or '与' in e or ent+coo in e) and len(e) <= len(ent)+len(coo)+2:
                 return e
 
     def getExpandEnt(self, ent):
@@ -205,18 +276,16 @@ class ParseSentence(object):
         print(array,"array==============")
         return array
 
+
     def extractBestEnt(self,words,dep):
 
         entity = self.getEntity(words)
         etype = self.getEtype(words)
 
-
         print(entity)
         print(etype)
-        print("asdjkashdgjasdhgasjkdgaskjdhasdlhgkdkashdgajksdhgkashdgaksdhga")
 
         if len(entity) == 0 and len(etype)==0:
-
             return None,[],"false"
         if len(entity)==1 and len(etype)==0:
             array = self.getExpandEnt(entity[0])
@@ -230,7 +299,11 @@ class ParseSentence(object):
 
             e_index = words.index(e)
             print("====================e",e, words,e_index)
-            ent_count.append(self.getCount(e_index,dep))
+
+            c = self.getCount(e_index,dep)
+            if e in self.proArray:
+                c = c-4
+            ent_count.append(c)
 
         for t in etype:
             t_index = words.index(t)
@@ -243,7 +316,6 @@ class ParseSentence(object):
 
         ent_index = -1
         ent_c = 0
-
         type_c = 0
         type_index = -1
 
@@ -268,9 +340,12 @@ class ParseSentence(object):
             return None, [], "false"
         print(ent_c,type_c)
 
+        if ent_index != -1 and type_index != -1 and ent_c == 2 and type_c==2:
+            if words.index(etype[type_index]) > words.index(entity[ent_index]):
+                return etype[type_index],[],"etype"
+            return entity[ent_index],[],'entity'
 
-
-        if ent_index != -1 and ent_c >= type_c:
+        elif ent_index != -1 and ent_c >= type_c:
 
             for i in range(len(words)):
 
@@ -300,44 +375,84 @@ class ParseSentence(object):
 
     def getValuableWords(self, words, pos, dep):
 
+
         valuable_words = []
         word_count = []
 
         begin_index = -1
         end_index = -1
+        key_word = ""
 
         if "“" in words and "”" in words:
+
             begin_index = words.index("“")
             end_index = words.index("”")
+            if pos[end_index-1] == 'WP':
+                end_index = end_index-1
+            key_word = "".join(words[begin_index+1:end_index])
+
         if "《" in words and "》" in words:
             begin_index = words.index("《")
             end_index = words.index("》")
+            if pos[end_index-1] == 'wp':
+                end_index = end_index-1
+            key_word = "".join(words[begin_index + 1:end_index])
+
+        if "\"" in words:
+            begin_index = words.index("\"")
+            if "\"" in words[begin_index+1:]:
+
+                end_index = words[begin_index + 1:].index("\"")+begin_index+1
+            if pos[end_index-1] == 'WP':
+                end_index = end_index-1
+            key_word = "".join(words[begin_index + 1:end_index])
+
+        print("getValuableWords", words,begin_index,end_index)
 
         for i in range(len(words)):
             print(i,"=======================")
-            if begin_index == "-1":
-                if i == "\"" and "\"" in words[i:]:
-                    begin_index = i
-                    end_index = words[i+1:].index("\"")
 
             if pos[i] in self.valuable_pos:
+
                 if words[i] in ['是', '有', '在', '于']:
                     continue
-                valuable_words.append(words[i])
-                if i>begin_index and i < end_index:
-                    word_count.append(20)
-                elif pos[i] in ["m","nt"]:
-                    word_count.append(5)
+                if i > begin_index and i < end_index:
 
+                    if "," in key_word:
+                        a = key_word.split(",")
+                        for kw in a:
+                            if words[i] in kw:
+                                valuable_words.append(kw)
+                                word_count.append(20)
+                                break
+                    elif "，" in key_word:
+                        a = key_word.split("，")
+                        for kw in a:
+                            if words[i] in kw:
+                                valuable_words.append(kw)
+                                word_count.append(20)
+                                break
+                    else:
+                        valuable_words.append(key_word)
+                        word_count.append(20)
+                    continue
+
+                valuable_words.append(words[i])
+                if pos[i] in ["m","nt"]:
+                    word_count.append(5)
                 elif dep[i][2] == 'HED' and words[i] not in ['是','有','在','于']:
                     word_count.append(4)
                 elif dep[i][2] == 'SBV':
                     word_count.append(4)
-                elif dep[i][2] == 'VOB':
+                elif dep[i][2] in ['VOB','POB','FOB']:
                     word_count.append(3)
                 elif dep[i][2] == 'ATT' and dep[i][1] <= len(words) and dep[dep[i][1]-1][2]=='SBV':
                     word_count.append(2)
                 elif dep[i][2] == 'ATT' and dep[i][1] <= len(words) and dep[dep[i][1]-1][2]=='VOB':
+                    word_count.append(2)
+                elif dep[i][2] == 'ADV' and dep[i][1] <= len(words) and dep[dep[i][1]-1][2]=='SBV':
+                    word_count.append(2)
+                elif dep[i][2] == 'ADV' and dep[i][1] <= len(words) and dep[dep[i][1]-1][2]=='HED':
                     word_count.append(2)
                 else:
                     word_count.append(1)
@@ -346,6 +461,9 @@ class ParseSentence(object):
                     word_count[-1] = word_count[-1]+3
                 if words[i] in self.instanceArray or words[i] in self.typeArray:
                     word_count[-1] = word_count[-1] + 1
+
+        print("getValuableWords2", valuable_words, word_count)
+
 
 
         return valuable_words,word_count

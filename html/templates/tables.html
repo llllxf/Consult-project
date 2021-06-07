@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tables - SB Admin</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link href="static/table/css/styles.css" rel="stylesheet" />
+
+
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    </head>
+    <section  id="navigations">
+      <div class="container-fluid px-md-0">
+				<div class="row no-gutters">
+					<div class="col-md-12">
+						<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+						  <div class="collapse navbar-collapse" id="navbarsExample06">
+						    <ul class="navbar-nav ml-auto">
+
+						      <li class="nav-item d-flex">
+						        <a href="/" class="nav-link icon d-flex align-items-center"><i class="icon ion-navigate mr-1"></i> 首页</a>
+						      </li>
+						      <li class="nav-item d-flex">
+						        <a id="goChoose" class="nav-link icon d-flex align-items-center"><i class="icon ion-grid mr-1"></i> 菜单</a>
+						      </li>
+
+
+						    </ul>
+						  </div>
+						</nav>
+					</div>
+				</div>
+			</div>
+  </section>
+    <body class="sb-nav-fixed">
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">{{ subject }}科目</h1>
+
+
+                        <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>实体</th>
+                                                <th>实体</th>
+                                                <th>实体</th>
+                                                <th>实体</th>
+                                                <th>实体</th>
+                                                <th>实体</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+
+
+
+                                        </tbody>
+
+                                        </table>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+
+
+            <script>
+
+$(document).ready(function(entity) {
+     var entity = window.location.search.substring(1).split("=")[1]
+
+     $.ajax({
+          type: 'POST',
+          data: JSON.stringify({'entity':entity}),
+
+          contentType: 'application/json',
+          dataType: 'json',
+          url: 'getEntity',
+          success: function (reply){
+
+            var data = reply['data'].toString()
+
+
+              var datalist = data.split(",")
+
+
+              var data_len = datalist.length
+
+              var i = 0;
+              var htm = ""
+
+
+
+              while(i+5<data_len){
+                  htm+="<tr><td><a href=\"/goGraph?entity="+datalist[i]+"\">"+datalist[i]+"</a></td>" +
+                                  "<td><a href=\"/goGraph?entity="+datalist[i+1]+"\">"+datalist[i+1]+"</a></td>"+
+                                  "<td><a href=\"/goGraph?entity="+datalist[i+2]+"\">"+datalist[i+2]+"</a></td>"+
+                                  "<td><a href=\"/goGraph?entity="+datalist[i+3]+"\">"+datalist[i+3]+"</a></td>"+
+                                  "<td><a href=\"/goGraph?entity="+datalist[i+4]+"\">"+datalist[i+4]+"</a></td>"+
+                                  "<td><a href=\"/goGraph?entity="+datalist[i+5]+"\">"+datalist[i+5]+"</a></td>"+
+
+                          "</tr>"
+                  i = i+6
+
+
+              }
+
+              var len = 6-(data_len%6)
+
+              if (len < 5 && data_len>30){
+                  htm+="<tr>"
+                  for(var j=i; j<data_len; j++){
+
+                      htm+="<td><a href=\"/goGraph?entity="+datalist[j]+"\">"+datalist[j]+"</a></td>"
+
+                  }
+                  for(var j=data_len; j<data_len+len;j++){
+                       htm+="<td><a href=\"/goGraph?entity="+datalist[data_len-1]+"\">"+datalist[data_len-1]+"</a></td>"
+
+
+                  }
+
+                  htm+="</tr>"
+
+
+              }else if (len <= 5 && data_len<=5) {
+                  htm+="<tr>"
+                  for(var j=i; j<data_len; j++){
+
+                      htm+="<td><a href=\"/goGraph?entity="+datalist[j]+"\">"+datalist[j]+"</a></td>"
+
+                  }
+                  for(var j=data_len; j<data_len+len;j++){
+                       htm+="<td></td>"
+                  }
+
+                  htm+="</tr>"
+
+              }
+
+
+              $("#tbody").html(htm);
+              $('#dataTable').DataTable()
+
+
+          },
+
+          error :function(e) {
+            alert(e)
+          }
+        });
+
+
+
+});
+
+            </script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" ></script>
+        <script src="static/table/js/scripts.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="static/table/assets/demo/datatables-demo.js"></script>
+
+
+
+
+
+
+
+    </body>
+</html>

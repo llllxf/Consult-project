@@ -22,7 +22,7 @@
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
-  --warning: #ffc107;
+  --warning: #ffa020;
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
@@ -5381,7 +5381,7 @@ button.bg-info:focus {
   background-color: #117a8b !important; }
 
 .bg-warning {
-  background-color: #ffc107 !important; }
+  background-color: #ffa020 !important; }
 
 a.bg-warning:hover, a.bg-warning:focus,
 button.bg-warning:hover,
@@ -5461,7 +5461,7 @@ button.bg-dark:focus {
   border-color: #17a2b8 !important; }
 
 .border-warning {
-  border-color: #ffc107 !important; }
+  border-color: #ffa020 !important; }
 
 .border-danger {
   border-color: #dc3545 !important; }

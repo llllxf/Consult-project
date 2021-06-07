@@ -7,7 +7,6 @@
 """
 
 from backend.nlu.processNLU import processNLU
-from backend.nlg.generateAns import generateAns
 from backend.graphSearch.calculateBussiness import calculateBussiness
 from backend.graphSearch.compareBussiness import compareBussiness
 from backend.graphSearch.normalBussiness import normalBussiness
@@ -32,24 +31,12 @@ from backend.dm.GeoDM import GeoDM
 
 if __name__ == '__main__':
 
-
-
-
-    #h = HistoryDM()
-    g = GeoDM()
+    h = HistoryDM()
+    #g = GeoDM()
     #gn = GeoDMNormal()
-
     #d = DialogManagement()
 
     while(1):
         s = input()
-        ans = g.doNLU(s)
+        ans = h.doNLU(s)
         print(ans)
-
-
-
-
-
-
-
-

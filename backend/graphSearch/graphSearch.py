@@ -23,7 +23,13 @@ class graphSearch(object):
         config.read("../backend/config.ini")
         self.subject = config['DEFAULT']['subject']
         print("=====================================================================", config)
-        self.repertoryName = config['TRANSFORM'][self.subject]
+        repertoryName = config['TRANSFORM'][self.subject]
+        if ',' in repertoryName:
+            self.repertoryName = repertoryName.split(",")[0]
+            self.backup_repertoryName = repertoryName.split(",")[1]
+        else:
+            self.repertoryName = repertoryName
+            self.backup_repertoryName = False
 
     def getAll(self):
         uri = "http://localhost:8004/getAll?repertoryName=" + self.repertoryName
@@ -109,6 +115,7 @@ class graphSearch(object):
         value_list = list(r.json())
         return value_list
 
+
     def resetTripleToRepertory(self,data):
         """
         重置属性
@@ -137,6 +144,21 @@ class graphSearch(object):
         :return:
         """
         uri = "http://localhost:8004/getValueByRel?repertoryName="+self.repertoryName+"&entityType=" + type+"&relation="+property
+        r = requests.post(uri)
+        value_list = list(r.json())
+        return value_list
+
+    def getValueByRelAndObj(self,type,property,obj):
+        """
+        该类型实体的某一关系对应的值
+        :param type:
+        :param property:
+        :return:
+        """
+        print("type,property,obj",type,property,obj)
+
+
+        uri = "http://localhost:8004/getValueByRelAndObj?repertoryName="+self.repertoryName+"&entityType=" + type+"&relation="+property+"&obj="+obj
         r = requests.post(uri)
         value_list = list(r.json())
         return value_list
@@ -360,10 +382,32 @@ class graphSearch(object):
 
     def fuzzySearchForNormalFalse(self, fuzzy, fuzzycon):
 
-        uri = "http://localhost:8004/fuzzySearchForNormalFalse?repertoryName=" + self.repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon[0]
+        print(fuzzy, fuzzycon)
+
+        uri = "http://localhost:8004/fuzzySearchForNormalFalse?repertoryName=" + self.repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon
         r = requests.post(uri)
         tri_list = list(r.json())
         return tri_list
+
+    def fuzzySearchForSAP(self, fuzzy, fuzzycon,entity):
+
+        print(fuzzy, fuzzycon)
+
+        uri = "http://localhost:8004/fuzzySearchForSAP?repertoryName=" + self.repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon + "&entity=" + entity
+        r = requests.post(uri)
+        tri_list = list(r.json())
+        return tri_list
+
+    def fuzzySearchForP(self, fuzzy, fuzzycon):
+
+        print(fuzzy, fuzzycon)
+
+        uri = "http://localhost:8004/fuzzySearchForP?repertoryName=" + self.repertoryName + "&fuzzy=" + fuzzy + "&fuzzyCon=" + fuzzycon
+        r = requests.post(uri)
+        tri_list = list(r.json())
+        return tri_list
+
+
 
     def getEntByfuzzySearch(self, description):
         """
@@ -413,6 +457,38 @@ class graphSearch(object):
         r = requests.post(uri)
         rel_list = list(r.json())
         return pro_list, rel_list
+
+
+    def searchEntityProBackup(self, entity):
+        """
+        根据标签分别查找该标签对应的属性和关系信息(同名实体一起)
+
+        :param entity: 实体标签
+        :return: 属性列表，关系列表
+        """
+
+        """获取属性信息"""
+        uri = "http://localhost:8004/getEntityByLabelWithPro?repertoryName="+self.backup_repertoryName+"&entityName=" + entity
+        r = requests.post(uri)
+        pro_list = list(r.json())
+
+
+        return pro_list
+
+    def getEntityByLabelWithRel(self,entity):
+        """
+        根据标签分别查找该标签对应的属性和关系信息(同名实体一起)
+
+        :param entity: 实体标签
+        :return: 属性列表，关系列表
+        """
+
+        """获取关系信息"""
+        uri = "http://localhost:8004/getEntityByLabelWithRel?repertoryName=" + self.repertoryName + "&entityName=" + entity
+        r = requests.post(uri)
+        rel_list = list(r.json())
+        return rel_list
+
 
     def searchEntityProName(self, entity):
         """
@@ -507,7 +583,10 @@ class graphSearch(object):
             pro_list.remove('图片')
 
         if pro_list == []:
-            return []
+            if self.backup_repertoryName:
+                uri = "http://localhost:8004/getPro?repertoryName=" + self.backup_repertoryName + "&entity=" + entity
+                r = requests.post(uri)
+                pro_list = list(r.json())
 
         return pro_list
     """
@@ -521,6 +600,7 @@ class graphSearch(object):
     """
 
     def getRelList(self, entity):
+        print("getRelList",entity)
         """
         得到一个实体的属性关系名称
         :param entity: 实体名称
@@ -530,6 +610,25 @@ class graphSearch(object):
         uri = "http://localhost:8004/getRel?repertoryName="+self.repertoryName+"&entity=" + entity
         r = requests.post(uri)
         rel_list = list(r.json())
+        print("rel_list",rel_list)
+
+        if rel_list == []:
+            return None
+
+        return rel_list
+
+    def getPRelList(self, entity):
+        print("getPRelList",entity)
+        """
+        得到一个实体的属性关系名称
+        :param entity: 实体名称
+        :return: 实体的关系名
+        """
+
+        uri = "http://localhost:8004/getPRel?repertoryName="+self.repertoryName+"&entity=" + entity
+        r = requests.post(uri)
+        rel_list = list(r.json())
+        print("rel_list",rel_list)
 
         if rel_list == []:
             return None
@@ -546,6 +645,40 @@ class graphSearch(object):
 
         """获取子类"""
         uri = "http://localhost:8004/getEntityByType?repertoryName="+self.repertoryName+"&entityName=" + etype
+        r = requests.post(uri)
+        son_list = list(r.json())
+
+        if son_list == []:
+            return None
+
+        return son_list
+
+    def getEntityByCategory(self, etype):
+        """
+        得到实体的子类
+        :param entity: 实体
+        :return: 实体子类
+        """
+
+
+        """获取子类"""
+        uri = "http://localhost:8004/getEntityByCategory?repertoryName="+self.repertoryName+"&entityName=" + etype
+        r = requests.post(uri)
+        son_list = list(r.json())
+
+        if son_list == []:
+            return None
+        return son_list
+    def getEntityByTypeAddType(self, etype):
+        """
+        得到实体的子类
+        :param entity: 实体
+        :return: 实体子类
+        """
+
+
+        """获取子类"""
+        uri = "http://localhost:8004/getEntityByTypeAddType?repertoryName="+self.repertoryName+"&entityName=" + etype
         r = requests.post(uri)
         son_list = list(r.json())
 

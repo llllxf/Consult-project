@@ -23,13 +23,29 @@ class GeoDMNormal(object):
 
 
     def doNLU(self,words):
+        flag, ans = self.geo_dm.getCompare(words)
+
+        if flag:
+            return ans
         if '最' in  words:
             #print("geo-dm=======================")
             ans = self.geo_dm.doMost(words)
             if ans[0] == 1:
                 #print("this work")
                 return ans
+
+
         ans = self.dm.doNLU(words)
+
+        if int(ans[0]) == 0:
+            ans = [0,'无法回答',ans[1]]
+
+        if int(ans[0]) == 5:
+            ans = self.geo_dm.searchBinaryRel(words,ans[1:])
+
+        if int(ans[0]) == 6:
+            ans = self.geo_dm.searchBinaryPRel(ans[1:])
+
         return ans
 
 

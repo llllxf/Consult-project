@@ -2,51 +2,7 @@
 # @Author : LinXiaofei
 # @File : ConPro.py
 """
-    原因型
-    形成 + ent + 的原因是什么
-    形成 + ent + 的 + conpro.split("原因")[0]/alias_conpro + "因素是什么"
-    造成 + ent + 的 + conpro.split("原因")[0]/alias_conpro + "因素是什么"
-
-    n+n
-    名词分离型
-    ent + "的" + sepnonepro + "是什么"
-    ent + "主要的" + sepnonepro + "是什么"
-    ent + "的" + front_pro + "是什么" + end_pro
-    ent + "的" + front_pro + "以" + end_pro + "为主"
-
-    v+n
-    动词分离型
-    ent + "的" + sepverbpro + "是什么"
-    ent + front_pro + "的" + end_pro + "是什么"
-
-    描述型
-    ent + conpro/alias_conpro + 的概况 + 是什么
-    ent + conpro/alias_conpro + 的情况 + 是什么
-    ent + conpro/alias_conpro + 有 + 什么/哪些 + 特征
-    ent + conpro/alias_conpro + 的特征 + 是/有 + 什么/哪些
-
-    范围型
-    ent + conpro/alias_conpro + 是/有 + 什么/哪些
-    ent + 以 + 什么/哪些 + conpro/alias_conpro 为主
-    ent + 有 + 哪些/什么 + conpro/alias_conpro
-    ent + 主要的 + conpro/alias_conpro 是/有 + 什么/哪些
-    ent + v + 的 + conpro/alias_conpro + 有哪些/有什么
-
-    唯一型
-    ent + 的 + conpro/alias_conpro + 是什么
-    ent + v + 什么
-
-    如何型
-    ent + 是怎么 + howpro + 的
-    怎么 + howpro + ent
-
-    如何分解型
-    ent + 的 + sephowpro + 是什么
-    ent + 的 + front_none + 是怎么 + end_verb + 的
-
-    默认型
-    作为实体没有属性是的默认情况
-
+没有用
 
 """
 
@@ -72,6 +28,12 @@ class ConPro(object):
 
         etype = list(set(read_file("../backend/data/" + subject + "/etype.csv")))
         self.typeArray = sorted(etype, key=lambda i: len(i), reverse=True)
+    """
+    def getNumPro(self, words, pos,ent):
+        pro_list = self.graph_util.getProList(ent)
+    """
+
+
 
     def getpro(self, words, pos, dep, ent, ent_index):
 
@@ -201,12 +163,12 @@ class ConPro(object):
                         key_word.append(a)
                         pro_index.append(words.index(a))
                         continue
-
+            """
             if self.config[pro]['type'] == "numpro":
 
-                if 'noun' in key:
+                if 'unit' in key:
 
-                    none = self.config[pro]['noun'].split(",")
+                    none = self.config[pro]['unit'].split(",")
                     for a in none:
                         print()
                         if a in words and pos[words.index(a) - 1] == 'r':
@@ -225,6 +187,7 @@ class ConPro(object):
                             key_word.append(a)
                             pro_index.append(words.index(a))
                             continue
+                """
         print(dep)
         if len(best_pro) == 1:
             return best_pro[0], key_word[0]

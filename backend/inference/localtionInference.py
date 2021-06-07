@@ -6,7 +6,6 @@
 位置推理模块
 """
 
-
 from backend.data.data_process import read_file
 
 from backend.graphSearch.graphSearch import graphSearch
@@ -14,6 +13,35 @@ from backend.graphSearch.graphSearch import graphSearch
 class localtionInfernce(object):
     def __init__(self):
         self.search_util = graphSearch()
+
+    def checkPos(self,entity_list,pos):
+        ans_ent = []
+
+        for entity in entity_list:
+            rel_list = self.graph_util.getEntityByLabelWithRel(entity)
+
+            check_again = []
+
+            for r in rel_list:
+                if r[0] == '位于':
+                    if r[1] == pos:
+                        ans_ent.append(entity)
+                        break
+            check_again.append(r[1])
+
+            for ca in check_again:
+                rel_list = self.graph_util.getEntityByLabelWithRel(ca)
+
+
+                for r in rel_list:
+                    if r[0] == '位于':
+                        if r[1] == pos:
+                            ans_ent.append(entity)
+                            break
+        return ans_ent
+
+
+
 
     def getLocation(self,entity):
         f = open("lake.txt","a")
@@ -93,13 +121,6 @@ class localtionInfernce(object):
                 formed_ent.append(son)
         return formed_ent
 
-
-
-if __name__ == '__main__':
-    l = localtionInfernce()
-    river = read_file(project_path+"/data/compare/river.csv")
-    ans = l.getLocationByLimit('湖泊', '美国')
-    print(ans)
 
 
 

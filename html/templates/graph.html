@@ -20,34 +20,37 @@
         data:JSON.stringify({'entity':entity}),
         contentType :'application/json',
         dataType:'json',
-        url :'showGraph',
+        url :'showGraphAtt',
         success :function(reply) {
+
             var link = new Array();
             var inf = new Array();
             var ent = reply['entity']
              inf.push({name: reply['entity'],
              des: reply['entity'],
-             symbolSize: 50,
+             symbolSize: 100,
              category: 0})
             for(var key in reply) {
-                if(key == 'entity'){
+                if (key == 'entity') {
                     continue
                 }
 
                 var item = reply[key]
 
-            inf.push({
-                name: key.toString(),
-                des: item.toString(),
-                symbolSize: 100,
-                category: 1
-            })
+
+                inf.push({
+                    name: key.toString(),
+                    des: item.toString(),
+                    symbolSize: 100,
+                    category: 1
+                })
                 link.push({
                     source: reply['entity'].toString(),
                     target: key.toString(),
                     name: '',
                     des: ''
-                })
+                })}
+
 
             var myChart = echarts.init(document.getElementById('main'));
         var categories = [{name:'实体'},{name:'属性'}];
@@ -184,7 +187,7 @@
 
     myChart.setOption(option);
 
-        }
+
 
 
         }, error :function(e) {

@@ -1,8 +1,19 @@
 import configparser
 from backend.data.data_process import read_file
 config = configparser.ConfigParser()
-from ltp import LTP
-myltp = LTP(path="base")
+rel_arr = read_file("data/地理/cleanrel.csv")
+
+for r in rel_arr:
+    config[r] = {
+        'type': 'normal',
+        'alias': ''
+    }
+
+
+
+
+with open('data/地理/relconfig.ini', 'w') as file:
+    config.write(file)
 
 """
 config["DEFAULT"] = {'Subject': '地理'
@@ -10,7 +21,7 @@ config["DEFAULT"] = {'Subject': '地理'
 
 config['TRANSFORM'] = {'地理': 'geo4','历史':'history'}
 
-"""
+
 
 pro_arr = read_file("data/历史/sep_ent_clean2.csv")
 
@@ -121,7 +132,6 @@ for p in pro_arr:
             'matchword': ",".join(match_words)
         }
 
+"""
 
 
-with open('data/历史/combine_ent3.ini', 'w') as file:
-    config.write(file)

@@ -5,11 +5,90 @@
 
 
 import csv
+import xlrd
 #from ltp import LTP
 import jieba
 #myltp = LTP(path="base")
 
+def getxlrd():
+    wb = xlrd.open_workbook('题目/7.xlsx')
+    wf1 = open('clean_test/5.csv',"w")
+    wf2 = open('clean_test/ans_5.csv', "w")
 
+    # 获取所有的sheet名称
+    sheet_names = wb.sheet_names()
+    # 获得sheet对象
+    #ws = wb.sheet_by_index(0)
+    ws = wb.sheet_by_name('地理')
+    # 获取sheet对象的属性：表名、总行数、总列数
+    print(ws.name, ws.nrows, ws.ncols)
+
+    # 获得某一行或某一列数据，返回list
+    row_2 = ws.row_values(2)
+
+    cloumn_2 = list(ws.col_values(2))
+
+    count = 0
+
+    for c in cloumn_2:
+        if '?' in c:
+            clean = c.split('?')[0]
+            #wf1.writelines(clean+"\n")
+        elif '？' in c:
+            clean = c.split('？')[0]
+
+            #wf1.writelines(clean + "\n")
+        elif '(' in c:
+            clean = c.split('(')[0]
+            #wf1.writelines(clean + "\n")
+        elif '（' in c:
+            clean = c.split('（')[0]
+            #wf1.writelines(clean + "\n")
+        elif 'A' in c:
+            clean = c.split('A')[0]
+            #wf1.writelines(clean + "\n")
+        elif '_' in c:
+            clean = c.split('_')[0]
+        else:
+            clean = c
+        clean2 = ""
+        for i in range(len(clean)):
+            if clean[i] == ' ' or clean[i] == '\n':
+                continue
+            else:
+                print(clean[i])
+                clean2 +=  clean[i]
+
+        wf1.writelines(clean2 + "\n")
+        wf2.writelines(clean2 + "\n")
+
+        if "A" in c:
+            ans_c = c.split("A")[1]
+            ans_c_2 = ""
+            for i in range(len(ans_c)):
+                if ans_c[i] == ' ' or ans_c[i] == '\n':
+                    continue
+                else:
+                    print(ans_c[i])
+                    ans_c_2 += ans_c[i]
+            wf2.writelines(ans_c_2 + "\n")
+        wf2.writelines(str(ws.cell(count, 3).value) + "\n")
+        wf2.writelines("=====================================\n")
+        count = count+1
+
+
+
+
+    #Row_4 = ws.row(3)  # 此方法list中包含单元格类型
+    #Column_5 = ws.col(4)  # 此方法list中包含单元格类型
+
+    # 获得某一单元格的值
+    #cell_1_1 = ws.cell_value(0, 0)
+    #cell_1_1 = ws.cell(0, 0).value
+    #cell_1_1 = ws.row_values(0)[0]
+    #cell_1_1 = ws.col_values(0)[0]
+    #cell_1_1 = ws.row(0)[0].value
+    #cell_1_1 = ws.col(0)[0].value
 
 
 def dealEntity():
@@ -300,7 +379,7 @@ def deleteOneVale(graph):
     wf.close()
 
 if __name__ == '__main__':
-    deleteType()
+    getxlrd()
 
 
 

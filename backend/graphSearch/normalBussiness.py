@@ -8,213 +8,186 @@
 
 
 import numpy as np
-
-
+import configparser
 
 from backend.graphSearch.graphSearch import graphSearch
-
+from backend.semantic_similarity.similarity import Similarity
+from backend.nlu.LTPUtil import LTPUtil
 import json
 
 
 class normalBussiness(object):
 
     def __init__(self):
+        config = configparser.ConfigParser()
+        config.read("../backend/config.ini")
+        self.subject = config['DEFAULT']['subject']
+
+
+
+        self.a = float(config[self.subject]['a'])
+        self.b = float(config[self.subject]['b'])
+        self.cilin = (config[self.subject]['cilin']=='True')
+        self.embedding = (config[self.subject]['embedding']=='True')
+
+        self.wether_rel = (config[self.subject]['wether_rel'] == 'True')
+        config.read("../backend/data/" + self.subject + "/proconfig.ini")
+        if self.wether_rel:
+            self.relconfig = config
         self.graph_util = graphSearch()
+        self.ltp_util = LTPUtil()
 
-    def seacrchAll(self,longWords,shortWords):
+
+    def seg_sentence(self,words,entity):
+        words_list_1 = []
+        words_list_2 = []
+
+        if '\n' in words:
+            words_list_1 = words.split("\n")
+        if '。' in words:
+            words_list_2 = words.split("。")
+
+        if len(words_list_2)>len(words_list_1):
+            print("words_list_2",words_list_2)
+
+
+            temp = ""
+            for words in words_list_2:
+                if entity in words:
+                    temp = words
+
+            return temp
+        elif len(words_list_1)>0:
+            print("words_list_1", words_list_1,entity)
+            temp = ""
+            for words in words_list_1:
+                if entity in words:
+                    temp = words
+            print("抽取的句子====================")
+            print(temp)
+            return temp
+        else:
+            print("抽取的句子====================")
+            print(words)
+            return words
+
+    def getWordsSimilarCount(self,words,words_count,words_name,question,entity,sum_score):
+        pass
         """
 
-        :param longWords: 问句和属性值中较长的一方
-        :param shortWords: 较短的一方
-        :return: 较短的那方匹配情况
-        """
-        count = 0.
-        for sw in shortWords:
-            if sw in longWords:
-                count = count+1
-        return count
+        sort_index = np.argsort(words_count)
+        words = np.array(words)[sort_index]
+        words_count = np.array(words_count)[sort_index]
+        question = "".join(question)
+        best_count = 0
+        best_index = -1
 
-    def matchFuzzySearch(self, words, triple):
-        """
-        匹配三元组的o和句子
-        """
+        for i in range(3):
 
+            index = len(words) - i - 1
+            if index<0:
+                break
 
+            key_words = self.seg_sentence(words[index],entity)
+            if len(key_words)<=0:
+                continue
 
-        ans_con = []
-        count_rate = []
+            print("question,key_words",question,key_words)
 
-        for name,key,value in triple:
+            words_score = synonyms.compare(question,key_words)
+            if words_score > best_count:
+                best_count = words_score
+                best_index = index
+        if best_count > 0.4:
+            return words_count[best_index]+0.2*sum_score,words[best_index],words_name[best_index]
 
-            value = self.form_util.preProcessWords(value)
-            while (name in words):
-                words = words.replace(name, '')
-            while (name in value):
-                value = value.replace(name, '')
-            count = self.seacrchAll(value, words)
-            c_len = len(words)
-            if float(count) / float(c_len) >= 0.65:
-                ans_con.append([name,key,value])
-                count_rate.append(count / c_len)
-
-        if ans_con != []:
-
-            max_index = np.argmax(np.array(count_rate))
-            return ans_con[max_index]
-        return None
-
-
-    def matchProConWithPro(self, words, deal_entity,property):
-        """
-        根据实体携带的属性信息和问句原文匹配得到与答案相符的属性信息
-        该函数制定了属性名字
-        1. 遍历实体所有的属性信息
-        2. 按字符匹配问句和属性信息
-        3. 2得到空则按向量相似度得到匹配信息
-        4. 2,3均空则返回空
-
-        这个没有答案二次reverse匹配
-        :param words: 问句
-        :param deal_entity: 实体及其信息
-        :return: 答案或空
+        else:
+            return words_count[len(words)-1],words[len(words)-1],words_name[len(words)-1]
         """
 
+    def judgeCilin(self,count,pvalue,name,words,words_value):
+        print("*************************************************")
+        print(count)
+        print(pvalue)
+        print(name)
+        print(words)
+        print(words_value)
+        print("*************************************************")
 
-        ans_con = []
-        count_rate = []
-
-
-        for name, content in deal_entity.items():
-            """
-            抽取出的实体的属性
-            """
-            pro = np.array(content['p'])
-
-            """
-            去掉问题中的实体方便匹配
-            """
-            while (name in words):
-                words = words.replace(name, '')
-
-            for p in pro:
-                if p[0] != property[0]:
-                    continue
-                con = self.form_util.preProcessWords(p[1])
-
-                while (name in con):
-                    con = con.replace(name, '')
-
-                if len(con) > len(words):
-                    c_len = len(words)
-                    count = self.seacrchAll(con, words)
-
-                else:
-
-                    c_len = len(con)
-                    count = self.seacrchAll(words, con)
-                if float(count) / float(c_len) >= 0.65:
-                    ans_con.append([name, p[0], p[1]])
-                    count_rate.append(count / c_len)
-        if ans_con != []:
-
-            max_index = np.argmax(np.array(count_rate))
-            return ans_con[max_index]
-        return None
+        sort_index = np.argsort(count)
+        count = np.array(count)[sort_index]
+        pvalue = np.array(pvalue)[sort_index]
+        words = np.array(words)[sort_index]
+        words_value = np.array(words_value)[sort_index]
+        name = np.array(name)[sort_index]
+        n_words = []
 
 
-    def matchByProACon(self, words, deal_entity):
-        """
-        根据实体携带的属性信息和问句原文匹配得到与答案相符的属性信息
-        1. 遍历实体所有的属性信息
-        2. 按字符匹配问句和属性信息
-        3. 2得到空则按向量相似度得到匹配信息
-        4. 2,3均空则返
+        if len(words)>=3:
 
-        有答案二次reverse匹配
-        :param words: 问句
-        :param deal_entity: 实体及其信息
-        :return: 答案或空
-        """
+            row_list = list(set(list(words[-1])+list(words[-2])+list(words[-3])))
+            pos = list(self.ltp_util.get_postag(row_list))
+            index_count = 0
+            for w in row_list:
+                if pos[index_count] in ['n','ns'] and (w not in words[len(words)-2] or w not in words[len(words)-3] or w not in words[len(words)-1]):
+                    n_words.append(w)
+                if pos[index_count] == 'nd':
+                    n_words.append(w)
+                index_count = index_count+1
 
-        ans_con = []
-        count_rate = []
+        if len(words)==2:
 
-        for name, content in deal_entity.items():
+            pos = list(self.ltp_util.get_postag(list(words[len(words)-1])))
+            index_count = 0
+            for w in words[len(words)-1]:
+                if pos[index_count] in ['n', 'ns'] and w not in words[len(words)-2]:
+                    n_words.append(w)
 
-            """
-            抽取出的实体的属性
-            """
-            pro = np.array(content['p'])
+        best_index = -1
+        best_count = 0
 
-            """
-            去掉问题中的实体方便匹配
-            """
-            while (name in words):
-                words = words.replace(name, '')
+        for i in range(3):
 
-            for p in pro:
+            index = len(count) - i - 1
+            if index<0:
+                break
 
-                con = self.form_util.preProcessWords(p[1])
+            pos = list(self.ltp_util.get_postag(list(words[index])))
+            print("judgeCilin",words[index],pos)
 
-                while (name in con):
-                    con = con.replace(name, '')
+            cilin_count = Similarity.calSimilarity(words[index], words_value[index], pvalue[index],n_words,pos,self.ltp_util)
+            cilin_add = count[index] + cilin_count
+            if cilin_add > best_count:
+                best_count = cilin_add
+                best_index = index
+        if best_index>-1:
 
-                if len(con) > len(words):
-                    c_len = len(words)
-                    count = self.seacrchAll(con, words)
-                else:
-                    c_len = len(con)
-                    count = self.seacrchAll(words, con)
-                if c_len == 0:
-                    continue
-                if float(count) / float(c_len) >= 0.65:
-                    ans_con.append([name, p[0], p[1]])
-                    count_rate.append(count / c_len)
-        if ans_con != []:
-            revers_count = []
+            return best_count,pvalue[best_index],name[best_index]
+        else:
+            return None,None,None
 
-            for ans in ans_con:
-                if len(words) >= len(ans[2]):
-                    revers_count.append(self.seacrchAll(words, ans[2]) / len(words))
-                else:
-                    revers_count.append(self.seacrchAll(ans[2], words) / len(ans[2]))
-            max_index = np.argmax(np.array(revers_count))
-            return ans_con[max_index]
-        return None
+    def searchBinaryRelUseless(self,entity, relation):
 
 
-    #======================================================================
-
-
-    def searchBinaryFactoidAll(self,entity, property):
-        """
-        匹配抽出的属性名称和实体具有的属性名称
-
-        :param find_pro: 抽取的属性
-        :param find_rel: 抽取的关系
-        :param entity_deal: 携带信息的实体
-        :return:字典，形式入{实体:{属性名:属性值}}
-        """
-
-        entity_deal = self.graph_util.dealWithEnitity(entity)
+        rel_list = self.graph_util.getEntityByLabelWithRel(entity[0])
+        print("searchBinaryRel",relation,rel_list)
 
         ans = []
 
-        for name, content in entity_deal.items():
 
-            pro = np.array(content['p'])
+        for r in rel_list:
+            print(r[0],relation)
+            if r[0] == relation:
 
+                ans.append(r[1])
 
-            for p in pro:
-                if p[0] == property:
-
-                    ans.append(name,p[1])
 
         if ans == []:
+            print(ans, "ans========================")
             return None
         else:
+            print(ans,"ans========================")
             return ans
-
 
 
     def searchBinaryFactoid(self,entity, property):
@@ -227,12 +200,47 @@ class normalBussiness(object):
         :return:字典，形式入{实体:{属性名:属性值}}
         """
 
-        entity_deal = self.graph_util.dealWithEnitity(entity)
+        pro_list, rel_list = self.graph_util.searchEntity(entity[0])
+        print("searchBinaryFactoid================")
+
+        print(pro_list)
+
+        print(rel_list)
+
+
+
+        #entity_deal = self.graph_util.dealWithEnitity(entity)
 
         ans = []
 
-        name, content = list(entity_deal.items())[0]
-        pro = np.array(content['p'])
+        #name, content = list(entity_deal.items())[0]
+        #pro = np.array(content['p'])
+        for p in pro_list:
+            print(p[0])
+            if p[0] == property:
+                ans.append(entity[0])
+                ans.append(p[0])
+                ans.append(p[1])
+                return ans
+        if ans == []:
+            return None
+        else:
+            print(ans)
+            return ans
+
+    def searchBinaryFactoidBackup(self,entity, property):
+        """
+        匹配抽出的属性名称和实体具有的属性名称
+
+        :param find_pro: 抽取的属性
+        :param find_rel: 抽取的关系
+        :param entity_deal: 携带信息的实体
+        :return:字典，形式入{实体:{属性名:属性值}}
+        """
+
+        pro = self.graph_util.searchEntityProBackup(entity[0])
+
+        ans = []
         for p in pro:
             if p[0] == property:
                 ans.append(entity[0])
@@ -245,6 +253,7 @@ class normalBussiness(object):
             print(ans)
             return ans
 
+
     def getOneEntity(self,entity):
         entity_deal = self.graph_util.dealWithEnitity([entity])
         ans = {}
@@ -252,174 +261,54 @@ class normalBussiness(object):
         name, content = list(entity_deal.items())[0]
         pro = np.array(content['p'])
         for p in pro:
-            if p[0] in ans.keys():
-                continue
+            ans[p[0]] = p[1]
+        return ans
+
+
+    def getOneEntityRelation(self, entity):
+        rel_list = self.graph_util.getEntityByLabelWithRelMore(entity)
+
+
+        category = ""
+        ans = {}
+        ans_category = {}
+
+        ans['entity'] = entity
+
+        ans_category['entity'] = entity
+
+        ans_relate = {}
+        ans_relate['entity'] = entity
+
+        for p in rel_list:
+            if p[0] == '实体限制':
+                ans_relate[p[1]] = p[0]
             else:
-                ans[p[0]] = p[1]
-        return ans
+                ans[p[1]] = p[0]
+            if p[0] == '分类' and '地理' not in p[0]:
+                category = p[0]
 
+        if len(category)>0:
 
-    def matchByProName(self,entity, property):
-        """
-        匹配抽出的属性名称和实体具有的属性名称
+            son_list = self.graph_util.getEntityByCategory(category)
 
-        :param find_pro: 抽取的属性
-        :param find_rel: 抽取的关系
-        :param entity_deal: 携带信息的实体
-        :return:字典，形式入{实体:{属性名:属性值}}
-        """
-        #print(entity,property,"???")
-        entity_deal = self.graph_util.dealWithEnitity(entity)
+            print(son_list,"son_list============================")
 
-        ans = {}
+            for p in son_list[:8]:
+                ans_category[p[0]] = "相似实体"
 
-        for name, content in entity_deal.items():
-            name_dict = {}
-            pro = np.array(content['p'])
-            for p in pro:
-                if p[0] in property:
-
-                    if p[0] in name_dict.keys():
-                        name_dict[p[0]].append(p[1])
-                    else:
-                        name_dict[p[0]] = [p[1]]
-
-            if name_dict != {}:
-                ans[name]=name_dict
-
-        if ans == {}:
-            return None
-        else:
-            print(ans)
-            return ans
-    def matchByRelName(self,entity, property):
-        """
-        匹配抽出的关系名称和实体具有的关系名称，返回形式如matchByProName
-
-        :param find_pro: 抽取的属性
-        :param find_rel: 抽取的关系
-        :param entity_deal: 携带信息的实体
-        :return:
-        """
-        entity_deal = self.graph_util.dealWithEnitity(entity)
-
-
-        ans = {}
-
-        for name, content in entity_deal.items():
-
-            name_dict = {}
-
-            rel = np.array(content['r'])
-            for r in rel:
-                if r[0] in property:
-                    if r[0] in name_dict.keys():
-                        name_dict[r[0]].append(r[1])
-                    else:
-                        name_dict[r[0]] = [r[1]]
-            if name_dict != {}:
-                ans[name]=name_dict
-
-        if ans == {}:
-            return None
-        else:
-            return ans
-
-    def taskNormalPro(self, entity, property):
-        ans = self.matchByProName(entity, property)
-        return ans
-
-
-
-    def taskNormalRel(self, entity, property):
-        """
-        根据实体和关系名称得到三元组
-        :param entity:
-        :param property:
-        :return:
-        """
-        ans = self.matchByRelName(entity, property)
-
-        return ans
-
-    def taskTAPAO(self, words, entity, property):
-        """
-        给出属性和实体类型以及问句，匹配得到精度最高的实体（闽是哪个省的简称）
-
-        :param words:
-        :param entity:
-        :param property:
-        :return:
-        """
-
-        son_list = self.graph_util.getEntityByType(entity[0])
-        if son_list == None:
-            return None
-        deal_entity = self.graph_util.dealWithEnitity(son_list)
-        ans = self.matchProConWithPro(words, deal_entity, property)
-        return ans
-
-
-    def taskTARAO(self, entity, property, keyword):
-        """
-        给出关系和宾语，得到主语，并限制主语的类型
-        :param entity: 实体类型
-        :param property: 关系
-        :param keyword: 宾语
-        :return:
-        """
-
-        ans = self.graph_util.getEntityByRelLimitType(keyword[0], property[0], entity[0])
-        if ans != None:
-            return ans
-        return None
-
-        return ans
-
-    def taskSTAO(self, words, entity):
-        """
-        给出主语和宾语，得出谓词
-        给出主语类型和宾语，确定主语和谓词
-
-
-        :param words: 问句（代表宾语）
-        :param entity: 实体或实体类型（主语）
-        :return: 三元组
-        """
-
-        deal_entity = self.graph_util.dealWithEnitity(entity)
-        ans = self.matchByProACon(words, deal_entity)
-
-        if ans != None:
-            return ans
-        son_list = self.graph_util.getEntityByType(entity[0])
-        if son_list == None:
-            return None
-        deal_entity = self.graph_util.dealWithEnitity(son_list)
-        ans = self.matchByProACon(words, deal_entity)
-        return ans
-
-
-    def taskReverse(self, words, key_words):
-        """
-        从属性关键词找到对应实体及三元组，然后得到与句子最匹配的三元组
-        :param words:
-        :param key_words:
-        :return:
-        """
-        triple = self.graph_util.getEntByfuzzySearch(key_words[0])
-        ans = self.matchFuzzySearch(words, triple)
-        return ans
-
-
-    #==================================================================
+        return ans,ans_category,ans_relate
 
 
     def doNormal(self,entity,property):
 
+        print("ans = self.searchBinaryFactoidBackup(entity,property)")
+
         ans = self.searchBinaryFactoid(entity,property)
         if ans is None:
-            return [entity[0],property,'对不起，没有'+entity[0]+"关于"+property+"的信息"]
+            ans = self.searchBinaryFactoidBackup(entity,property)
+            if ans is None:
+                return [entity[0],property,'对不起，没有'+entity[0]+"关于"+property+"的信息"]
 
         return ans
 
@@ -428,7 +317,7 @@ class normalBussiness(object):
         word_count = con_cnt[1]
 
 
-        if len(con) == 2:
+        if len(con) == 2 and sum(word_count)<20:
             return None
 
 
@@ -449,22 +338,24 @@ class normalBussiness(object):
             if p[0] in con_pro:
                 for c in range(len(con)):
                     if con[c] in p[1]:
-                        print(con[c],p[1])
+                        if con[c] == entity[0]:
+                            temp_c += word_count[c]
+                            continue
+                        #print(con[c],p[1])
                         temp_c += word_count[c]
-
-            print(temp_c,temp_c/len(con))
 
             if (temp_c >= (2*np.sum(word_count))/3 and len(con) > 2) or (temp_c == np.sum(word_count)):
                 con_count.append(temp_c)
                 con_value.append(p[1])
 
-        print(con_count)
-        print(con_value)
+        #print(con_count)
+        #print(con_value)
 
         if len(con_value) == 0:
             return None
         else:
             max_count = np.max(con_count)
+
             min_len = 1000
             best_value = ""
             for v_index in range(len(con_value)):
@@ -477,10 +368,125 @@ class normalBussiness(object):
 
 
     def compareContent(self, entity, con_cnt, con_pro):
+        """
+        查询实体一般属性的属性值，匹配属性值于问句，即处理句型为：实体+属性值，实体是主语
+        :param entity:实体
+        :param con_cnt:匹配数据，共两个，第一个是匹配词汇，第二个是对应的词汇分数
+        :param con_pro:每个科目匹配的属性
+        :return:最适配属性值
+        """
         con = con_cnt[0]
         word_count = con_cnt[1]
 
-        print("compareContent",con,word_count)
+        lack_words = []
+        lack_words_value = []
+
+        print("compareContent",con,word_count,entity)
+
+        con_count = []
+        entity_value = self.graph_util.dealWithEnitity(entity)
+        con_value = []
+        con_name = []
+
+        bad_value = []
+        bad_count = []
+        bad_name = []
+        delete_sum = 0
+        for c in range(len(con)):
+            if con[c] == entity[0]:
+                delete_sum += word_count[c]
+
+
+        name, content = list(entity_value.items())[0]
+        pro = np.array(content['p'])
+        for p in pro:
+            temp_c = 0
+
+            temp_lack_words = []
+            temp_lack_words_value = []
+            if p[0] in con_pro:
+
+                for c in range(len(con)):
+                    if con[c] == entity[0]:
+                        continue
+                    if con[c] in p[1]:
+                        temp_c += word_count[c]
+                    else:
+                        temp_lack_words.append(con[c])
+                        temp_lack_words_value.append(word_count[c])
+
+            #print("temp_c",temp_c)
+
+            if (temp_c>=(self.a*(np.sum(word_count)-delete_sum)) and len(con)>2) or (temp_c == (np.sum(word_count)-delete_sum)):
+                con_count.append(temp_c)
+                con_value.append(p[1])
+                con_name.append(name)
+
+            bad_count.append(temp_c)
+            bad_value.append(p[1])
+            bad_name.append(name)
+            lack_words.append(temp_lack_words)
+            lack_words_value.append(temp_lack_words_value)
+
+
+        #print("con_count",con_count)
+        #print("delete_sum",delete_sum,np.sum(word_count))
+
+        if len(bad_value) == 0:
+            return None
+
+        elif self.cilin:
+
+
+            if len(con_value) > 0 and np.max(con_count)/(np.sum(word_count)-delete_sum)>=0.6:
+                max_count = np.max(con_count)
+                min_len = 1000
+
+                for v_index in range(len(con_value)):
+                    if con_count[v_index] == max_count:
+                        v_len = len(con_value[v_index])
+                        if v_len < min_len:
+                            min_len = v_len
+                            best_value = con_value[v_index]
+                            best_name = con_name[v_index]
+                return best_name+":"+best_value
+
+
+
+            best_count, best_value, best_name = self.judgeCilin(bad_count, bad_value, bad_name, lack_words,
+                                                                lack_words_value)
+            if best_count and (best_count >= (np.sum(word_count)-delete_sum) * self.b):
+                return best_name+":"+best_value
+        elif self.embedding and len(con)>2:
+
+            embedding_count,best_value,best_name = self.getWordsSimilarCount(bad_value,bad_count,bad_name,con,entity[0],np.sum(word_count))
+            if embedding_count >= self.a * (np.sum(word_count)-delete_sum):
+                return best_value
+
+        elif len(con_value) == 0:
+            return None
+
+        else:
+
+            max_count = np.max(con_count)
+            min_len = 1000
+            best_value = ""
+            for v_index in range(len(con_value)):
+                if con_count[v_index] == max_count:
+                    v_len = len(con_value[v_index])
+                    if v_len < min_len:
+                        min_len = v_len
+                        best_value = con_value[v_index]
+                        best_name = con_name[v_index]
+
+            return best_name+":"+best_value
+        return None
+
+    def compareContentYear(self, entity, con_cnt, con_pro):
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+
+        print("compareContentYear",con,word_count,entity)
 
         con_count = []
 
@@ -496,13 +502,15 @@ class normalBussiness(object):
             temp_c = 0
             if p[0] in con_pro:
                 for c in range(len(con)):
+
                     if con[c] in p[1]:
                         print(con[c],p[1])
                         temp_c += word_count[c]
 
             print(temp_c,temp_c/len(con))
 
-            if (temp_c>=len(con) and len(con)>2) or (temp_c == np.sum(word_count)):
+            #if (temp_c>=(np.sum(word_count)/3) and len(con)>2) or (temp_c == np.sum(word_count)):
+            if '年' in p[1] or '世纪' in p[1] or '公元' in p[1]:
                 con_count.append(temp_c)
                 con_value.append(p[1])
 
@@ -531,89 +539,183 @@ class normalBussiness(object):
 
     def doNormalForFalse(self, entity, con_cnt):
 
-        print(entity)
-
-        print("asdhgalshjdgsajkdashd")
-        print(con_cnt)
+        if len(entity)==0:
+            return None, None
 
         con = con_cnt[0]
         word_count = con_cnt[1]
         print(con,word_count)
         con_count = []
         con_value = []
+        con_name = []
+        lack_words = []
+        lack_words_value = []
+        bad_count = []
+        bad_value = []
+        bad_name = []
+        delete_sum = 0
+        for c in range(len(con)):
+            if con[c] == entity:
+                print(entity,c,con[c],word_count[c],word_count)
+                delete_sum += word_count[c]
+
         value_list = self.graph_util.fuzzySearchForNormalFalse("?o",entity)
         for v in value_list:
-            temp_c = 0
-            for c in range(len(con)):
-                if con[c] in v[2]:
-                    print(v)
-                    temp_c += word_count[c]
 
-            if (temp_c >= len(con) and len(con) > 2) or (temp_c == np.sum(word_count)):
+            temp_c = 0
+
+            temp_lack_words_value = []
+            temp_lack_words = []
+            for c in range(len(con)):
+                if con[c] == entity:
+                    continue
+
+                if con[c] in v[2]:
+                    temp_c += word_count[c]
+                else:
+                    temp_lack_words.append(con[c])
+                    temp_lack_words_value.append(word_count[c])
+
+            if (temp_c >= self.a*(np.sum(word_count)-delete_sum) and len(con) > 2) or (len(con)==2 and temp_c == (np.sum(word_count)-delete_sum)):
                 con_count.append(temp_c)
                 con_value.append(v[0]+":"+v[2])
+                con_name.append(v[0])
 
-        print(con_count,con_value,"asdaskdjgasdjlagsdh")
 
-        if len(con_value) == 0:
-            return None
+
+            bad_count.append(temp_c)
+            bad_value.append(v[2])
+            bad_name.append(v[0])
+            lack_words.append(temp_lack_words)
+            lack_words_value.append(temp_lack_words_value)
+
+        if len(bad_value)==0:
+            return None,None
+
+        elif self.cilin:
+            best_count, best_value, best_name = self.judgeCilin(bad_count, bad_value, bad_name, lack_words,
+                                                                lack_words_value)
+            if best_count and (best_count >= (np.sum(word_count) - delete_sum) * self.b):
+                return best_name+":"+best_value, best_name
+        elif self.embedding:
+
+            embedding_count,best_value,best_name = self.getWordsSimilarCount(bad_value,bad_count,bad_name,con,entity[0],np.sum(word_count))
+            if embedding_count >= self.a * (np.sum(word_count)- delete_sum):
+                return best_name+":"+best_value,best_name
+
+        elif len(con_value) == 0:
+            return None,None
         else:
             cal_value = []
             value_len = []
+            cal_name = []
             max_count = np.max(con_count)
             for i in range(len(con_count)):
                 if con_count[i] == max_count:
                     cal_value.append(con_value[i])
                     value_len.append(len(con_value[i]))
+                    cal_name.append(con_name[i])
 
-            return cal_value[np.argmin(value_len)]
+            return cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
+
+        return None, None
+
+    def doNormalForFalseYear(self, entity, con_cnt):
+
+        print(entity)
+        if len(entity)==0:
+            return None, None
+
+        print(con_cnt,entity)
+
+        con = con_cnt[0]
+        word_count = con_cnt[1]
+        print(con,word_count)
+        con_count = []
+        con_value = []
+        con_name = []
+        value_list = self.graph_util.fuzzySearchForNormalFalse("?o",entity)
+        for v in value_list:
+            temp_c = 0
+            for c in range(len(con)):
+                if con[c] in v[2]:
+                    temp_c += word_count[c]
+
+            if '年' in v[2] or '世纪' in v[2] or '公元' in v[2]:
+                con_count.append(temp_c)
+                con_value.append(v[0]+":"+v[2])
+                con_name.append(v[0])
+
+        if len(con_value) == 0:
+            return None,None
+        else:
+            cal_value = []
+            value_len = []
+            cal_name = []
+            max_count = np.max(con_count)
+            for i in range(len(con_count)):
+                if con_count[i] == max_count:
+                    cal_value.append(con_value[i])
+                    value_len.append(len(con_value[i]))
+                    cal_name.append(con_name[i])
+
+            return cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
 
 
     def doNormalForFalseStrict(self, entity, con_cnt):
 
-        print(entity)
+        print("doNormalForFalseStrict",entity, con_cnt)
 
-        print("asdhgalshjdgsajkdashd")
-        print(con_cnt)
+
 
         con = con_cnt[0]
         word_count = con_cnt[1]
 
         if len(con) == 2:
-            return None
+            return None,None
 
 
-        print(con,word_count)
+
         con_count = []
         con_value = []
+        con_name = []
         value_list = self.graph_util.fuzzySearchForNormalFalse("?o",entity)
         for v in value_list:
             temp_c = 0
             for c in range(len(con)):
+                if con[c] == entity:
+                    if len(con) == 2:
+                        temp_c += word_count[c]
+                    continue
                 if con[c] in v[2]:
-                    print(v)
+                    #print(v)
                     temp_c += word_count[c]
 
-            if ((temp_c >= (2*np.sum(word_count))/3) and len(con) > 2) or (temp_c == np.sum(word_count)):
+            if ((temp_c >= (2*np.sum(word_count))/3) and len(con) > 2) or (len(con)==2 and temp_c == np.sum(word_count)):
                 con_count.append(temp_c)
                 con_value.append(v[0]+":"+v[2])
-
-        print(con_count,con_value,"asdaskdjgasdjlagsdh")
+                con_name.append(v[0])
 
         if len(con_value) == 0:
-            return None
+            return None,None
         else:
             cal_value = []
             value_len = []
+            cal_name = []
             max_count = np.max(con_count)
             for i in range(len(con_count)):
                 if con_count[i] == max_count:
                     cal_value.append(con_value[i])
                     value_len.append(len(con_value[i]))
+                    cal_name.append(con_name[i])
 
-            return cal_value[np.argmin(value_len)]
+            return cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
 
     def doCon(self, entity, con_cnt):
+        print("doCon",entity,con_cnt)
+
+
+
         con = con_cnt[0]
         word_count = con_cnt[1]
 
@@ -622,45 +724,105 @@ class normalBussiness(object):
         name = []
         content = []
         count = []
+        lack_words = []
+        lack_words_value = []
+
+        bad_p = []
+        bad_count = []
+        bad_name = []
+        delete_sum = 0
+        for c in range(len(con)):
+            if con[c] == entity:
+                delete_sum += word_count[c]
+
+
+
         pro_list = self.graph_util.getProByType(entity)
         for pro in pro_list:
             if pro in ['图片','出处','分类编号']:
                 continue
 
+
+
             value_list = self.graph_util.getValueByPro(entity,pro)
-            #print(value_list)
+
             for value in value_list:
+                temp_lack_work = []
+                temp_lack_work_value = []
                 temp = 0
+
                 for c in range(len(con)):
+                    if con[c] == entity:
+
+                        continue
+
                     if con[c] in value[1]:
                         print(con[c],word_count[c],value[0])
                         temp += word_count[c]
-
-                if temp >= (np.sum(word_count)/2):
+                    else:
+                        temp_lack_work.append(con[c])
+                        temp_lack_work_value.append(word_count[c])
+                if (len(con)>2 and temp >= (np.sum(word_count)-delete_sum)*self.b) or (len(con)<=2  and (temp==np.sum(word_count)+delete_sum or (np.sum(word_count) > 20 and temp >= 20))):
                     name.append(value[0])
                     content.append(value[1])
                     count.append(temp)
-        if len(count)==0:
+                bad_name.append(value[0])
+                bad_p.append(value[1])
+                bad_count.append(temp)
+                lack_words.append(temp_lack_work)
+                lack_words_value.append(temp_lack_work_value)
+
+        if len(bad_p)==0:
             return None,None
-        cal_value = []
-        value_len = []
-        cal_name = []
-        max_count = np.max(count)
-        for i in range(len(count)):
-            if count[i] == max_count:
-                cal_value.append(content[i])
-                value_len.append(len(content[i]))
-                cal_name.append(name[i])
-        return cal_name[np.argmin(value_len)]+": "+cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
+        elif self.cilin:
+            if len(content) > 0 and np.max(count)/(np.sum(word_count)-delete_sum)>0.6:
+                max_count = np.max(count)
+                print(max_count,np.sum(word_count),delete_sum,max_count/(np.sum(word_count)-delete_sum), "max_count")
+                min_len = 1000
+
+                for v_index in range(len(content)):
+                    if count[v_index] == max_count:
+
+                        v_len = len(content[v_index])
+                        print("content[v_index]", content[v_index],v_len,min_len)
+                        if v_len < min_len:
+                            min_len = v_len
+                            best_value = content[v_index]
+                            best_name = name[v_index]
+                return best_name+":"+best_value,best_name
+
+            best_count,best_value,best_name = self.judgeCilin(bad_count,bad_p,bad_name,lack_words,lack_words_value)
+
+            if best_count and (best_count >= (np.sum(word_count) - delete_sum) * self.b):
+                return best_name+":"+best_value,best_name
+        elif self.embedding and len(con)>2:
+
+            embedding_count,best_value,best_name = self.getWordsSimilarCount(bad_p,bad_count,bad_name,con,entity[0],np.sum(word_count))
+            if embedding_count >= self.a * (np.sum(word_count)):
+                return best_name+":"+best_value,best_name
+
+        elif len(count)>0:
+            cal_value = []
+            value_len = []
+            cal_name = []
+            max_count = np.max(count)
+            for i in range(len(count)):
+                if count[i] == max_count:
+                    cal_value.append(content[i])
+                    value_len.append(len(content[i]))
+                    cal_name.append(name[i])
+            return cal_name[np.argmin(value_len)] + ": " + cal_value[np.argmin(value_len)], cal_name[np.argmin(value_len)]
 
 
+        if len(count)==0:
+            return None, None
+
+        return None, None
 
     def doConStrict(self, entity, con_cnt):
         con = con_cnt[0]
+
         word_count = con_cnt[1]
-
-
-
         sum_count = np.sum(word_count)
 
         name = []
@@ -695,104 +857,7 @@ class normalBussiness(object):
                 cal_name.append(name[i])
         return cal_name[np.argmin(value_len)]+": "+cal_value[np.argmin(value_len)],cal_name[np.argmin(value_len)]
 
-    def doMost(self,etype,match):
-        print("doMost",etype,match)
-
-
-        tri_list = self.graph_util.fuzzySearchOne("?plabel","特征",etype)
-        for i in range(len(tri_list)):
-            flag = True
-            for m in match:
-                if m not in tri_list[i][2]:
-                    flag = False
-                    break
-            if flag:
-                return tri_list[i][0]
-
-
-        most_pro = ['地位','作用','定义','内容']
-        for p in most_pro:
-            result = self.graph_util.getValueByPro(etype,p)
-            for i in range(len(result)):
-                flag = True
-                for m in match:
-                    if m not in result[i][1]:
-                        flag = False
-                        break
-                if flag:
-                    return result[i][0]
-
-        if '世界' in match or '地球' in match:
-            for i in range(len(tri_list)):
-                flag = True
-                for m in match:
-                    if m == '世界' or m == '地球':
-                        continue
-                    if m not in tri_list[i][2]:
-                        flag = False
-                        break
-                if flag:
-                    return tri_list[i][0]
-            for i in range(len(result)):
-                flag = True
-                for m in match:
-                    if m == '世界' or m == '地球':
-                        continue
-                    if m not in result[i][1]:
-                        flag = False
-                        break
-                if flag:
-                    return result[i][0]
-
-        return None
-
-
 
     def searchEnt(self,entity,property):
         pro_list = self.graph_util.getValueByPro(entity,property)
         return pro_list
-
-
-    def doNormal2(self,words,task_type,entity,property,keywords):
-
-
-        if task_type == 'task_normal_pro':
-
-            ans = self.taskNormalPro(entity,property)
-
-            if ans != None:
-                return entity[0], "ans_items", ans
-
-        if task_type == 'task_normal_rel':
-            ans = self.taskNormalRel(entity,property)
-            if ans != None:
-                return entity[0], "ans_items", ans
-
-        if task_type == 'task_son_kw_match':
-            ans = self.taskTARAO(entity, property,keywords)
-            if ans != None:
-                return keywords[0], "ans_list", ans
-            else:
-                return keywords[0],None,None
-
-        if task_type == 'task_son_match':
-            ans = self.taskTAPAO(keywords,entity,property)
-            if ans != None:
-                return entity[0], "ans_triple", ans
-
-        if task_type == 'task_singal_entity':
-            ans = self.taskSTAO(words,entity)
-            if ans != None:
-                return entity[0], "ans_triple", ans
-
-        if task_type == 'task_reverse' and len(entity)>0:
-            ans = self.taskReverse(words,entity)
-            if ans != None:
-                return entity[0], "ans_triple", ans
-
-
-        if len(entity)==0 or entity == None:
-
-            return None,None,None
-
-        return entity[0], None, None

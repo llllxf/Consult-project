@@ -3,7 +3,7 @@
 # @Author: LinXiaofei
 # @Date  : 2020-06-22
 """
-
+没有用
 """
 
 from backend.numUtil import getSingelCompareNum,getSingelDirNum

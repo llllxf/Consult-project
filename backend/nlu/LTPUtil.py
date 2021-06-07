@@ -14,19 +14,14 @@ class LTPUtil(object):
         """
         词性标注
         """
-        self.postagger = Postagger()
-
-        self.postagger.load("../../ltp_data_v3.4.0/pos.model")
-
-        self.segmentor = Segmentor()
-        self.segmentor.load("../../ltp_data_v3.4.0/cws.model")
-
-
-
-
         config = configparser.ConfigParser()
         config.read("../backend/config.ini")
         subject = config['DEFAULT']['subject']
+        self.postagger = Postagger()
+        self.postagger.load("../../ltp_data_v3.4.0/pos.model")
+        self.segmentor = Segmentor()
+        self.segmentor.load("../../ltp_data_v3.4.0/cws.model")
+
         self.cut_tool = jieba
         self.cut_tool.load_userdict("../backend/data/" + subject + "/entforcut.csv")
 
@@ -49,6 +44,8 @@ class LTPUtil(object):
     :describe 词性分析
     :arg 分词列表
     """
+
+
 
     def get_normal_seg(self,words):
 
@@ -84,18 +81,25 @@ class LTPUtil(object):
 
 
     def get_sentence_data(self, words):
-        print(words,"ajshdkajshdoaiuehdlud")
+
         cut_words = self.get_seg(words)
         postags = self.get_postag(cut_words)
         arcs = self.parser.parse(cut_words, postags)
 
         #arcs_dict,reverse_arcs_dict = self._build_sub_dicts(cut_words, arcs)
         dep = []
+        revers_dep={}
         count = 1
         for i in range(len(cut_words)):
 
             sub_arc = arcs[i]
             dep.append((i+1,sub_arc.head,sub_arc.relation))
+            #if sub_arc.relation == 'COO':
+            #    sub_arc = arcs[sub_arc.head-1]
+            if sub_arc.head in revers_dep.keys():
+                revers_dep[sub_arc.head].append([i+1,sub_arc.relation])
+            else:
+                revers_dep[sub_arc.head]=[[i+1,sub_arc.relation]]
             #print(sub_arc.relation,sub_arc.head)
             """
             if sub_arc.head == 'HED':
@@ -109,7 +113,7 @@ class LTPUtil(object):
             count=count+1
             """
         print(dep)
-        return cut_words,list(postags),dep
+        return cut_words,list(postags),dep,revers_dep
 
 
     """

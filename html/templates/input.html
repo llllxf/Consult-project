@@ -75,7 +75,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
 
                       <a href="goNormal" class="dropdown-item">普通模式</a>
-                      <a href="goTest" class="dropdown-item">试题模式</a>
+                      <a href="goTest" class="dropdown-item">强回答模式</a>
 
                     </div>
 
@@ -173,7 +173,7 @@
   <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
 	$("#btn_add").on("click", function() {
 
         var question = $("#question").val()
@@ -190,7 +190,7 @@
                 $("#ans").html(reply['ans'])
                 $("#input").html('<textarea id="question" name="question" placeholder="请在此处输入你的问题" required="" ></textarea>')
                 $("#knowledgepoint").on("click", function() {
-                    window.location.href = "/goGraph?entity=" + reply['entity']
+                    window.location.href = "/goKnowledgePoint?entity=" + reply['entity']
                 });
 
             }
@@ -221,10 +221,10 @@
 
                 });
                 $("#point").on("click", function() {
-                    window.location.href = "/goGraph?entity=" + reply['entity']
+                    window.location.href = "/goKnowledgePoint?entity=" + reply['entity']
                 });
                 $("#knowledgepoint").on("click", function() {
-                    window.location.href = "/goGraph?entity=" + reply['entity']
+                    window.location.href = "/goKnowledgePoint?entity=" + reply['entity']
                 });
 
             }
